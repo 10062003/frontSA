@@ -7,11 +7,13 @@ import {MailIcon} from "./icons/MailIcon";
 import PassIcon from "./icons/PassIcon";
 import ReCAPTCHA from "react-google-recaptcha";
 import React, {useRef} from 'react';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
-<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
 const Login = () => {
-  
+  const notifyerror = () => toast.error("Por favor completa el captcha!");
+  const notifysuccess = () => toast.success("Acceso concedido.");
   const captcha=useRef(null);
 
   const onChange = () => {
@@ -21,18 +23,32 @@ const Login = () => {
   }
 
   const submit = (e) => {
+
     e.preventDefault();
     if(captcha.current.getValue()){
       console.log("El usuario no es un robot, acceso concedido.");
+      notifysuccess();
       } else {
         console.log("Por favor acepta el captcha.");
-        alert('Por favor acepta el captcha');
+        notifyerror();
       }
   }
 
   return (
     <>
-     
+      <div><ToastContainer
+          position="bottom-right"
+          autoClose={3000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover={false}
+          theme="colored"
+        /></div>
+
       <div className="flex min-h-full h-screen flex-1 flex-col justify-center items-center px-6 py-12 lg:px-8dark:bg-neutral-900">
         <div className="sm:mx-auto sm:w-full sm:max-w-sm">
           
