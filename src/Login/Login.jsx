@@ -49,7 +49,7 @@ const Login = () => {
                     required
                   />
                   <span className="absolute left-2">
-                    <MailIcon />
+                    <MailIcon fill="#16a34a" />
                   </span>
                 </div>
               </div>
@@ -69,7 +69,7 @@ const Login = () => {
                     required
                   />
                   <span className="absolute left-2">
-                    <PassIcon />
+                    <PassIcon fill="#16a34a" />
                   </span>
                 </div>
               </div>
