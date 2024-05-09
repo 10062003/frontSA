@@ -14,7 +14,7 @@ import {
   Tags,
 } from "lucide-react";
 import Login from "./Login/Login";
-import Sidebar, { SidebarItem } from "./Sidebar/Sidebar";
+import Sidebar, { SidebarItem } from "./Sidebar/SideBar";
 
 const App = () => {
   return (
