@@ -10,7 +10,10 @@ const Login = () => {
     <>
       <div className="flex min-h-full h-screen flex-1 flex-col justify-center items-center px-6 py-12 lg:px-8dark:bg-neutral-900">
         <div className="sm:mx-auto sm:w-full sm:max-w-sm">
-          <LogoIcon className="mx-auto h-12 w-auto dark:text-green-600" />
+          <LogoIcon
+            className="mx-auto h-12 w-auto dark:text-green-600"
+            fill="#16a34a"
+          />
           <h2 className="mt-5 text-center text-4xl font-bold leading-9 tracking-tight text-green-600">
             Super Administrador
           </h2>
@@ -30,7 +33,7 @@ const Login = () => {
                     required
                   />
                   <span className="absolute left-2">
-                    <MailIcon />
+                    <MailIcon fill="#16a34a" />
                   </span>
                 </div>
               </div>
@@ -50,7 +53,7 @@ const Login = () => {
                     required
                   />
                   <span className="absolute left-2">
-                    <PassIcon />
+                    <PassIcon fill="#16a34a" />
                   </span>
                 </div>
               </div>
