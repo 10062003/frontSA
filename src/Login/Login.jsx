@@ -7,10 +7,10 @@ import {MailIcon} from "./icons/MailIcon";
 import PassIcon from "./icons/PassIcon";
 import ReCAPTCHA from "react-google-recaptcha";
 import React, {useRef} from 'react';
-import { Toaster, toast } from 'react-hot-toast'
+
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
 const Login = () => {
-  <Toaster/>
   
   const captcha=useRef(null);
 
@@ -26,6 +26,7 @@ const Login = () => {
       console.log("El usuario no es un robot, acceso concedido.");
       } else {
         console.log("Por favor acepta el captcha.");
+        alert('Por favor acepta el captcha');
       }
   }
 
@@ -100,7 +101,7 @@ const Login = () => {
              </div>  
 
             <div className="flex justify-center">
-              <Button type="submit" onSubmit={() => toast('My first toast')}>Iniciar sesión</Button>
+              <Button type="submit">Iniciar sesión</Button>
             </div>
           </form>
         </div>
