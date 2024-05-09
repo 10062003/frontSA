@@ -7,9 +7,11 @@ import {MailIcon} from "./icons/MailIcon";
 import PassIcon from "./icons/PassIcon";
 import ReCAPTCHA from "react-google-recaptcha";
 import React, {useRef} from 'react';
+import { Toaster, toast } from 'react-hot-toast'
 
 const Login = () => {
-
+  <Toaster/>
+  
   const captcha=useRef(null);
 
   const onChange = () => {
@@ -20,7 +22,11 @@ const Login = () => {
 
   const submit = (e) => {
     e.preventDefault();
-    console.log('Se envio el formulario.')
+    if(captcha.current.getValue()){
+      console.log("El usuario no es un robot, acceso concedido.");
+      } else {
+        console.log("Por favor acepta el captcha.");
+      }
   }
 
   return (
@@ -94,7 +100,7 @@ const Login = () => {
              </div>  
 
             <div className="flex justify-center">
-              <Button type="submit">Iniciar sesión</Button>
+              <Button type="submit" onSubmit={() => toast('My first toast')}>Iniciar sesión</Button>
             </div>
           </form>
         </div>
