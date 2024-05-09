@@ -10,13 +10,19 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@angular/animations": "^17.3.8",
     "@nextui-org/input": "^2.1.21",
     "lucide-react": "^0.378.0",
+    "ngx-toastr": "^18.0.0",
     "prop-types": "^15.8.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-google-recaptcha": "^3.1.0",
+    "react-hot-toast": "^2.4.1",
+    "react-toastify": "^10.0.5",
     "sonner": "^1.4.41",
+    "sweetalert": "^2.1.2",
+    "sweetalert2": "^11.6.13",
     "typescript": "^5.4.5"
   },
   "devDependencies": {
