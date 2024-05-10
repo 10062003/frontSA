@@ -14,11 +14,17 @@ import {
   Tags,
 } from "lucide-react";
 import Login from "./Login/Login";
+<<<<<<< HEAD
 import Sidebar, { SidebarItem } from "./Sidebar/SideBar";
+=======
+import Sidebar from "./Sidebar/SideBar";
+import { SidebarItem } from "./Sidebar/SideBar";
+import HomePage from "./HomePage/Home";
+>>>>>>> f78e78a4596837376b8c5729c5247e61efe0f2f4
 
 const App = () => {
   return (
-    <div className=" flex dark:bg-neutral-800">
+    <div className=" flex dark:bg-neutral-900">
       <Sidebar>
         <SidebarItem icon={<Home size={20} />} text="Inicio" />
         <SidebarItem icon={<BarChart3 size={20} />} text="Upas" />
@@ -31,9 +37,11 @@ const App = () => {
         <SidebarItem icon={<Clock size={20} />} text="Historial" />
         <SidebarItem icon={<Settings size={20} />} text="Configuración" alert />
       </Sidebar>
-      <div className="flex-1">
+      {/*<div className="flex-1">
         <Login />
       </div>
+       */}
+      <div className="m-4"><HomePage/></div>
     </div>
   );
 };
