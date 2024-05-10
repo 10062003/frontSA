@@ -12,6 +12,8 @@
   "dependencies": {
     "@angular/animations": "^17.3.8",
     "@nextui-org/input": "^2.1.21",
+    "axios": "^1.6.8",
+    "crypto-js": "^4.2.0",
     "lucide-react": "^0.378.0",
     "ngx-toastr": "^18.0.0",
     "prop-types": "^15.8.1",

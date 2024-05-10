@@ -21,14 +21,12 @@ import HomePage from "./HomePage/Home";
 
 const App = () => {
   return (
-    
     <div className="">
-      {/*
       <div className="">
         <Login />
-      </div> 
-      */}
-      <div className="flex h-screen dark:bg-neutral-900">
+      </div>
+
+      {/* <div className="flex h-screen dark:bg-neutral-900">
         <Sidebar>
           <SidebarItem icon={<Home size={20} />} text="Inicio" />
           <SidebarItem icon={<BarChart3 size={20} />} text="Upas" />
@@ -47,7 +45,7 @@ const App = () => {
             <HomePage />
           </div> 
         </div>
-      </div>
+  </div>*/}
     </div>
   );
 };
