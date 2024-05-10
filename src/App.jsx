@@ -14,12 +14,14 @@ import {
   Tags,
 } from "lucide-react";
 import Login from "./Login/Login";
-import Sidebar, { SidebarItem } from "./Sidebar/Sidebar";
+import Sidebar from "./Sidebar/SideBar";
+import { SidebarItem } from "./Sidebar/SideBar";
+import HomePage from "./HomePage/Home";
 
 const App = () => {
   return (
     <div className=" flex dark:bg-neutral-800">
-      <Sidebar>
+      {/*<Sidebar>
         <SidebarItem icon={<Home size={20} />} text="Inicio" />
         <SidebarItem icon={<BarChart3 size={20} />} text="Upas" />
         <SidebarItem icon={<BellRing size={20} />} text="Actividades" />
@@ -34,6 +36,8 @@ const App = () => {
       <div className="flex-1">
         <Login />
       </div>
+       */}
+      <div><HomePage/></div>
     </div>
   );
 };
