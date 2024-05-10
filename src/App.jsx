@@ -1,3 +1,4 @@
+import React from "react";
 import {
   BarChart3,
   BellRing,
@@ -20,7 +21,7 @@ import HomePage from "./HomePage/Home";
 
 const App = () => {
   return (
-    <div className=" flex dark:bg-neutral-900">
+    <div className="flex h-screen dark:bg-neutral-900">
       <Sidebar>
         <SidebarItem icon={<Home size={20} />} text="Inicio" />
         <SidebarItem icon={<BarChart3 size={20} />} text="Upas" />
@@ -33,12 +34,15 @@ const App = () => {
         <SidebarItem icon={<Clock size={20} />} text="Historial" />
         <SidebarItem icon={<Settings size={20} />} text="Configuración" alert />
       </Sidebar>
-      {/*<div className="flex-1">
-        <Login />
-      </div>
-       */}
-      <div className="m-4">
-        <HomePage />
+      <div className="flex-1 overflow-y-scroll">
+        {/* Contenido móvil, que se puede desplazar */}
+        <div className="p-5">
+          <HomePage />
+        </div>
+        {/* Login puede ir fuera del content si se desea */}
+        {/* <div className="login-container">
+          <Login />
+        </div> */}
       </div>
     </div>
   );
