@@ -9,6 +9,7 @@ import ReCAPTCHA from "react-google-recaptcha";
 import React, {useRef} from 'react';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { Cctv } from "lucide-react";
 
 
 const Login = () => {
@@ -49,10 +50,11 @@ const Login = () => {
           theme="colored"
         /></div>
 
-      <div className="flex min-h-full h-screen flex-1 flex-col justify-center items-center px-6 py-12 lg:px-8dark:bg-neutral-900">
+      <div className="flex min-h-full h-screen flex-1 flex-col justify-center items-center px-6 py-12 lg:px-8 dark:bg-neutral-900">
         <div className="sm:mx-auto sm:w-full sm:max-w-sm">
           
-          <LogoIcon className="mx-auto h-12 w-auto dark:text-green-600" fill="#16a34a" />
+          {/*<LogoIcon className="mx-auto h-12 w-auto dark:text-green-600" fill="#16a34a" />*/}
+          <Cctv className="mx-auto h-12 w-auto dark:text-green-600 text-green-600"></Cctv>
           <h2 className="mt-5 text-center text-4xl font-bold leading-9 tracking-tight text-green-600">
             Super Administrador
           </h2>
@@ -108,13 +110,14 @@ const Login = () => {
             
             <div className="flex justify-center items-center">
                 <div className="recaptcha">
-                    <ReCAPTCHA  
-                        ref={captcha}    
-                        sitekey="6LeNTm8pAAAAAJ8LiwLy1QSgHNWPKeBR4XZoKsqO"
-                        onChange={onChange}
-                      />
-                  </div>
-             </div>  
+                  <ReCAPTCHA  
+                    ref={captcha}    
+                    sitekey="6LeNTm8pAAAAAJ8LiwLy1QSgHNWPKeBR4XZoKsqO"
+                    onChange={onChange}
+                    
+                  />
+                </div>
+            </div>  
 
             <div className="flex justify-center">
               <Button type="submit">Iniciar sesión</Button>
