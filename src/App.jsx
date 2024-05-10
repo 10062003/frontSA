@@ -14,13 +14,9 @@ import {
   Tags,
 } from "lucide-react";
 import Login from "./Login/Login";
-<<<<<<< HEAD
-import Sidebar, { SidebarItem } from "./Sidebar/SideBar";
-=======
 import Sidebar from "./Sidebar/SideBar";
 import { SidebarItem } from "./Sidebar/SideBar";
 import HomePage from "./HomePage/Home";
->>>>>>> f78e78a4596837376b8c5729c5247e61efe0f2f4
 
 const App = () => {
   return (
@@ -41,7 +37,9 @@ const App = () => {
         <Login />
       </div>
        */}
-      <div className="m-4"><HomePage/></div>
+      <div className="m-4">
+        <HomePage />
+      </div>
     </div>
   );
 };
