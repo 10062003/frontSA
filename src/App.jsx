@@ -20,8 +20,8 @@ import HomePage from "./HomePage/Home";
 
 const App = () => {
   return (
-    <div className=" flex dark:bg-neutral-800">
-      {/*<Sidebar>
+    <div className=" flex dark:bg-neutral-900">
+      <Sidebar>
         <SidebarItem icon={<Home size={20} />} text="Inicio" />
         <SidebarItem icon={<BarChart3 size={20} />} text="Upas" />
         <SidebarItem icon={<BellRing size={20} />} text="Actividades" />
@@ -33,11 +33,11 @@ const App = () => {
         <SidebarItem icon={<Clock size={20} />} text="Historial" />
         <SidebarItem icon={<Settings size={20} />} text="Configuración" alert />
       </Sidebar>
-      <div className="flex-1">
+      {/*<div className="flex-1">
         <Login />
       </div>
        */}
-      <div><HomePage/></div>
+      <div className="m-4"><HomePage/></div>
     </div>
   );
 };
