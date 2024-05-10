@@ -1,6 +1,7 @@
-import { MoreVertical, ChevronLast, ChevronFirst } from "lucide-react";
+import { MoreVertical, ChevronLast, ChevronFirst, Cctv } from "lucide-react";
 import { useContext, createContext, useState } from "react";
 import Logo from "./Logo";
+import './SideBar.css'
 
 const SidebarContext = createContext();
 
@@ -11,18 +12,11 @@ export default function Sidebar({ children }) {
     <aside className="h-screen">
       <nav className="h-screen flex flex-col bg-slate-50 border-gray-200 shadow-sm dark:bg-neutral-950">
         <div className="p-4 pb-2 flex justify-between items-center">
-          <img
-            src="/public/imgs/"
-            className={`overflow-hidden transition-all ${
-              expanded ? "w-52" : "w-0"
-            }`}
-            alt=""
-          />
-          {/* <Logo
-            className={`overflow-hidden transition-all ${
-              expanded ? "w-32" : "w-0"
-            }`}
-          /> */}
+          <div className={`flex overflow-hidden transition-all ${
+              expanded ? "w-52" : "w-0"}`}>
+            <Cctv className="text-green-800 mx-2 h-10 w-auto"></Cctv>
+            <p className="LestomaLogo">LESTOMA</p>
+          </div>
           <button
             onClick={() => setExpanded((curr) => !curr)}
             className="p-1.5 rounded-lg text-white bg-green-800 hover:bg-green-600 dark:hover:bg-gray-400 dark:text-black dark:bg-green-600"
