@@ -9,12 +9,12 @@ export default function Sidebar({ children }) {
 
   return (
     <aside className="h-screen">
-      <nav className="h-full flex flex-col bg-slate-50 border-r shadow-sm">
+      <nav className="h-screen flex flex-col bg-slate-50 border-gray-200 shadow-sm dark:bg-neutral-950">
         <div className="p-4 pb-2 flex justify-between items-center">
           <img
-            src=""
+            src="/public/imgs/"
             className={`overflow-hidden transition-all ${
-              expanded ? "w-32" : "w-0"
+              expanded ? "w-52" : "w-0"
             }`}
             alt=""
           />
@@ -25,7 +25,7 @@ export default function Sidebar({ children }) {
           /> */}
           <button
             onClick={() => setExpanded((curr) => !curr)}
-            className="p-1.5 rounded-lg bg-gray-50 hover:bg-gray-100"
+            className="p-1.5 rounded-lg text-white bg-green-800 hover:bg-green-600 dark:hover:bg-gray-400 dark:text-black dark:bg-green-600"
           >
             {expanded ? <ChevronFirst /> : <ChevronLast />}
           </button>
@@ -44,8 +44,8 @@ export default function Sidebar({ children }) {
           `}
           >
             <div className="leading-4">
-              <h4 className="font-semibold">John Doe</h4>
-              <span className="text-xs text-gray-600">johndoe@gmail.com</span>
+              <h4 className="font-semibold dark:text-white">John Doe</h4>
+              <span className="text-xs text-gray-600 dark:text-white">johndoe@gmail.com</span>
             </div>
             <MoreVertical size={20} />
           </div>
@@ -66,8 +66,8 @@ export function SidebarItem({ icon, text, active, alert }) {
         transition-colors group
         ${
           active
-            ? "bg-gradient-to-tr from-stone-200 to-stone-100 text-green-800"
-            : "hover:bg-stone-200 text-gray-600"
+            ? "bg-gradient-to-tr from-stone-200 to-stone-100 text-green-800 "
+            : "hover:bg-stone-200 text-gray-600 dark:text-white dark:hover:bg-neutral-800"
         }
     `}
     >
@@ -91,9 +91,10 @@ export function SidebarItem({ icon, text, active, alert }) {
         <div
           className={`
           absolute left-full rounded-md px-2 py-1 ml-6
-          bg-stone-100 text-green-600 text-sm
+          bg-stone-100 text-green-800 text-sm
           invisible opacity-20 -translate-x-3 transition-all
           group-hover:visible group-hover:opacity-100 group-hover:translate-x-0
+          dark:bg-neutral-900 dark:text-white
       `}
         >
           {text}
