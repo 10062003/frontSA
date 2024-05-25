@@ -2,7 +2,7 @@ const Card = (props) => {
   const { title, description, imgSrc } = props; // Props para el título, la descripción y la imagen
 
   return (
-    <div className="max-w-xs bg-white border border-gray-200 rounded-lg shadow dark:bg-neutral-900 dark:border-gray-700">
+    <div className="max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-neutral-900 dark:border-gray-700">
       <a href="#">
         <img className="rounded-t-lg" src={imgSrc} alt="Imagen de la card" />{" "}
       </a>
