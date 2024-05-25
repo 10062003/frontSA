@@ -16,6 +16,7 @@ import Sidebar from "./Sidebar/SideBar";
 import { SidebarItem } from "./Sidebar/SideBar";
 import HomePage from "./HomePage/Home";
 import { createBrowserRouter, RouterProvider, Link } from "react-router-dom";
+import Hola from "./components/ui/hola";
 
 const router = createBrowserRouter([
   {
@@ -23,6 +24,14 @@ const router = createBrowserRouter([
     element: (
       <div className="">
         <Login />
+      </div>
+    ),
+  },
+  {
+    path: "hola",
+    element: (
+      <div className="">
+        <Hola />
       </div>
     ),
   },
