@@ -16,7 +16,7 @@ import Sidebar from "./Sidebar/SideBar";
 import { SidebarItem } from "./Sidebar/SideBar";
 import HomePage from "./HomePage/Home";
 import { createBrowserRouter, RouterProvider, Link } from "react-router-dom";
-import Hola from "./components/ui/hola";
+import NavBar from "./components/ui/NavBar";
 
 const router = createBrowserRouter([
   {
@@ -28,10 +28,10 @@ const router = createBrowserRouter([
     ),
   },
   {
-    path: "hola",
+    path: "NavBar",
     element: (
-      <div className="">
-        <Hola />
+      <div className="bg-neutral-900">
+        <NavBar />
       </div>
     ),
   },
@@ -39,6 +39,7 @@ const router = createBrowserRouter([
     path: "Inicio",
     element: (
       <div className="flex h-screen dark:bg-neutral-900">
+        
         <Sidebar>
           <SidebarItem icon={<Home size={20} />} text="Inicio" to={"/Inicio"} />
           <SidebarItem
@@ -79,8 +80,9 @@ const router = createBrowserRouter([
             to={"/Configuracion"}
           />
         </Sidebar>
-        <div className="flex-1 overflow-y-scroll">
-          <div className="p-5">
+        <div className="flex overflow-y-scroll">
+          <div className="">
+            <NavBar />
             <HomePage />
           </div>
         </div>
@@ -91,7 +93,7 @@ const router = createBrowserRouter([
 
 const App = () => {
   return (
-    <div className="">
+    <div className="dark:bg-neutral-900">
       <RouterProvider router={router} />
     </div>
   );

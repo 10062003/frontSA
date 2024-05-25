@@ -6,7 +6,7 @@ import "./SideBar.css";
 const SidebarContext = createContext();
 
 export default function Sidebar({ children }) {
-  const [expanded, setExpanded] = useState(true);
+  const [expanded, setExpanded] = useState(false);
 
   return (
     <aside className="h-screen">
@@ -18,13 +18,13 @@ export default function Sidebar({ children }) {
             }`}
           >
             <Cctv className="text-green-800 mx-2 h-10 w-auto"></Cctv>
-            <p className="LestomaLogo">LESTOMA</p>
+            <p className="LestomaLogo dark:text-white">LESTOMA</p>
           </div>
           <button
             onClick={() => setExpanded((curr) => !curr)}
             className="p-1.5 rounded-lg text-white bg-green-800 hover:bg-green-600 dark:hover:bg-gray-400 dark:text-black dark:bg-green-600"
           >
-            {expanded ? <ChevronFirst /> : <ChevronLast />}
+            {expanded ? <ChevronFirst className="dark:text-white" /> : <ChevronLast />}
           </button>
         </div>
 
@@ -33,7 +33,7 @@ export default function Sidebar({ children }) {
         </SidebarContext.Provider>
 
         <div className="border-t flex p-3">
-          <img src="" alt="" className="w-10 h-10 rounded-md" />
+          <img src="./public/imgs/yo.png" alt="" className="w-12 h-14 rounded-md" />
           <div
             className={`
               flex justify-between items-center
@@ -41,9 +41,9 @@ export default function Sidebar({ children }) {
           `}
           >
             <div className="leading-4">
-              <h4 className="font-semibold dark:text-white">John Doe</h4>
+              <h4 className="font-semibold dark:text-white">Kevin</h4>
               <span className="text-xs text-gray-600 dark:text-white">
-                johndoe@gmail.com
+                kholguin@ucundinamarca.edu.com
               </span>
             </div>
             <MoreVertical size={20} />
