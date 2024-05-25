@@ -1,8 +1,6 @@
-import { useReducer } from "react";
 import Button from "../components/ui/Button";
 import Input from "../components/ui/Input";
 import Label from "../components/ui/Label";
-import LogoIcon from "./icons/LogoIcon";
 import { MailIcon } from "./icons/MailIcon";
 import PassIcon from "./icons/PassIcon";
 import ReCAPTCHA from "react-google-recaptcha";

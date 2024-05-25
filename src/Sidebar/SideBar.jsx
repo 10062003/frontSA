@@ -1,7 +1,7 @@
 import { MoreVertical, ChevronLast, ChevronFirst, Cctv } from "lucide-react";
 import { useContext, createContext, useState } from "react";
-import Logo from "./Logo";
-import './SideBar.css'
+import { NavLink } from "react-router-dom";
+import "./SideBar.css";
 
 const SidebarContext = createContext();
 
@@ -12,8 +12,11 @@ export default function Sidebar({ children }) {
     <aside className="h-screen">
       <nav className="h-screen flex flex-col bg-slate-50 border-gray-200 shadow-sm dark:bg-neutral-950">
         <div className="p-4 pb-2 flex justify-between items-center">
-          <div className={`flex overflow-hidden transition-all ${
-              expanded ? "w-52" : "w-0"}`}>
+          <div
+            className={`flex overflow-hidden transition-all ${
+              expanded ? "w-52" : "w-0"
+            }`}
+          >
             <Cctv className="text-green-800 mx-2 h-10 w-auto"></Cctv>
             <p className="LestomaLogo">LESTOMA</p>
           </div>
@@ -39,7 +42,9 @@ export default function Sidebar({ children }) {
           >
             <div className="leading-4">
               <h4 className="font-semibold dark:text-white">John Doe</h4>
-              <span className="text-xs text-gray-600 dark:text-white">johndoe@gmail.com</span>
+              <span className="text-xs text-gray-600 dark:text-white">
+                johndoe@gmail.com
+              </span>
             </div>
             <MoreVertical size={20} />
           </div>
@@ -49,7 +54,7 @@ export default function Sidebar({ children }) {
   );
 }
 
-export function SidebarItem({ icon, text, active, alert }) {
+export function SidebarItem({ icon, text, to, active, alert }) {
   const { expanded } = useContext(SidebarContext);
 
   return (
@@ -65,22 +70,23 @@ export function SidebarItem({ icon, text, active, alert }) {
         }
     `}
     >
-      {icon}
-      <span
-        className={`overflow-hidden transition-all ${
-          expanded ? "w-52 ml-3" : "w-0"
-        }`}
-      >
-        {text}
-      </span>
-      {alert && (
-        <div
-          className={`absolute right-2 w-2 h-2 rounded bg-green-600 ${
-            expanded ? "" : "top-2"
+      <NavLink to={to} className="flex items-center w-full">
+        {icon}
+        <span
+          className={`overflow-hidden transition-all ${
+            expanded ? "w-52 ml-3" : "w-0"
           }`}
-        />
-      )}
-
+        >
+          {text}
+        </span>
+        {alert && (
+          <div
+            className={`absolute right-2 w-2 h-2 rounded bg-green-600 ${
+              expanded ? "" : "top-2"
+            }`}
+          />
+        )}
+      </NavLink>
       {!expanded && (
         <div
           className={`
