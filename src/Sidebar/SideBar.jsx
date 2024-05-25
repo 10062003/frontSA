@@ -11,19 +11,15 @@ export default function Sidebar({ children }) {
   return (
     <aside className="h-screen">
       <nav className="h-screen flex flex-col bg-slate-50 border-gray-200 shadow-sm dark:bg-neutral-950">
-        <div className="p-4 pb-2 flex justify-between items-center">
-          <div
-            className={`flex overflow-hidden transition-all ${
-              expanded ? "w-52" : "w-0"
-            }`}
-          >
-            <Cctv className="text-green-800 mx-2 h-10 w-auto"></Cctv>
-            <p className="LestomaLogo dark:text-white">LESTOMA</p>
+        <div className="p-4 pb-2 flex items-center">
+          <div className={`transition-all flex-grow ${expanded ? "mr-2 flex" : "w-0 overflow-hidden"}`}>
+            {expanded && (
+              <img src="./public/imgs/logoa.png" alt="description" className="flex flex-grow mr-3 w-24 h-auto" />
+            )}
           </div>
           <button
             onClick={() => setExpanded((curr) => !curr)}
-            className="p-1.5 rounded-lg text-white bg-green-800 hover:bg-green-600 dark:hover:bg-gray-400 dark:text-black dark:bg-green-600"
-          >
+            className="p-1.5 rounded-lg text-white bg-green-800 hover:bg-green-600 dark:hover:bg-gray-400 dark:text-black dark:bg-green-600">
             {expanded ? <ChevronFirst className="dark:text-white" /> : <ChevronLast />}
           </button>
         </div>
@@ -37,13 +33,13 @@ export default function Sidebar({ children }) {
           <div
             className={`
               flex justify-between items-center
-              overflow-hidden transition-all ${expanded ? "w-52 ml-3" : "w-0"}
+              overflow-hidden transition-all ${expanded ? "w-40 ml-3" : "w-0"}
           `}
           >
             <div className="leading-4">
               <h4 className="font-semibold dark:text-white">Kevin</h4>
               <span className="text-xs text-gray-600 dark:text-white">
-                kholguin@ucundinamarca.edu.com
+                kholguin@udec.edu.com
               </span>
             </div>
             <MoreVertical size={20} />
@@ -74,7 +70,7 @@ export function SidebarItem({ icon, text, to, active, alert }) {
         {icon}
         <span
           className={`overflow-hidden transition-all ${
-            expanded ? "w-52 ml-3" : "w-0"
+            expanded ? "w-40 ml-3" : "w-0"
           }`}
         >
           {text}
