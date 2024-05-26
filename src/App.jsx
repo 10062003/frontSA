@@ -30,7 +30,7 @@ const router = createBrowserRouter([
         <MostrarSideBar />
         <div className="flex flex-col flex-1 overflow-y-auto">
           <div className=" top-0 z-10">
-            <NavBar title={"Estos son tus Módulos"} />
+            <NavBar title={"Estos son tus Módulos ☠️☠️☠️"} />
           </div>
           <div className="flex flex-col flex-1 p-4">
             <HomePage />

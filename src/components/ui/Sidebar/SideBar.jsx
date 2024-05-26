@@ -10,7 +10,7 @@ export default function Sidebar({ children }) {
 
   return (
     <aside className="h-screen">
-      <nav className="h-screen flex flex-col bg-slate-50 border-r-2 border-gray-200 shadow-sm dark:bg-neutral-950">
+      <nav className="h-screen flex flex-col bg-slate-50 border-r-2 border-gray-300 shadow-sm dark:bg-neutral-950 dark:border-neutral-800">
         <div className="p-4 pb-2 flex items-center justify-center">
           <div
             className={`transition-all flex-grow ${expanded ? "mr-2 flex" : "w-0 overflow-hidden"}`}
@@ -41,7 +41,7 @@ export default function Sidebar({ children }) {
           <ul className="flex-1 px-3">{children}</ul>
         </SidebarContext.Provider>
 
-        <div className="border-t flex p-3">
+        <div className=" flex p-3 border-t-2 border-neutral-300 dark:border-neutral-800">
           <img
             src="./public/imgs/yo.png"
             alt=""
