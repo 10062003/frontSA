@@ -1,10 +1,9 @@
 import PropTypes from "prop-types";
 
-const Label = ({ children, props }) => {
+const Label = ({ children, className, props }) => {
   return (
     <label
-      // className="block text-sm font-medium leading-6 text-gray-900"
-      className="block text-sm font-semibold leading-6 text-gray-900 dark:text-white"
+      className={`block text-sm font-semibold leading-6 text-gray-900 dark:text-white ${className}`}
       {...props}
     >
       {children}

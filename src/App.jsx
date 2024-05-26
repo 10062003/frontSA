@@ -18,7 +18,7 @@ const router = createBrowserRouter([
   {
     path: "Login",
     element: (
-      <div className="">
+      <div className="bg-slate-100">
         <Login />
       </div>
     ),
@@ -30,7 +30,7 @@ const router = createBrowserRouter([
         <MostrarSideBar />
         <div className="flex flex-col flex-1 overflow-y-auto">
           <div className=" top-0 z-10">
-            <NavBar title={"Estos son tus Modulos"} />
+            <NavBar title={"Estos son tus Módulos"} />
           </div>
           <div className="flex flex-col flex-1 p-4">
             <HomePage />
@@ -45,9 +45,6 @@ const router = createBrowserRouter([
       <div className="flex h-screen">
         <MostrarSideBar />
         <div className="flex flex-col flex-1 overflow-y-auto">
-          {/* <div className="top-0 z-10">
-            <NavBar title={"Estás en Upas"} />
-          </div> */}
           <div className="flex flex-col flex-1 items-center justify-center p-4">
             <UpaInicio />
           </div>
@@ -59,7 +56,7 @@ const router = createBrowserRouter([
 
 const App = () => {
   return (
-    <div className="bg-gray-100 dark:bg-neutral-900">
+    <div className="bg-gray-200 dark:bg-neutral-900">
       <RouterProvider router={router} />
     </div>
   );

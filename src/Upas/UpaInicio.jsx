@@ -3,7 +3,11 @@ import CardGeneral from "../components/ui/CardGeneral";
 
 const UpaInicio = () => {
   const navigate = useNavigate();
-  const handleButton = () => {
+  const ButtonRegistroUpa = () => {
+    navigate("/");
+  };
+
+  const ButtonListarUpa = () => {
     navigate("/");
   };
 
@@ -15,7 +19,8 @@ const UpaInicio = () => {
           "Bienvido a la sección de Upas (Unidad productiva agropecuaría), aquí podrás registrar y buscar Upas."
         }
         toFrist={"/Inicio"}
-        onClick={handleButton}
+        onClickOne={ButtonRegistroUpa}
+        onClickTwo={ButtonListarUpa}
       />
     </div>
   );
