@@ -1,25 +1,31 @@
 import { LogOut } from "lucide-react";
 import React from "react";
 
-const NavBar = () => {
+const NavBar = (props) => {
+  const { title } = props;
   return (
+<<<<<<< HEAD
     <nav className="bg-slate-50 dark:bg-neutral-950 w-full z-20">
+=======
+    <nav className="bg-slate-50 dark:bg-neutral-950 w-full z-20 ">
+>>>>>>> 0c28f251080fa11b95c665f702c59e96cead2b42
       <div className="flex items-center justify-between mx-auto p-4">
-        {/* Menú de navegación */}
         <div className="flex-1 flex justify-center" id="navbar-sticky">
+<<<<<<< HEAD
           <ul className="flex flex-col md:flex-row md:p-0 font-medium rounded-lg md:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0 md:bg-slate-50 md:dark:bg-neutral-950">
+=======
+          <ul className="flex flex-col md:flex-row md:p-0 font-medium rounded-lg md:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0 md:dark:bg-neutral-950">
+>>>>>>> 0c28f251080fa11b95c665f702c59e96cead2b42
             <li>
               <div
-                className="text-2xl md:text-3xl flex justify-center py-2 px-3 text-center rounded md:bg-transparent dark:text-green-600 text-green-700 md:p-0 md:dark:text-green-600"
+                className="text-2xl md:text-4xl font-bold flex justify-center py-2 px-3 text-center rounded md:bg-transparent dark:text-green-600 text-green-700 md:p-0 md:dark:text-green-600"
                 aria-current="page"
               >
-                Bienvenido a tus módulos
+                {title}
               </div>
             </li>
           </ul>
         </div>
-
-        {/* Contenedor del botón "Cerrar sesión" */}
         <div className="flex items-center ml-auto">
           <button
             type="button"
