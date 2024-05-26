@@ -5,7 +5,7 @@ const NavBar = (props) => {
   const { title } = props;
   return (
     <nav className="bg-slate-50 dark:bg-neutral-950 w-full z-20 ">
-      <div className="flex items-center justify-between mx-auto p-4">
+      <div className="flex items-center justify-between mx-auto p-4 border-b-2 border-neutral-300 dark:border-neutral-800">
         <div className="flex-1 flex justify-center" id="navbar-sticky">
           <ul className="flex flex-col md:flex-row md:p-0 font-medium rounded-lg md:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0 md:dark:bg-neutral-950">
             <li>
