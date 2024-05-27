@@ -19,7 +19,7 @@ export default function Sidebar({ children }) {
               <img
                 src="./public/imgs/logoa.png"
                 alt="description"
-                className="flex flex-grow mr-3 w-24 h-auto"
+                className="flex mr-3 w-40 h-auto items-center"
               />
             )}
           </div>
