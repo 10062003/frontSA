@@ -45,7 +45,7 @@ export default function Sidebar({ children }) {
           <img
             src="./public/imgs/yo.png"
             alt=""
-            className="w-12 h-14 rounded-md"
+            className="w-10 h-14 rounded-md"
           />
           <div
             className={`
