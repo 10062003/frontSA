@@ -8,7 +8,7 @@ const UpaInicio = () => {
   };
 
   const ButtonListarUpa = () => {
-    navigate("/");
+    navigate("/TablaUpa");
   };
 
   return (

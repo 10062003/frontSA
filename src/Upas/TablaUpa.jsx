@@ -1,82 +1,104 @@
+import React, { useState } from 'react';
+import { Download, Search, FileText, FileJson, ScrollText, Sheet } from 'lucide-react';
+import './TablaUpa.css';
+
 const TablaUpa = () => {
-  return (
-    <section className="container mx-auto p-6 font-mono">
-      <div className="w-full mb-8 overflow-hidden rounded-lg shadow-lg">
-        <div className="w-full overflow-x-auto">
-          <table className="w-full max-w-full table-auto">
-            <thead>
-              <tr className="text-md font-semibold tracking-wide text-left text-gray-900 bg-gray-100 uppercase border-b border-gray-600">
-                <th className="px-2 py-1 text-xs whitespace-nowrap sm:text-sm sm:px-4 sm:py-3">Nombre</th>
-                <th className="px-2 py-1 text-xs whitespace-nowrap sm:text-sm sm:px-4 sm:py-3">Edad</th>
-                <th className="px-2 py-1 text-xs whitespace-nowrap sm:text-sm sm:px-4 sm:py-3">Estado</th>
-                <th className="px-2 py-1 text-xs whitespace-nowrap sm:text-sm sm:px-4 sm:py-3">Fecha</th>
-              </tr>
-            </thead>
-            <tbody className="bg-white">
-              <tr className="text-gray-700">
-                <td className="px-2 py-1 text-xs whitespace-nowrap border sm:text-sm sm:px-4 sm:py-3">
-                  <div className="flex items-center text-sm">
-                    <div className="relative w-8 h-8 mr-3 rounded-full md:block">
-                      <img
-                        className="object-cover w-8 h-10 rounded-full"
-                        src="./public/imgs/yo.png"
-                        alt=""
-                        loading="lazy"
-                      />
-                      <div
-                        className="absolute inset-0 rounded-full shadow-inner"
-                        aria-hidden="true"
-                      ></div>
+    const [searchTerm, setSearchTerm] = useState('');
+    const [sortBy, setSortBy] = useState({ column: null, asc: true });
+
+    const handleSearch = (event) => {
+        setSearchTerm(event.target.value.toLowerCase());
+    };
+
+    const handleSort = (index) => {
+        setSortBy({
+            column: index,
+            asc: sortBy.column === index ? !sortBy.asc : true,
+        });
+    };
+
+    // Datos de ejemplo para las filas de la tabla
+    const data = [
+        { id: 1, nombre: 'Lestoma', ubicacion: 'Facatativá', estado: 'Activo', descripcion: 'Texto descriptivo' },
+        { id: 2, nombre: 'HydroDomusLab', ubicacion: 'Soacha', estado: 'En preparación', descripcion: 'Texto descriptivo' },
+        { id: 3, nombre: 'EcoAquaInnovación', ubicacion: 'Girardot', estado: 'En preparación', descripcion: 'Texto descriptivo' },
+        { id: 4, nombre: 'AquaTechLab', ubicacion: 'Chía', estado: 'Inactivo', descripcion: 'Texto descriptivo' },
+        // Agrega más datos de ejemplo si es necesario
+    ];
+
+    // Ordena las filas según el ID de manera ascendente
+    const sortedRows = data.sort((a, b) => {
+        return sortBy.asc ? a.id - b.id : b.id - a.id;
+    });
+
+    // Filtra las filas según el término de búsqueda
+    const filteredRows = sortedRows.filter(row => {
+        return (
+            row.nombre.toLowerCase().includes(searchTerm) ||
+            row.ubicacion.toLowerCase().includes(searchTerm) ||
+            row.estado.toLowerCase().includes(searchTerm) ||
+            row.descripcion.toLowerCase().includes(searchTerm)
+        );
+    });
+
+    return (
+        <div className='bodystyle'>
+            <main className="table" id="customers_table">
+                <section className="table__header">
+                    <h1><strong>Listado de Upas</strong></h1>
+                    <div className="input-group">
+                        <input type="search" placeholder="Buscar Upa" onChange={handleSearch} value={searchTerm} />
+                        <Search />
                     </div>
-                    <div>
-                      <p className="font-semibold text-black">Kevin Holguin</p>
-                      <p className="text-xs text-gray-600">Super administrador</p>
+                    <div className="export__file">
+                        <label htmlFor="export-file" className="export__file-btn" title="Export File">
+                            <Download />
+                        </label>
+                        <input type="checkbox" id="export-file" />
+                        <div className="export__file-options">
+                            <label>Export As &nbsp; &#10140;</label>
+                            <label htmlFor="export-file" id="toPDF">
+                                PDF <ScrollText />
+                            </label>
+                            <label htmlFor="export-file" id="toJSON">
+                                JSON <FileJson />
+                            </label>
+                            <label htmlFor="export-file" id="toCSV">
+                                CSV <FileText />
+                            </label>
+                            <label htmlFor="export-file" id="toEXCEL">
+                                EXCEL <Sheet />
+                            </label>
+                        </div>
                     </div>
-                  </div>
-                </td>
-                <td className="px-2 py-1 text-xs whitespace-nowrap font-semibold border sm:text-sm sm:px-4 sm:py-3">21</td>
-                <td className="px-2 py-1 text-xs whitespace-nowrap border sm:text-sm sm:px-4 sm:py-3">
-                  <span className="px-2 py-1 font-semibold leading-tight text-green-700 bg-green-100 rounded-sm">
-                    Activo
-                  </span>
-                </td>
-                <td className="px-2 py-1 text-xs whitespace-nowrap border sm:text-sm sm:px-4 sm:py-3">30/01/2003</td>
-              </tr>
-              <tr className="text-gray-700">
-                <td className="px-2 py-1 text-xs whitespace-nowrap border sm:text-sm sm:px-4 sm:py-3">
-                  <div className="flex items-center text-sm">
-                    <div className="relative w-8 h-8 mr-3 rounded-full md:block">
-                      <img
-                        className="object-cover w-8 h-10 rounded-full"
-                        src="./public/imgs/Daniel.png"
-                        alt=""
-                        loading="lazy"
-                      />
-                      <div
-                        className="absolute inset-0 rounded-full shadow-inner"
-                        aria-hidden="true"
-                      ></div>
-                    </div>
-                    <div>
-                      <p className="font-semibold text-black">Daniel Paternina</p>
-                      <p className="text-xs text-gray-600">Super administrador</p>
-                    </div>
-                  </div>
-                </td>
-                <td className="px-2 py-1 text-xs whitespace-nowrap font-semibold border sm:text-sm sm:px-4 sm:py-3">20</td>
-                <td className="px-2 py-1 text-xs whitespace-nowrap border sm:text-sm sm:px-4 sm:py-3">
-                  <span className="px-2 py-1 font-semibold leading-tight text-red-700 bg-red-100 rounded-sm">
-                    Inactivo
-                  </span>
-                </td>
-                <td className="px-2 py-1 text-xs whitespace-nowrap border sm:text-sm sm:px-4 sm:py-3">06/10/2003</td>
-              </tr>
-            </tbody>
-          </table>
+                </section>
+                <section className="table__body">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th onClick={() => handleSort(0)}> Id </th>
+                                <th onClick={() => handleSort(1)}> Nombre </th>
+                                <th onClick={() => handleSort(2)}> Ubicación </th>
+                                <th onClick={() => handleSort(3)}> Estado </th>
+                                <th onClick={() => handleSort(4)}> Descripción </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {filteredRows.map((row, index) => (
+                                <tr key={index}>
+                                    <td>{row.id}</td>
+                                    <td>{row.nombre}</td>
+                                    <td>{row.ubicacion}</td>
+                                    <td>{row.estado}</td>
+                                    <td>{row.descripcion}</td>
+                                </tr>
+                            ))}
+                        </tbody>
+                    </table>
+                </section>
+            </main>
         </div>
-      </div>
-    </section>
-  );
+    );
 };
 
 export default TablaUpa;
