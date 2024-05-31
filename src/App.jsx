@@ -58,7 +58,7 @@ const router = createBrowserRouter([
     element: (
       <div className="flex h-screen">
         <MostrarSideBar />
-        <div className="flex justify-center grow">
+        <div className="grow">
           <RegistroUpa />
         </div>
       </div>

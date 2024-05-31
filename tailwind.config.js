@@ -9,8 +9,20 @@ export default {
         error: "#BB2929",
         exito: "#1ED12D",
       },
+      zIndex: {
+        90: "90",
+      },
+      borderWidth: {
+        3: "3px",
+      },
     },
     fontFamily: {},
+  },
+  variants: {
+    extend: {
+      boxShadow: ["focus"],
+      borderColor: ["focus"],
+    },
   },
   plugins: [],
 };

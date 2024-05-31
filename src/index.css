@@ -1,3 +1,12 @@
+/* index.css */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.input-placeholder::placeholder {
+  @apply transition-opacity ease-linear duration-200; /* Usar ease-linear en lugar de ease */
+}
+
+.input-placeholder:focus::placeholder {
+  @apply opacity-0;
+}
