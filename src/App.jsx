@@ -10,6 +10,7 @@ import NavBar from "./components/ui/NavBar";
 import UpaInicio from "./Upas/UpaInicio";
 import MostrarSideBar from "./components/ui/Sidebar/MostrarSideBar";
 import RegistroUpa from "./Upas/RegistroUpa";
+import TablaUpa from "./Upas/TablaUpa";
 
 const router = createBrowserRouter([
   {
@@ -31,7 +32,7 @@ const router = createBrowserRouter([
         <MostrarSideBar />
         <div className="flex flex-col flex-1 overflow-y-auto">
           <div className=" top-0 z-10">
-            <NavBar title={"Estos son tus Módulos ☠️☠️☠️"} />
+            <NavBar title={"Estos son tus Módulos"} />
           </div>
           <div className="flex flex-col flex-1 p-4">
             <HomePage />
@@ -64,6 +65,18 @@ const router = createBrowserRouter([
       </div>
     ),
   },
+  {
+    path: "TablaUpa",
+    element: (
+      <div className="flex h-screen">
+        <MostrarSideBar />
+        <div className="flex justify-center grow">
+          <TablaUpa/>
+        </div>
+      </div>
+    ),
+  },
+
 ]);
 
 const App = () => {
