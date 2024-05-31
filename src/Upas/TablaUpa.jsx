@@ -41,6 +41,19 @@ const TablaUpa = () => {
         );
     });
 
+    const getStatusClass = (estado) => {
+        switch (estado.toLowerCase()) {
+            case 'activo':
+                return 'status activo';
+            case 'en preparación':
+                return 'status en-preparacion';
+            case 'inactivo':
+                return 'status inactivo';
+            default:
+                return '';
+        }
+    };
+
     return (
         <div className='bodystyle'>
             <main className="table" id="customers_table">
@@ -79,7 +92,7 @@ const TablaUpa = () => {
                                 <th onClick={() => handleSort(0)}> Id </th>
                                 <th onClick={() => handleSort(1)}> Nombre </th>
                                 <th onClick={() => handleSort(2)}> Ubicación </th>
-                                <th onClick={() => handleSort(3)}> Estado </th>
+                                <th className="estados" onClick={() => handleSort(3)}> Estado </th>
                                 <th onClick={() => handleSort(4)}> Descripción </th>
                             </tr>
                         </thead>
@@ -87,9 +100,13 @@ const TablaUpa = () => {
                             {filteredRows.map((row, index) => (
                                 <tr key={index}>
                                     <td>{row.id}</td>
-                                    <td>{row.nombre}</td>
+                                    <td className="left-align">{row.nombre}</td>
                                     <td>{row.ubicacion}</td>
-                                    <td>{row.estado}</td>
+                                    <td>
+                                        <div className='estados'>
+                                        <div dangerouslySetInnerHTML={{ __html: `<div class="${getStatusClass(row.estado)}">${row.estado}</div>` }} />
+                                        </div>
+                                    </td>
                                     <td>{row.descripcion}</td>
                                 </tr>
                             ))}

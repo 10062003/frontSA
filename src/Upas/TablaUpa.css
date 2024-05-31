@@ -58,7 +58,7 @@ main.table {
 .table__body {
   width: 95%;
   max-height: calc(89% - 1.6rem);
-  background-color: #bbf7d0;
+  background-color: #f8f8f8; /* Tono de gris muy claro */
   margin: .8rem auto;
   border-radius: .6rem;
   overflow: auto;
@@ -81,11 +81,19 @@ thead th {
 }
 
 tbody tr:nth-child(even) {
-  background-color: #0000000b;
+  background-color: #f0f0f0; /* Tono de gris muy claro */
+}
+
+tbody tr:nth-child(odd) {
+  background-color: #e8e8e8; /* Otro tono de gris muy claro */
 }
 
 tbody tr:hover {
-  background-color: #fff6 !important;
+  background-color: #d8d8d8 !important; /* Gris un poco más oscuro al hacer hover */
+}
+
+.left-align {
+  text-align: left;
 }
 
 .status {
@@ -96,18 +104,21 @@ tbody tr:hover {
 
 /* Cambia el color de fondo de los campos "estado" según su valor */
 .status.activo {
-  background-color: #86e49d; /* Verde */
-  color: #006b21; /* Color de texto para "activo" */
+  background-color: #86efac; /* Verde */
+  color: #14532d; /* Color de texto para "activo" */
+  width: 150px;
 }
 
 .status.en-preparacion {
-  background-color: #ffeb3b; /* Amarillo */
+  background-color: #fef08a; /* Amarillo */
   color: #000; /* Color de texto para "En preparacion" */
+  width: 150px;
 }
 
 .status.inactivo {
-  background-color: #f44336; /* Rojo */
+  background-color: #f87171; /* Rojo */
   color: #fff; /* Color de texto para "inactivo" */
+  width: 150px;
 }
 
 .export__file {
@@ -180,4 +191,11 @@ tbody tr:hover {
 .export__file .export__file-options img {
   width: 2rem;
   height: auto;
+}
+
+.estados{
+  display:flex;
+  justify-content: center;
+  align-items: center;
+  height: 50px;
 }
