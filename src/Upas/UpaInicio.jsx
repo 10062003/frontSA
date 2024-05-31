@@ -16,7 +16,7 @@ const UpaInicio = () => {
       <CardGeneral
         title="Upas"
         description={
-          "Bienvido a la sección de Upas (Unidad productiva agropecuaría), aquí podrás registrar y buscar Upas."
+          "Bienvido a la sección de Upas (Unidades productivas agropecuarías), aquí podrás registrar y buscar Upas."
         }
         toFrist={"/Inicio"}
         onClickOne={ButtonRegistroUpa}
