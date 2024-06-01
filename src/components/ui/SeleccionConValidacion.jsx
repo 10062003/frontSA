@@ -50,7 +50,7 @@ const SeleccionConValidacion = ({
             Seleccione una opción
           </option>
           {opciones.map((opcion, index) => (
-            <option key={index} value={opcion.value}>
+            <option key={index} value={opcion.campo}>
               {opcion.label}
             </option>
           ))}

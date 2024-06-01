@@ -14,7 +14,8 @@ class ServiciosLogin {
         const mensaje = res.data;
         const token = mensaje.split(" ")[1];
         console.log(token);
-        sessionStorage.setItem("Token", token);
+        const Token = token ? token.slice(1, -1) : "";
+        sessionStorage.setItem("Token", Token);
         respuestaLogin.respuesta = 1;
         respuestaLogin.mensaje = "Bienvenido";
         return respuestaLogin;

@@ -4,8 +4,10 @@ import InputRegistros from "../components/ui/InputRegistros";
 import { AlignLeft, BookA, BookUser, Church, MapPin } from "lucide-react";
 import { useState } from "react";
 import SeleccionConValidacion from "../components/ui/SeleccionConValidacion";
+import ServiciosUpa from "./ServiciosUpa";
 
 const RegistroUpa = () => {
+  const servicioUpa = new ServiciosUpa();
   const expresiones = {
     titulo: /^.[a-zA-ZÀ-ÿ\s]{3,20}$/, // Letras y espacios, pueden llevar acentos.
     nombre: /^[a-zA-ZÀ-ÿ\s]{3,20}$/, // Letras y espacios, pueden llevar acentos.
@@ -15,12 +17,18 @@ const RegistroUpa = () => {
   };
 
   const opciones = [
-    { campo: "opcion1", label: "Opción 1", valido: null },
-    { campo: "opcion2", label: "Opción 2", valido: null },
-    { campo: "opcion3", label: "Opción 3", valido: null },
+    {
+      campo: "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+      label: "Activado",
+      valido: null,
+    },
+    {
+      campo: "1a9d5660-0fb2-4b3e-857f-a45e3d1a5dbd",
+      label: "Desactivado",
+      valido: null,
+    },
   ];
 
-  const [titulo, cambiarTitulo] = useState({ campo: "", valido: null });
   const [nombre, cambiarNombre] = useState({ campo: "", valido: null });
   const [descripcion, cambiarDescripcion] = useState({
     campo: "",
@@ -29,18 +37,32 @@ const RegistroUpa = () => {
   const [ubicacion, cambiarUbicacion] = useState({ campo: "", valido: null });
   const [estado, cambiarEstado] = useState({ campo: "", valido: null });
   const [municipio, cambiarMunicipio] = useState({ campo: "", valido: null });
+  const [departamento, cambiarDepartamento] = useState({
+    campo: "",
+    valido: null,
+  });
 
-  // const handleSubmit = (e) => {
-  //   e.preventDefault();
-  //   // Aquí puedes agregar la lógica para validar el formulario
-  //   const isFormValid = false; // Esto es solo un ejemplo, deberías implementar tu lógica de validación
+  const handleSubmit = (e) => {
+    e.preventDefault();
 
-  //   if (isFormValid) {
-  //     toast.success("Formulario enviado correctamente");
-  //   } else {
-  //     toast.error("Hubo un error al enviar el formulario");
-  //   }
-  // };
+    const upa = {
+      upsNombre: nombre.campo,
+      upsDescipcion: descripcion.campo,
+      upsUbicacion: ubicacion.campo,
+      upsIdEstado: estado.campo,
+      upsCreacionUpa: new Date(),
+      upsCiudad: municipio.campo,
+      upsDepartamento: departamento.campo,
+    };
+
+    //console.log(upa);
+    const respuesta = servicioUpa.RegistrarUpa(upa);
+    if (respuesta.respuesta === 1) {
+      toast.success(respuesta.mensaje);
+    } else {
+      toast.error(respuesta.mensaje);
+    }
+  };
 
   return (
     <main className="max-w-4xl w-11/12 m-auto p-10">
@@ -48,27 +70,9 @@ const RegistroUpa = () => {
         Registro Upas
       </p>
       <form
-        // onSubmit={handleSubmit}
+        onSubmit={handleSubmit}
         className="grid grid-cols-1 sm:grid-cols-2 sm:gap-5"
       >
-        {/* Input Título */}
-        <InputRegistros
-          estado={titulo}
-          cambiarEstado={cambiarTitulo}
-          label="Título"
-          placeholder="Lestoma"
-          id="titulo"
-          type="text"
-          name="titulo"
-          errorMsm="El título no debe contener números y máximo 20 caracteres"
-          expRegular={expresiones.titulo}
-          icon={
-            <BookA
-              className={`${titulo.valido === "true" ? "opacity-100 text-exito" : titulo.valido === "false" ? "opacity-100 text-error" : titulo.valido === null ? "opacity-100 text-green-800" : ""}`}
-            />
-          }
-        ></InputRegistros>
-
         {/* Input Nombre */}
         <InputRegistros
           estado={nombre}
@@ -109,7 +113,7 @@ const RegistroUpa = () => {
         <InputRegistros
           estado={ubicacion}
           cambiarEstado={cambiarUbicacion}
-          label="Ubicacion"
+          label="Dirección"
           placeholder="Cundinamarca"
           id="ubicacion"
           type="text"
@@ -119,6 +123,24 @@ const RegistroUpa = () => {
           icon={
             <MapPin
               className={`${ubicacion.valido === "true" ? "opacity-100 text-exito" : ubicacion.valido === "false" ? "opacity-100 text-error" : ubicacion.valido === null ? "opacity-100 text-green-800" : ""}`}
+            />
+          }
+        ></InputRegistros>
+
+        {/* Input Departamaento */}
+        <InputRegistros
+          estado={departamento}
+          cambiarEstado={cambiarDepartamento}
+          label="Departamento"
+          placeholder="Cundinamarca"
+          id="departamento"
+          type="text"
+          name="departamento"
+          errorMsm="El nombre no debe contener números y máximo 20 caracteres"
+          expRegular={expresiones.nombre}
+          icon={
+            <BookUser
+              className={`${departamento.valido === "true" ? "opacity-100 text-exito" : departamento.valido === "false" ? "opacity-100 text-error" : departamento.valido === null ? "opacity-100 text-green-800" : ""}`}
             />
           }
         ></InputRegistros>
