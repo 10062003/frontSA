@@ -5,20 +5,20 @@ import { MailIcon } from "./icons/MailIcon";
 import PassIcon from "./icons/PassIcon";
 import ReCAPTCHA from "react-google-recaptcha";
 import React, { useRef } from "react";
-import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { Cctv } from "lucide-react";
 import ServiciosLogin from "./ServiciosLogin";
 import { useState } from "react";
 import sha512 from "crypto-js/sha512";
+import { useNavigate } from "react-router-dom";
+import { Toaster, toast } from "sonner";
 
 const Login = () => {
   const servicioLogin = new ServiciosLogin();
   const [tCorreoUsuario, setCorreo] = useState("");
   const [tContrasenna, setContrasenna] = useState("");
-  const notifyerror = () => toast.error("Por favor completa el captcha!");
-  const notifysuccess = () => toast.success("Acceso concedido.");
   const captcha = useRef(null);
+  const navigate = useNavigate();
 
   const onChange = () => {
     if (captcha.current.getValue()) {
@@ -26,44 +26,37 @@ const Login = () => {
     }
   };
 
-  const submit = (e) => {
+  // En tu componente Login:
+
+  const submit = async (e) => {
     e.preventDefault();
+
     if (captcha.current.getValue()) {
       console.log("El usuario no es un robot, acceso concedido.");
-      notifysuccess();
       const contrasena = sha512(tContrasenna).toString();
       const user = { tCorreoUsuario, tContrasenna: contrasena };
-      const respuesta = servicioLogin.IniciarSesion(user);
-      if (respuesta.respuesta === 1) {
-        toast.success(respuesta.mensaje);
-        window.location.href = "/#/Inicio";
-        window.location.reload();
-      } else {
-        console.log(respuesta.mensaje);
+
+      try {
+        const respuesta = await servicioLogin.IniciarSesion(user);
+
+        if (respuesta.respuesta === 1) {
+          toast.success("Acceso concedido.");
+          navigate("/Inicio");
+        } else {
+          toast.error(respuesta.mensaje || "Usuario o contraseña incorrectos.");
+          console.log(respuesta.mensaje);
+        }
+      } catch (error) {
+        console.error(error);
+        toast.error("Ocurrió un error al iniciar sesión.");
       }
     } else {
-      console.log("Por favor acepta el captcha.");
-      notifyerror();
+      toast.error("Por favor completa el captcha!");
     }
   };
 
   return (
     <>
-      <div>
-        <ToastContainer
-          position="bottom-right"
-          autoClose={3000}
-          hideProgressBar={false}
-          newestOnTop={false}
-          closeOnClick
-          rtl={false}
-          pauseOnFocusLoss
-          draggable
-          pauseOnHover={false}
-          theme="colored"
-        />
-      </div>
-
       <div className="flex min-h-full h-screen flex-1 flex-col justify-center items-center px-6 py-12 lg:px-8 dark:bg-neutral-900">
         <div className="sm:mx-auto sm:w-full sm:max-w-sm">
           {/*<LogoIcon className="mx-auto h-12 w-auto dark:text-green-600" fill="#16a34a" />*/}
@@ -139,7 +132,9 @@ const Login = () => {
             </div>
 
             <div className="flex justify-center">
-              <Button type="submit">Iniciar sesión</Button>
+              <Button className="text-white" type="submit">
+                Iniciar sesión
+              </Button>
             </div>
           </form>
         </div>

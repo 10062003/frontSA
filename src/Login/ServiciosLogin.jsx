@@ -18,14 +18,15 @@ class ServiciosLogin {
         sessionStorage.setItem("Token", Token);
         respuestaLogin.respuesta = 1;
         respuestaLogin.mensaje = "Bienvenido";
-        return respuestaLogin;
+        console.log("Usuario encontrado");
       })
       .catch((err) => {
         console.log(err);
         respuestaLogin.respuesta = 0;
         respuestaLogin.mensaje = "Usuario o contraseña incorrectos";
-        return respuestaLogin;
+        console.log("Usuario no encontrado");
       });
+    return respuestaLogin;
   };
 }
 

@@ -4,7 +4,7 @@ import CardGeneral from "../components/ui/CardGeneral";
 const UpaInicio = () => {
   const navigate = useNavigate();
   const ButtonRegistroUpa = () => {
-    navigate("/");
+    navigate("/RegistroUpa");
   };
 
   const ButtonListarUpa = () => {

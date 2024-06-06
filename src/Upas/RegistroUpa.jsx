@@ -1,7 +1,7 @@
 import { Toaster, toast } from "sonner";
 import Button from "../components/ui/Button";
 import InputRegistros from "../components/ui/InputRegistros";
-import { AlignLeft, BookA, BookUser, Church, MapPin } from "lucide-react";
+import { AlignLeft, BookUser, Church, MapPin } from "lucide-react";
 import { useState } from "react";
 import SeleccionConValidacion from "../components/ui/SeleccionConValidacion";
 import ServiciosUpa from "./ServiciosUpa";
@@ -9,11 +9,11 @@ import ServiciosUpa from "./ServiciosUpa";
 const RegistroUpa = () => {
   const servicioUpa = new ServiciosUpa();
   const expresiones = {
-    titulo: /^.[a-zA-ZÀ-ÿ\s]{3,20}$/, // Letras y espacios, pueden llevar acentos.
-    nombre: /^[a-zA-ZÀ-ÿ\s]{3,20}$/, // Letras y espacios, pueden llevar acentos.
-    descripcion: /^[a-zA-ZÀ-ÿ\s]{10,50}$/, // Letras y espacios, pueden llevar acentos.
-    ubicacion: /^[a-zA-ZÀ-ÿ\s]{10,20}$/, // Letras y espacios, pueden llevar acentos.
-    municipio: /^[a-zA-ZÀ-ÿ\s]{10,20}$/, // Letras y espacios, pueden llevar acentos.
+    nombre: /^[a-zA-ZÀ-ÿ\s]{3,20}$/, // Letras y espacios, pueden llevar acentos, de 3 a 20.
+    descripcion: /^[a-zA-ZÀ-ÿ0-9\s]{10,100}$/, // Letras y espacios, pueden llevar acentos, de 10 a 50.
+    ubicacion: /^[a-zA-Z0-9\s.,#-]{5,100}$/, // Letras y espacios, pueden llevar acentos, de 5 a 100.
+    departamento: /^[a-zA-ZÀ-ÿ\s]{4,20}$/, // Letras y espacios, pueden llevar acentos, de 4 a 20.
+    municipio: /^[a-zA-ZÀ-ÿ\s]{4,20}$/, // Letras y espacios, pueden llevar acentos, de 4 a 20.
   };
 
   const opciones = [
@@ -57,21 +57,38 @@ const RegistroUpa = () => {
 
     //console.log(upa);
     const respuesta = servicioUpa.RegistrarUpa(upa);
-    if (respuesta.respuesta === 1) {
-      toast.success(respuesta.mensaje);
+
+    if (
+      respuesta.respuesta === 1 &&
+      nombre.valido === "true" &&
+      descripcion.valido === "true" &&
+      ubicacion.valido === "true" &&
+      estado.valido === "true" &&
+      municipio.valido === "true" &&
+      departamento.valido === "true"
+    ) {
+      cambiarNombre({ campo: "", valido: null });
+      cambiarDescripcion({ campo: "", valido: null });
+      cambiarUbicacion({ campo: "", valido: null });
+      cambiarEstado({ campo: "", valido: null });
+      cambiarMunicipio({ campo: "", valido: null });
+      cambiarDepartamento({ campo: "", valido: null });
+      toast.success("Upa " + nombre.campo + " registrada correctamente", {
+        duration: null,
+      });
     } else {
-      toast.error(respuesta.mensaje);
+      toast.error("Error al enviar la Upa revise los campos");
     }
   };
 
   return (
     <main className="max-w-4xl w-11/12 m-auto p-10">
-      <p className="flex justify-center text-bold font-bold mb-11 text-green-800 text-7xl">
+      <p className="flex justify-center text-bold font-bold mb-11 text-green-800 text-7xl dark:text-green-500">
         Registro Upas
       </p>
       <form
         onSubmit={handleSubmit}
-        className="grid grid-cols-1 sm:grid-cols-2 sm:gap-5"
+        className="grid grid-cols-1 gap-5 sm:grid-cols-2"
       >
         {/* Input Nombre */}
         <InputRegistros
@@ -86,9 +103,10 @@ const RegistroUpa = () => {
           expRegular={expresiones.nombre}
           icon={
             <BookUser
-              className={`${nombre.valido === "true" ? "opacity-100 text-exito" : nombre.valido === "false" ? "opacity-100 text-error" : nombre.valido === null ? "opacity-100 text-green-800" : ""}`}
+              className={`${nombre.valido === "true" ? "opacity-100 text-exito" : nombre.valido === "false" ? "opacity-100 text-error" : nombre.valido === null ? "opacity-100 text-green-800 dark:text-green-600" : ""}`}
             />
           }
+          className="col-span-1 sm:col-span-2"
         ></InputRegistros>
 
         {/* Input Descripción */}
@@ -100,13 +118,14 @@ const RegistroUpa = () => {
           id="descripcion"
           type="text"
           name="descripcion"
-          errorMsm="La descripcion no debe contener números, tiene un máximo 50 caracteres y un minimo de 10 caracteres"
+          errorMsm="La descripción no puede contener caracteres especiales y un minimo de 10 caracteres"
           expRegular={expresiones.descripcion}
           icon={
             <AlignLeft
-              className={`${descripcion.valido === "true" ? "opacity-100 text-exito" : descripcion.valido === "false" ? "opacity-100 text-error" : descripcion.valido === null ? "opacity-100 text-green-800" : ""}`}
+              className={`${descripcion.valido === "true" ? "opacity-100 text-exito" : descripcion.valido === "false" ? "opacity-100 text-error" : descripcion.valido === null ? "opacity-100 text-green-800 dark:text-green-600" : ""}`}
             />
           }
+          className="col-span-1 sm:col-span-2"
         ></InputRegistros>
 
         {/* Input Ubicación */}
@@ -114,17 +133,18 @@ const RegistroUpa = () => {
           estado={ubicacion}
           cambiarEstado={cambiarUbicacion}
           label="Dirección"
-          placeholder="Cundinamarca"
+          placeholder="Calle 13 #21-37"
           id="ubicacion"
           type="text"
           name="ubicacion"
-          errorMsm="La descripcion no debe contener números, tiene un máximo 50 caracteres y un minimo de 10 caracteres"
+          errorMsm="Solo puede tener caracteres como #, -, ."
           expRegular={expresiones.ubicacion}
           icon={
             <MapPin
-              className={`${ubicacion.valido === "true" ? "opacity-100 text-exito" : ubicacion.valido === "false" ? "opacity-100 text-error" : ubicacion.valido === null ? "opacity-100 text-green-800" : ""}`}
+              className={`${ubicacion.valido === "true" ? "opacity-100 text-exito" : ubicacion.valido === "false" ? "opacity-100 text-error" : ubicacion.valido === null ? "opacity-100 text-green-800 dark:text-green-600" : ""}`}
             />
           }
+          className="col-span-1 sm:col-span-2"
         ></InputRegistros>
 
         {/* Input Departamaento */}
@@ -136,13 +156,14 @@ const RegistroUpa = () => {
           id="departamento"
           type="text"
           name="departamento"
-          errorMsm="El nombre no debe contener números y máximo 20 caracteres"
-          expRegular={expresiones.nombre}
+          errorMsm="No debe contener números y un máximo de 20 caracteres"
+          expRegular={expresiones.departamento}
           icon={
             <BookUser
-              className={`${departamento.valido === "true" ? "opacity-100 text-exito" : departamento.valido === "false" ? "opacity-100 text-error" : departamento.valido === null ? "opacity-100 text-green-800" : ""}`}
+              className={`${departamento.valido === "true" ? "opacity-100 text-exito" : departamento.valido === "false" ? "opacity-100 text-error" : departamento.valido === null ? "opacity-100 text-green-800 dark:text-green-600" : ""}`}
             />
           }
+          className="col-span-1 sm:col-span-2"
         ></InputRegistros>
 
         {/* Input Municipio */}
@@ -154,15 +175,17 @@ const RegistroUpa = () => {
           id="municipio"
           type="text"
           name="municipio"
-          errorMsm="La descripcion no debe contener números, tiene un máximo 50 caracteres y un minimo de 10 caracteres"
+          errorMsm="La descripcion no debe contener números y máximo 20 caracteres"
           expRegular={expresiones.municipio}
           icon={
             <Church
-              className={`${municipio.valido === "true" ? "opacity-100 text-exito" : municipio.valido === "false" ? "opacity-100 text-error" : municipio.valido === null ? "opacity-100 text-green-800" : ""}`}
+              className={`${municipio.valido === "true" ? "opacity-100 text-exito" : municipio.valido === "false" ? "opacity-100 text-error" : municipio.valido === null ? "opacity-100 text-green-800 dark:text-green-600" : ""}`}
             />
           }
+          className="col-span-1 sm:col-span-2"
         ></InputRegistros>
 
+        {/* Select Estado */}
         <SeleccionConValidacion
           label="Estado"
           name="estado"
@@ -170,32 +193,20 @@ const RegistroUpa = () => {
           estado={estado}
           cambiarEstado={cambiarEstado}
           opciones={opciones}
+          className="col-span-1 sm:col-span-2"
         />
 
-        <div className="flex text-xs flex-col col-span-2 sm:col-span-2 justify-center items-center">
-          <label
-            htmlFor="terminos"
-            className="block p-2.5 min-h-2.5 cursor-pointer"
-          >
-            <input
-              type="checkbox"
-              name="terminos"
-              id="terminos"
-              className="mr-2.5 flex-col col-span-2"
-            />
-            Acepto los terminos y condiciones
-          </label>
-        </div>
-        <div className="flex flex-col col-span-2 items-center">
+        {/* Boton Registrar */}
+        <div className="flex flex-col col-span-1 sm:col-span-2 items-center">
           <Button
             children={"Registrar"}
             className={
-              "sm:w-[30%] cursor-pointer hover:shadow-[3px_0px_30px_rgba(163,163,163,0.4)]"
+              "sm:w-[30%] cursor-pointer text-white hover:shadow-[3px_0px_30px_rgba(163,163,163,0.4)] hover:bg-green-700"
             }
           />
         </div>
       </form>
-      <Toaster richColors />
+      <Toaster richColors closeButton />
     </main>
   );
 };

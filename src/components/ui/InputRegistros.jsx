@@ -17,10 +17,10 @@ const InputRegistros = ({
   const validacion = (expRegular) => {
     if (expRegular.test(estado.campo)) {
       cambiarEstado({ ...estado, valido: "true" });
-      console.log("bien");
+      //console.log("bien");
     } else {
       cambiarEstado({ ...estado, valido: "false" });
-      console.log("mal");
+      //console.log("mal");
     }
   };
 
@@ -28,7 +28,7 @@ const InputRegistros = ({
     <div>
       <label
         htmlFor={name}
-        className={`block text-base font-bold p-1 ml-4 min-h-2.5 cursor-pointer ${classNamelabel} ${estado.valido === "true" ? "text-exito" : ""} ${estado.valido === "false" ? "text-error" : ""}`}
+        className={`block text-base font-bold p-1 ml-4 min-h-2.5 cursor-pointer dark:text-white ${classNamelabel} ${estado.valido === "true" ? "text-exito dark:text-exito" : ""} ${estado.valido === "false" ? "text-error dark:text-error" : ""}`}
       >
         {label}
       </label>
@@ -42,7 +42,7 @@ const InputRegistros = ({
           onChange={(e) => cambiarEstado({ ...estado, campo: e.target.value })}
           onKeyUp={() => validacion(expRegular)}
           onBlur={() => validacion(expRegular)}
-          className={`input-placeholder w-full text-sm bg-white border-2 border-gray-300 rounded-md h-11 leading-[45px] px-[10px] pr-[40px] pl-[40px] transition-all duration-200 ease-in-out focus:border-blue-400 focus:outline-none focus:shadow-[3px_0px_30px_rgba(163,163,163,0.4)] ${classNameInput} ${estado.valido === "false" ? "border-error focus:border-error" : ""}`}
+          className={`input-placeholder w-full text-sm bg-white border-2 border-gray-300 rounded-md h-11 leading-[45px] px-[10px] pr-[40px] pl-[40px] transition-all duration-200 ease-in-out focus:border-blue-400 focus:outline-none focus:shadow-[3px_0px_30px_rgba(163,163,163,0.4)] dark:bg-neutral-800 dark:text-white dark:border-neutral-100 ${classNameInput} ${estado.valido === "false" ? "border-error dark:border-error focus:border-error dark:focus:border-error" : ""}`}
         />
         <span className="absolute left-2">{icon}</span>
         <CircleCheck

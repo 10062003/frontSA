@@ -11,6 +11,7 @@ import UpaInicio from "./Upas/UpaInicio";
 import MostrarSideBar from "./components/ui/Sidebar/MostrarSideBar";
 import RegistroUpa from "./Upas/RegistroUpa";
 import TablaUpa from "./Upas/TablaUpa";
+import ToasterWrapper from "./components/ui/Toast";
 
 const router = createBrowserRouter([
   {
@@ -59,7 +60,7 @@ const router = createBrowserRouter([
     element: (
       <div className="flex h-screen">
         <MostrarSideBar />
-        <div className="grow">
+        <div className="flex flex-col flex-1 overflow-y-auto">
           <RegistroUpa />
         </div>
       </div>
@@ -71,18 +72,23 @@ const router = createBrowserRouter([
       <div className="flex h-screen">
         <MostrarSideBar />
         <div className="flex justify-center grow">
-          <TablaUpa/>
+          <TablaUpa />
         </div>
       </div>
     ),
   },
-
 ]);
 
 const App = () => {
   return (
     <div className="bg-gray-200 dark:bg-neutral-900">
-      <RouterProvider router={router} />
+      {/* Mantén el Toaster fuera de las rutas para que esté presente en todas las páginas */}
+      <ToasterWrapper richColors closeButton />
+
+      {/* Envuelve las rutas en RouterProvider */}
+      <RouterProvider router={router}>
+        {/* Define tus rutas aquí... */}
+      </RouterProvider>
     </div>
   );
 };
