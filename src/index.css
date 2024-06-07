@@ -4,7 +4,7 @@
 @tailwind utilities;
 
 .input-placeholder::placeholder {
-  @apply transition-opacity ease-linear duration-200; /* Usar ease-linear en lugar de ease */
+  @apply transition-opacity ease-linear duration-200;
 }
 
 .input-placeholder:focus::placeholder {

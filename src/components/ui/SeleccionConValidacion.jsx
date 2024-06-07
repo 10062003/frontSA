@@ -7,6 +7,7 @@ const SeleccionConValidacion = ({
   name,
   errorMsm,
   estado,
+  icon, // Icono que se muestra en el input
   cambiarEstado,
   opciones, // Lista de opciones para el dropdown
 }) => {
@@ -34,7 +35,7 @@ const SeleccionConValidacion = ({
         <select
           name={name}
           value={estado.campo}
-          className={`w-full text-sm bg-white border-2 border-gray-300 rounded-md h-11 leading-[45px] px-[10px] transition-all duration-200 ease-in-out focus:border-blue-400 focus:outline-none focus:shadow-[3px_0px_30px_rgba(163,163,163,0.4)] dark:bg-neutral-800 dark:text-white dark:border-neutral-100 ${estado.valido === "false" ? "border-error focus:border-error" : ""} ${estado.valido === "true" ? "border-exito focus:border-exito" : ""}`}
+          className={`w-full text-sm bg-white border-2 border-gray-300 rounded-md h-11 leading-[45px] px-[10px] pl-[40px] transition-all duration-200 ease-in-out focus:border-blue-400 focus:outline-none focus:shadow-[3px_0px_30px_rgba(163,163,163,0.4)] dark:bg-neutral-800 dark:text-white dark:border-neutral-100 ${estado.valido === "false" ? "border-error focus:border-error" : ""} ${estado.valido === "true" ? "border-exito focus:border-exito" : ""}`}
           onChange={(e) => {
             const valor = e.target.value;
             cambiarEstado({ campo: valor });
@@ -42,7 +43,7 @@ const SeleccionConValidacion = ({
           }}
           onBlur={(e) => validacion(e.target.value)}
         >
-          <option value="" disabled>
+          <option className="" value="" disabled>
             Seleccione una opción
           </option>
           {opciones.map((opcion, index) => (
@@ -51,6 +52,7 @@ const SeleccionConValidacion = ({
             </option>
           ))}
         </select>
+        <span className="absolute left-2">{icon}</span>
         <CircleCheck
           className={`absolute text-base right-6 z-[100] ${estado.valido === "true" ? "opacity-100 text-exito" : "opacity-0"}`}
         />

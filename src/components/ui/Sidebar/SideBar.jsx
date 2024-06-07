@@ -107,7 +107,7 @@ export function SidebarItem({ icon, text, to, active, alert }) {
           bg-stone-100 text-green-800 text-sm
           invisible opacity-20 -translate-x-3 transition-all
           group-hover:visible group-hover:opacity-100 group-hover:translate-x-0
-          dark:bg-neutral-900 dark:text-white
+          dark:bg-neutral-900 dark:text-white w-auto
       `}
           >
             {text}

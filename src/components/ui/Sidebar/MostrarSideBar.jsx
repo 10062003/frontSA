@@ -12,6 +12,7 @@ import {
   NotepadText,
   Settings,
   Tags,
+  UserPlus,
 } from "lucide-react";
 
 const MostrarSideBar = () => {
@@ -19,6 +20,11 @@ const MostrarSideBar = () => {
     <div className="">
       <Sidebar>
         <SidebarItem icon={<Home size={20} />} text="Inicio" to={"/Inicio"} />
+        <SidebarItem
+          icon={<UserPlus size={20} />}
+          text="Registro"
+          to={"/RegistroUsuario"}
+        ></SidebarItem>
         <SidebarItem
           icon={<BarChart3 size={20} />}
           text="Upas"

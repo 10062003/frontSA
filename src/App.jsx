@@ -12,6 +12,7 @@ import MostrarSideBar from "./components/ui/Sidebar/MostrarSideBar";
 import RegistroUpa from "./Upas/RegistroUpa";
 import TablaUpa from "./Upas/TablaUpa";
 import ToasterWrapper from "./components/ui/Toast";
+import RegistroUsuario from "./Registro/RegistroUsuario";
 
 const router = createBrowserRouter([
   {
@@ -73,6 +74,17 @@ const router = createBrowserRouter([
         <MostrarSideBar />
         <div className="flex justify-center grow">
           <TablaUpa />
+        </div>
+      </div>
+    ),
+  },
+  {
+    path: "RegistroUsuario",
+    element: (
+      <div className="flex h-screen">
+        <MostrarSideBar />
+        <div className="flex flex-col flex-1 overflow-y-auto">
+          <RegistroUsuario />
         </div>
       </div>
     ),
