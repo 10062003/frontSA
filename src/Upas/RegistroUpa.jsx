@@ -1,7 +1,7 @@
 import { Toaster, toast } from "sonner";
 import ButtonBasic from "../components/ui/ButtonBasic";
 import InputRegistros from "../components/ui/InputRegistros";
-import { AlignLeft, BarChart3, BookUser, Church, MapPin, Map, Orbit } from "lucide-react";
+import { AlignLeft, BarChart3, BookUser, Church, MapPin, Map, Orbit, TextCursorInput } from "lucide-react";
 import { useState, useEffect } from "react";
 import SeleccionConValidacion from "../components/ui/SeleccionConValidacion";
 import ServiciosUpa from "./ServiciosUpa";
@@ -125,7 +125,7 @@ const RegistroUpa = () => {
           errorMsm="El nombre no debe contener números y máximo 20 caracteres"
           expRegular={expresiones.nombre}
           icon={
-            <BookUser
+            <TextCursorInput
               className={`${nombre.valido === "true" ? "opacity-100 text-exito" : nombre.valido === "false" ? "opacity-100 text-error" : nombre.valido === null ? "opacity-100 text-green-800 dark:text-green-600" : ""}`}
             />
           }

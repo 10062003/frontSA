@@ -15,6 +15,7 @@ import {
   Tags,
   Trees,
   UserPlus,
+  FileStack
 } from "lucide-react";
 
 const MostrarSideBar = () => {
@@ -38,6 +39,11 @@ const MostrarSideBar = () => {
           to={"/Actividades"}
         />
         <SidebarItem
+          icon={<FileStack size={20} />}
+          text="Documentos"
+          to={"/Documentos"}
+        ></SidebarItem>
+        <SidebarItem
           icon={<GraduationCap size={20} />}
           text="Profesiones"
           to={"/Profesiones"}
@@ -59,11 +65,7 @@ const MostrarSideBar = () => {
           text="Historial"
           to={"/Historial"}
         />
-        {/* <SidebarItem
-          icon={<Settings size={20} />}
-          text="Configuración"
-          to={"/Configuracion"}
-        /> */}
+        
       </Sidebar>
     </div>
   );
