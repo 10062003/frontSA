@@ -62,6 +62,30 @@ const router = createBrowserRouter([
     ),
   },
   {
+    path: "RegistroUpa",
+    element: (
+      <div className="flex h-screen">
+        <MostrarSideBar />
+        <div className="flex flex-col flex-1 overflow-y-auto">
+          <RegistroUpa />
+        </div>
+      </div>
+    ),
+  },
+  {
+    path: "TablaUpa",
+    element: (
+      <div className="flex h-screen">
+        <div className="flex-shrink-0">
+          <MostrarSideBar />
+        </div>
+        <div className="flex flex-1 flex-col overflow-y-auto p-4">
+          <TablaUpa />
+        </div>
+      </div>
+    ),
+  },
+  {
     path: "Roles",
     element: (
       <div className="flex h-screen">
@@ -88,36 +112,38 @@ const router = createBrowserRouter([
     ),
   },
   {
-    path: "RegistroUpa",
-    element: (
-      <div className="flex h-screen">
-        <MostrarSideBar />
-        <div className="flex flex-col flex-1 overflow-y-auto">
-          <RegistroUpa />
-        </div>
-      </div>
-    ),
-  },
-  {
-    path: "TablaUpa",
-    element: (
-      <div className="flex h-screen">
-        <div className="flex-shrink-0">
-          <MostrarSideBar />
-        </div>
-        <div className="flex flex-1 flex-col overflow-y-auto p-4">
-          <TablaUpa />
-        </div>
-      </div>
-    ),
-  },
-  {
     path: "RegistroUsuario",
     element: (
       <div className="flex h-screen">
         <MostrarSideBar />
         <div className="flex flex-col flex-1 overflow-y-auto">
           <RegistroUsuario />
+        </div>
+      </div>
+    ),
+  },
+  {
+    path: "Estados",
+    element: (
+      <div className="flex h-screen">
+        <MostrarSideBar />
+        <div className="flex flex-col flex-1 overflow-y-auto">
+          <div className="flex flex-col flex-1 items-center justify-center p-4">
+            <EstadosInicio />
+          </div>
+        </div>
+      </div>
+    ),
+  },
+  {
+    path: "RegistroEstados",
+    element: (
+      <div className="flex h-screen">
+        <MostrarSideBar />
+        <div className="flex flex-col flex-1 overflow-y-auto">
+          <div className="flex flex-col flex-1 items-center justify-center p-4">
+            <RegistroEstados />
+          </div>
         </div>
       </div>
     ),
