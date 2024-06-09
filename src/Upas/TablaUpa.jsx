@@ -1,7 +1,6 @@
 import DataTable from "../components/tablas/datatable";
 import data from "../MOCK_DATA.json";
 import { MoreHorizontal } from "lucide-react";
-import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -10,6 +9,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { Button } from "@/components/ui/button";
 
 const TablaUpa = () => {
   const columns = [
