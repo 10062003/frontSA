@@ -71,9 +71,9 @@ const router = createBrowserRouter([
   {
     path: "TablaUpa",
     element: (
-      <div className="flex h-screen">
+      <div className="flex h-full flex-shrink-0">
         <MostrarSideBar />
-        <div className="flex justify-center grow">
+        <div className="flex flex-col flex-1 overflow-y-auto p-4 ">
           <TablaUpa />
         </div>
       </div>
@@ -94,7 +94,7 @@ const router = createBrowserRouter([
 
 const App = () => {
   return (
-    <div className="bg-gray-200 dark:bg-neutral-900 font-sans">
+    <div className="bg-gray-100 dark:bg-neutral-900 font-sans">
       {/* Mantén el Toaster fuera de las rutas para que esté presente en todas las páginas */}
       <ToasterWrapper richColors closeButton />
 

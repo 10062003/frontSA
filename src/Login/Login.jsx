@@ -1,4 +1,4 @@
-import Button from "../components/ui/Button";
+import ButtonBasic from "../components/ui/ButtonBasic";
 import Input from "../components/ui/Input";
 import Label from "../components/ui/Label";
 import { MailIcon } from "./icons/MailIcon";
@@ -130,9 +130,9 @@ const Login = () => {
             </div>
 
             <div className="flex justify-center">
-              <Button className="text-white" type="submit">
+              <ButtonBasic className="text-white" type="submit">
                 Iniciar sesión
-              </Button>
+              </ButtonBasic>
             </div>
           </form>
         </div>

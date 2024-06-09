@@ -13,7 +13,7 @@ import {
   NotepadText,
   User,
 } from "lucide-react";
-import Button from "../components/ui/Button";
+import ButtonBasic from "../components/ui/ButtonBasic";
 import { Toaster } from "sonner";
 import SeleccionConValidacion from "../components/ui/SeleccionConValidacion";
 
@@ -320,11 +320,11 @@ const RegistroUsuario = () => {
 
         {/* Botón de registro */}
         <div className="flex justify-center col-span-1 sm:col-span-2">
-          <Button
+          <ButtonBasic
             className={"text-white bg-green-700 border-green-700 text-xl"}
           >
             Registrarse
-          </Button>
+          </ButtonBasic>
         </div>
       </form>
       <Toaster position="bottom-right" richColors />

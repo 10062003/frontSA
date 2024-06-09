@@ -1,5 +1,5 @@
 import { Toaster, toast } from "sonner";
-import Button from "../components/ui/Button";
+import ButtonBasic from "../components/ui/ButtonBasic";
 import InputRegistros from "../components/ui/InputRegistros";
 import { AlignLeft, BarChart3, BookUser, Church, MapPin } from "lucide-react";
 import { useState, useEffect } from "react";
@@ -227,7 +227,7 @@ const RegistroUpa = () => {
 
         {/* Boton Registrar */}
         <div className="flex flex-col col-span-1 sm:col-span-2 items-center">
-          <Button
+          <ButtonBasic
             children={"Registrar"}
             className={
               "sm:w-[30%] cursor-pointer text-white hover:shadow-[3px_0px_30px_rgba(163,163,163,0.4)] bg-green-700 border-green-700 text-xl"

@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import Button from "./Button";
+import ButtonBasic from "./ButtonBasic";
 
 const CardGeneral = (props) => {
   const { title, description, className, onClickOne, onClickTwo } = props;
@@ -12,12 +12,18 @@ const CardGeneral = (props) => {
           </h1>
           <p className="text-gray-600 mb-6 dark:text-gray-100">{description}</p>
           <div className="flex flex-wrap justify-center">
-            <Button className={"text-white bg-green-700"} onClick={onClickOne}>
+            <ButtonBasic
+              className={"text-white bg-green-700"}
+              onClick={onClickOne}
+            >
               Registrar {title}
-            </Button>
-            <Button className={"text-white bg-green-700"} onClick={onClickTwo}>
+            </ButtonBasic>
+            <ButtonBasic
+              className={"text-white bg-green-700"}
+              onClick={onClickTwo}
+            >
               Listar {title}
-            </Button>
+            </ButtonBasic>
           </div>
         </div>
       </div>

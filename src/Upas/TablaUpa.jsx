@@ -1,169 +1,74 @@
-import React, { useState } from "react";
+import DataTable from "../components/tablas/datatable";
+import data from "../MOCK_DATA.json";
+import { MoreHorizontal } from "lucide-react";
+import { Button } from "@/components/ui/button";
 import {
-  Download,
-  Search,
-  FileText,
-  FileJson,
-  ScrollText,
-  Sheet,
-} from "lucide-react";
-import "./TablaUpa.css";
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 
 const TablaUpa = () => {
-  const [searchTerm, setSearchTerm] = useState("");
-  const [sortBy, setSortBy] = useState({ column: null, asc: true });
-
-  const handleSearch = (event) => {
-    setSearchTerm(event.target.value.toLowerCase());
-  };
-
-  const handleSort = (index) => {
-    setSortBy({
-      column: index,
-      asc: sortBy.column === index ? !sortBy.asc : true,
-    });
-  };
-
-  // Datos de ejemplo para las filas de la tabla
-  const data = [
+  const columns = [
     {
-      id: 1,
-      nombre: "Lestoma",
-      ubicacion: "Facatativá",
-      estado: "Activo",
-      descripcion: "Texto descriptivo",
+      header: "ID",
+      accessorKey: "id",
     },
     {
-      id: 2,
-      nombre: "HydroDomusLab",
-      ubicacion: "Soacha",
-      estado: "En preparación",
-      descripcion: "Texto descriptivo",
+      header: "Primer Nombre",
+      accessorKey: "first_name",
     },
     {
-      id: 3,
-      nombre: "EcoAquaInnovación",
-      ubicacion: "Girardot",
-      estado: "En preparación",
-      descripcion: "Texto descriptivo",
+      header: "Last Name",
+      accessorKey: "last_name",
     },
     {
-      id: 4,
-      nombre: "AquaTechLab",
-      ubicacion: "Chía",
-      estado: "Inactivo",
-      descripcion: "Texto descriptivo",
+      header: "Email",
+      accessorKey: "email",
     },
-    // Agrega más datos de ejemplo si es necesario
-  ];
-
-  // Ordena las filas según el ID de manera ascendente
-  const sortedRows = data.sort((a, b) => {
-    return sortBy.asc ? a.id - b.id : b.id - a.id;
-  });
-
-  // Filtra las filas según el término de búsqueda
-  const filteredRows = sortedRows.filter((row) => {
-    return (
-      row.nombre.toLowerCase().includes(searchTerm) ||
-      row.ubicacion.toLowerCase().includes(searchTerm) ||
-      row.estado.toLowerCase().includes(searchTerm) ||
-      row.descripcion.toLowerCase().includes(searchTerm)
-    );
-  });
-
-  const getStatusClass = (estado) => {
-    switch (estado.toLowerCase()) {
-      case "activo":
-        return "status activo";
-      case "en preparación":
-        return "status en-preparacion";
-      case "inactivo":
-        return "status inactivo";
-      default:
-        return "";
-    }
-  };
-
-  return (
-    <div className="bodystyle">
-      <main className="table" id="customers_table">
-        <section className="table__header">
-          <h1>
-            <strong>Listado de Upas</strong>
-          </h1>
-          <div className="input-group">
-            <input
-              type="search"
-              placeholder="Buscar Upa"
-              onChange={handleSearch}
-              value={searchTerm}
-            />
-            <Search />
-          </div>
-          <div className="export__file">
-            <label
-              htmlFor="export-file"
-              className="export__file-btn"
-              title="Export File"
+    {
+      header: "Color",
+      accessorKey: "color",
+    },
+    {
+      header: "IP Address",
+      accessorKey: "ip_address",
+    },
+    {
+      id: "actions",
+      cell: ({ row }) => (
+        <DropdownMenu>
+          <DropdownMenuTrigger asChild>
+            <Button variant="ghost" className="h-8 w-8 p-0">
+              <span className="sr-only">Open options</span>
+              <MoreHorizontal className="h-4 w-4" />
+            </Button>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent aling="end">
+            <DropdownMenuLabel>Actions</DropdownMenuLabel>
+            <DropdownMenuItem
+              onClick={() => navigator.clipboard.writeText(row.original.id)}
             >
-              <Download />
-            </label>
-            <input type="checkbox" id="export-file" />
-            <div className="export__file-options">
-              <label>Export As &nbsp; &#10140;</label>
-              <label htmlFor="export-file" id="toPDF">
-                PDF <ScrollText />
-              </label>
-              <label htmlFor="export-file" id="toJSON">
-                JSON <FileJson />
-              </label>
-              <label htmlFor="export-file" id="toCSV">
-                CSV <FileText />
-              </label>
-              <label htmlFor="export-file" id="toEXCEL">
-                EXCEL <Sheet />
-              </label>
-            </div>
-          </div>
-        </section>
-        <section className="table__body">
-          <table>
-            <thead>
-              <tr>
-                <th onClick={() => handleSort(0)}> Id </th>
-                <th onClick={() => handleSort(1)}> Nombre </th>
-                <th onClick={() => handleSort(2)}> Ubicación </th>
-                <th className="estados" onClick={() => handleSort(3)}>
-                  {" "}
-                  Estado{" "}
-                </th>
-                <th onClick={() => handleSort(4)}> Descripción </th>
-              </tr>
-            </thead>
-            <tbody>
-              {filteredRows.map((row, index) => (
-                <tr key={index}>
-                  <td>{row.id}</td>
-                  <td className="left-align">{row.nombre}</td>
-                  <td>{row.ubicacion}</td>
-                  <td>
-                    <div className="estados">
-                      <div
-                        dangerouslySetInnerHTML={{
-                          __html: `<div class="${getStatusClass(row.estado)}">${row.estado}</div>`,
-                        }}
-                      />
-                    </div>
-                  </td>
-                  <td>{row.descripcion}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </section>
-      </main>
-    </div>
+              Copy User
+            </DropdownMenuItem>
+            <DropdownMenuSeparator />
+            <DropdownMenuItem>Edit</DropdownMenuItem>
+            <DropdownMenuItem>Delete</DropdownMenuItem>
+          </DropdownMenuContent>
+        </DropdownMenu>
+      ),
+    },
+  ];
+  return (
+    <section className="py-24">
+      <div className="container">
+        <h1 className="mb-16 text-2xl font-medium">Tabla bien perrona</h1>
+        <DataTable data={data} columns={columns} />
+      </div>
+    </section>
   );
 };
 
