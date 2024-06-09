@@ -63,10 +63,12 @@ const TablaUpa = () => {
     },
   ];
   return (
-    <section className="py-24">
+    <section className="py-10">
       <div className="container">
-        <h1 className="mb-16 text-2xl font-medium">Tabla bien perrona</h1>
-        <DataTable data={data} columns={columns} />
+        <h1 className="mb-10 text-5xl font-bold text-green-700">
+          Listado de Upas
+        </h1>
+        <DataTable data={data} columns={columns} footer={"Lista de UPAs"} />
       </div>
     </section>
   );

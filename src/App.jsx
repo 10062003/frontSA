@@ -103,7 +103,7 @@ const router = createBrowserRouter([
         <div className="flex-shrink-0">
           <MostrarSideBar />
         </div>
-        <div className="flex flex-1 flex-col overflow-y-auto p-4">
+        <div className="flex flex-1 flex-col p-4">
           <TablaUpa />
         </div>
       </div>
