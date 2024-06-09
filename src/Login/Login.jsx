@@ -1,5 +1,5 @@
 import ButtonBasic from "../components/ui/ButtonBasic";
-import Input from "../components/ui/Input";
+import InputBasic from "../components/ui/InputBasic";
 import Label from "../components/ui/Label";
 import { MailIcon } from "./icons/MailIcon";
 import PassIcon from "./icons/PassIcon";
@@ -75,7 +75,7 @@ const Login = () => {
               <Label htmlFor="email">Correo Institucional</Label>
               <div className="mt-2">
                 <div className="relative flex items-center">
-                  <Input
+                  <InputBasic
                     id="email"
                     name="email"
                     type="email"
@@ -96,7 +96,7 @@ const Login = () => {
               </div>
               <div className="mt-2">
                 <div className="relative flex items-center justify-center">
-                  <Input
+                  <InputBasic
                     id="password"
                     name="password"
                     type="password"
