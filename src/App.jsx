@@ -16,6 +16,10 @@ import RegistroUsuario from "./Registro/RegistroUsuario";
 import "./index.css";
 import RolesInicio from "./Roles/RolesInicio";
 import RegistroRoles from "./Roles/RegistroRoles";
+import EstadosInicio from "./EstadosTicket/EstadosInicio";
+import RegistroEstados from "./EstadosTicket/RegistroEstados";
+import DocumentosInicio from "./Documentos/DocumentosInicio";
+import RegistroDocumentos from "./Documentos/RegistroDocumentos";
 
 const router = createBrowserRouter([
   {
@@ -60,6 +64,30 @@ const router = createBrowserRouter([
     ),
   },
   {
+    path: "RegistroUpa",
+    element: (
+      <div className="flex h-screen">
+        <MostrarSideBar />
+        <div className="flex flex-col flex-1 overflow-y-auto">
+          <RegistroUpa />
+        </div>
+      </div>
+    ),
+  },
+  {
+    path: "TablaUpa",
+    element: (
+      <div className="flex h-screen">
+        <div className="flex-shrink-0">
+          <MostrarSideBar />
+        </div>
+        <div className="flex flex-1 flex-col overflow-y-auto p-4">
+          <TablaUpa />
+        </div>
+      </div>
+    ),
+  },
+  {
     path: "Roles",
     element: (
       <div className="flex h-screen">
@@ -86,6 +114,7 @@ const router = createBrowserRouter([
     ),
   },
   {
+<<<<<<< HEAD
     path: "RegistroUpa",
     element: (
       <div className="flex h-screen">
@@ -110,12 +139,66 @@ const router = createBrowserRouter([
     ),
   },
   {
+=======
+>>>>>>> a631e7fbf56c482ec05ccf1b633e924bee56fb50
     path: "RegistroUsuario",
     element: (
       <div className="flex h-screen">
         <MostrarSideBar />
         <div className="flex flex-col flex-1 overflow-y-auto">
           <RegistroUsuario />
+        </div>
+      </div>
+    ),
+  },
+  {
+    path: "Estados",
+    element: (
+      <div className="flex h-screen">
+        <MostrarSideBar />
+        <div className="flex flex-col flex-1 overflow-y-auto">
+          <div className="flex flex-col flex-1 items-center justify-center p-4">
+            <EstadosInicio />
+          </div>
+        </div>
+      </div>
+    ),
+  },
+  {
+    path: "RegistroEstados",
+    element: (
+      <div className="flex h-screen">
+        <MostrarSideBar />
+        <div className="flex flex-col flex-1 overflow-y-auto">
+          <div className="flex flex-col flex-1 items-center justify-center p-4">
+            <RegistroEstados />
+          </div>
+        </div>
+      </div>
+    ),
+  },
+  {
+    path: "Documentos",
+    element: (
+      <div className="flex h-screen">
+        <MostrarSideBar />
+        <div className="flex flex-col flex-1 overflow-y-auto">
+          <div className="flex flex-col flex-1 items-center justify-center p-4">
+            <DocumentosInicio />
+          </div>
+        </div>
+      </div>
+    ),
+  },
+  {
+    path: "RegistroDocumentos",
+    element: (
+      <div className="flex h-screen">
+        <MostrarSideBar />
+        <div className="flex flex-col flex-1 overflow-y-auto">
+          <div className="flex flex-col flex-1 items-center justify-center p-4">
+            <RegistroDocumentos />
+          </div>
         </div>
       </div>
     ),

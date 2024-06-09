@@ -10,7 +10,7 @@ const CardGeneral = (props) => {
           <h1 className="text-green-700 text-4xl font-bold mb-4 dark:text-white text-center">
             {title}
           </h1>
-          <p className="text-gray-600 mb-6 dark:text-gray-100">{description}</p>
+          <p className="text-gray-600 mb-6 dark:text-gray-100 text-center">{description}</p>
           <div className="flex flex-wrap justify-center">
             <ButtonBasic
               className={"text-white bg-green-700"}

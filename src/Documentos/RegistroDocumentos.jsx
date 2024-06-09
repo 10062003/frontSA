@@ -2,14 +2,14 @@ import { Toaster, toast } from "sonner";
 import ButtonBasic from "../components/ui/ButtonBasic";
 import InputRegistros from "../components/ui/InputRegistros";
 import SeleccionConValidacion from "../components/ui/SeleccionConValidacion";
-import ServiciosRoles from "./ServiciosRoles";
+import ServiciosDocumentos from "./ServiciosDocumentos"; // Cambiado de ServiciosRoles a ServiciosDocumentos
 import { useState } from "react";
-import { BookUser, BarChart3, TextCursorInput, Orbit } from "lucide-react";
+import { BookUser, BarChart3, TextCursorInput, Orbit, Files } from "lucide-react";
 
-const RegistroRol = () => {
-  const servicioRol = new ServiciosRoles();
+const RegistroDocumentos = () => {
+  const servicioDocumento = new ServiciosDocumentos(); // Cambiado de ServiciosRoles a ServiciosDocumentos
   const expresiones = {
-    nombre: /^[a-zA-ZÀ-ÿ\s]{3,20}$/, // Letras y espacios, pueden llevar acentos, de 3 a 20.
+    nombre: /^[a-zA-ZÀ-ÿ\s]{2,20}$/, // Letras y espacios, pueden llevar acentos, de 3 a 20.
   };
 
   const opciones = [
@@ -31,9 +31,9 @@ const RegistroRol = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
   
-    const rol = {
-      rolNombre: nombre.campo,
-      rolIdEstado: estado.campo
+    const documento = {
+      tdocTipoDocumento: nombre.campo,
+      tdocIdEstado: estado.campo
     };
   
     console.log("Nombre:", nombre.campo);
@@ -41,24 +41,24 @@ const RegistroRol = () => {
   
     if (validarCampo(nombre.campo, expresiones.nombre) && estado.campo) {
       try {
-        const respuesta = await servicioRol.RegistrarRol(rol);
+        const respuesta = await servicioDocumento.RegistrarDocumento(documento); // Cambiado de servicioRol.RegistrarRol a servicioDocumento.RegistrarDocumento
         console.log("Respuesta del servidor:", respuesta);
   
         if (respuesta && respuesta.respuesta === 1) {
           cambiarNombre({ campo: "", valido: null });
           cambiarEstado({ campo: "", valido: null });
-          toast.success("Rol " + nombre.campo + " registrado correctamente", {
+          toast.success("Tipo de documento " + nombre.campo + " registrado correctamente", { // Cambiado de Rol a Tipo de documento
             duration: 4000,
           });
         } else {
-          toast.error("Error al enviar el rol, revise los campos");
+          toast.error("Error al enviar el tipo de documento, revise los campos"); // Cambiado de Rol a Tipo de documento
         }
       } catch (error) {
-        toast.error("Error de servidor: no se pudo registrar el rol");
+        toast.error("Error de servidor: no se pudo registrar el tipo de documento"); // Cambiado de Rol a Tipo de documento
         console.error("Error en el servidor:", error);
       }
     } else {
-      toast.error("Error al enviar el rol, revise los campos");
+      toast.error("Error al enviar el tipo de documento, revise los campos"); // Cambiado de Rol a Tipo de documento
       console.log("Error de validación de campos");
     }
   };
@@ -66,7 +66,7 @@ const RegistroRol = () => {
   return (
     <main className="max-w-4xl w-11/12 m-auto p-10">
       <p className="flex justify-center text-bold text-center font-bold mb-11 text-green-700 text-7xl dark:text-green-500">
-        Registro de roles
+        Registro de tipos de Documento
       </p>
       <form
         onSubmit={handleSubmit}
@@ -76,15 +76,15 @@ const RegistroRol = () => {
         <InputRegistros
           estado={nombre}
           cambiarEstado={cambiarNombre}
-          label="Nombre del rol"
-          placeholder="Administrador"
+          label="Tipo de documento"
+          placeholder="CC"
           id="nombre"
           type="text"
           name="nombre"
           errorMsm="El nombre no debe contener números y máximo 20 caracteres"
           expRegular={expresiones.nombre}
           icon={
-            <TextCursorInput
+            <Files
             className={`${nombre.valido === "true" ? "opacity-100 text-exito" : nombre.valido === "false" ? "opacity-100 text-error" : nombre.valido === null ? "opacity-100 text-green-800 dark:text-green-600" : ""}`}
             />
           }
@@ -120,4 +120,4 @@ const RegistroRol = () => {
   );
 };
 
-export default RegistroRol;
+export default RegistroDocumentos;

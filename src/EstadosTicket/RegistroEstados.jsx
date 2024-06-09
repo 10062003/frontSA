@@ -2,24 +2,23 @@ import { Toaster, toast } from "sonner";
 import ButtonBasic from "../components/ui/ButtonBasic";
 import InputRegistros from "../components/ui/InputRegistros";
 import SeleccionConValidacion from "../components/ui/SeleccionConValidacion";
-import ServiciosRoles from "./ServiciosRoles";
 import { useState } from "react";
 import { BookUser, BarChart3, TextCursorInput, Orbit } from "lucide-react";
+import ServiciosEstados from "./ServiciosEstados"; // Ensure this import exists
 
-const RegistroRol = () => {
-  const servicioRol = new ServiciosRoles();
+const RegistroEstados = () => {
   const expresiones = {
-    nombre: /^[a-zA-ZÀ-ÿ\s]{3,20}$/, // Letras y espacios, pueden llevar acentos, de 3 a 20.
+    nombre: /^[a-zA-ZÀ-ÿ\s]{3,20}$/,
   };
 
   const opciones = [
     {
       campo: "3fa85f64-5717-4562-b3fc-2c963f66afa6",
-      label: "Activado",
+      label: "Activo",
     },
     {
       campo: "1a9d5660-0fb2-4b3e-857f-a45e3d1a5dbd",
-      label: "Desactivado",
+      label: "Inactivo",
     },
   ];
 
@@ -30,35 +29,35 @@ const RegistroRol = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-  
-    const rol = {
-      rolNombre: nombre.campo,
-      rolIdEstado: estado.campo
+
+    const estadoObj = {
+      etdTkEstadoTicket: nombre.campo,
+      etdTkIdEstado: estado.campo,
     };
-  
+
     console.log("Nombre:", nombre.campo);
     console.log("Estado:", estado.campo);
-  
+
     if (validarCampo(nombre.campo, expresiones.nombre) && estado.campo) {
       try {
-        const respuesta = await servicioRol.RegistrarRol(rol);
+        const respuesta = await ServiciosEstados.RegistrarEstado(estadoObj);
         console.log("Respuesta del servidor:", respuesta);
-  
+
         if (respuesta && respuesta.respuesta === 1) {
           cambiarNombre({ campo: "", valido: null });
           cambiarEstado({ campo: "", valido: null });
-          toast.success("Rol " + nombre.campo + " registrado correctamente", {
+          toast.success("Estado " + nombre.campo + " registrado correctamente", {
             duration: 4000,
           });
         } else {
-          toast.error("Error al enviar el rol, revise los campos");
+          toast.error("Error al enviar el estado, revise los campos");
         }
       } catch (error) {
-        toast.error("Error de servidor: no se pudo registrar el rol");
+        toast.error("Error de servidor: no se pudo registrar el estado");
         console.error("Error en el servidor:", error);
       }
     } else {
-      toast.error("Error al enviar el rol, revise los campos");
+      toast.error("Error al enviar el estado, revise los campos");
       console.log("Error de validación de campos");
     }
   };
@@ -66,7 +65,7 @@ const RegistroRol = () => {
   return (
     <main className="max-w-4xl w-11/12 m-auto p-10">
       <p className="flex justify-center text-bold text-center font-bold mb-11 text-green-700 text-7xl dark:text-green-500">
-        Registro de roles
+        Registro de estados
       </p>
       <form
         onSubmit={handleSubmit}
@@ -76,8 +75,8 @@ const RegistroRol = () => {
         <InputRegistros
           estado={nombre}
           cambiarEstado={cambiarNombre}
-          label="Nombre del rol"
-          placeholder="Administrador"
+          label="Nombre del estado"
+          placeholder="En espera"
           id="nombre"
           type="text"
           name="nombre"
@@ -85,7 +84,7 @@ const RegistroRol = () => {
           expRegular={expresiones.nombre}
           icon={
             <TextCursorInput
-            className={`${nombre.valido === "true" ? "opacity-100 text-exito" : nombre.valido === "false" ? "opacity-100 text-error" : nombre.valido === null ? "opacity-100 text-green-800 dark:text-green-600" : ""}`}
+              className={`${nombre.valido === "true" ? "opacity-100 text-exito" : nombre.valido === "false" ? "opacity-100 text-error" : nombre.valido === null ? "opacity-100 text-green-800 dark:text-green-600" : ""}`}
             />
           }
           className="col-span-1 sm:col-span-2"
@@ -101,7 +100,7 @@ const RegistroRol = () => {
           opciones={opciones}
           icon={
             <Orbit
-            className={`${estado.valido === "true" ? "opacity-100 text-exito" : estado.valido === "false" ? "opacity-100 text-error" : estado.valido === null ? "opacity-100 text-green-800 dark:text-green-600" : ""}`}
+              className={`${estado.valido === "true" ? "opacity-100 text-exito" : estado.valido === "false" ? "opacity-100 text-error" : estado.valido === null ? "opacity-100 text-green-800 dark:text-green-600" : ""}`}
             />
           }
           className="col-span-1 sm:col-span-2"
@@ -120,4 +119,4 @@ const RegistroRol = () => {
   );
 };
 
-export default RegistroRol;
+export default RegistroEstados;

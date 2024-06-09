@@ -10,9 +10,12 @@ import {
   GraduationCap,
   Home,
   NotepadText,
+  Orbit,
   Settings,
   Tags,
+  Trees,
   UserPlus,
+  FileStack
 } from "lucide-react";
 
 const MostrarSideBar = () => {
@@ -26,7 +29,7 @@ const MostrarSideBar = () => {
           to={"/RegistroUsuario"}
         ></SidebarItem>
         <SidebarItem
-          icon={<BarChart3 size={20} />}
+          icon={<Trees size={20} />}
           text="Upas"
           to={"/Upas"}
         ></SidebarItem>
@@ -35,6 +38,11 @@ const MostrarSideBar = () => {
           text="Actividades"
           to={"/Actividades"}
         />
+        <SidebarItem
+          icon={<FileStack size={20} />}
+          text="Documentos"
+          to={"/Documentos"}
+        ></SidebarItem>
         <SidebarItem
           icon={<GraduationCap size={20} />}
           text="Profesiones"
@@ -46,7 +54,7 @@ const MostrarSideBar = () => {
           to={"/Modulos"}
         />
         <SidebarItem
-          icon={<NotepadText size={20} />}
+          icon={<Orbit size={20} />}
           text="Estados"
           to={"/Estados"}
         />
@@ -57,11 +65,7 @@ const MostrarSideBar = () => {
           text="Historial"
           to={"/Historial"}
         />
-        {/* <SidebarItem
-          icon={<Settings size={20} />}
-          text="Configuración"
-          to={"/Configuracion"}
-        /> */}
+        
       </Sidebar>
     </div>
   );
