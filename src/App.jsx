@@ -60,13 +60,13 @@ const router = createBrowserRouter([
     ),
   },
   {
-  path: "Roles",
+    path: "Roles",
     element: (
       <div className="flex h-screen">
         <MostrarSideBar />
         <div className="flex flex-col flex-1 overflow-y-auto">
           <div className="flex flex-col flex-1 items-center justify-center p-4">
-            <RolesInicio/>
+            <RolesInicio />
           </div>
         </div>
       </div>
@@ -74,17 +74,17 @@ const router = createBrowserRouter([
   },
   {
     path: "RegistroRoles",
-      element: (
-        <div className="flex h-screen">
-          <MostrarSideBar />
-          <div className="flex flex-col flex-1 overflow-y-auto">
-            <div className="flex flex-col flex-1 items-center justify-center p-4">
-              <RegistroRoles/>
-            </div>
+    element: (
+      <div className="flex h-screen">
+        <MostrarSideBar />
+        <div className="flex flex-col flex-1 overflow-y-auto">
+          <div className="flex flex-col flex-1 items-center justify-center p-4">
+            <RegistroRoles />
           </div>
         </div>
-      ),
-    },
+      </div>
+    ),
+  },
   {
     path: "RegistroUpa",
     element: (
@@ -99,9 +99,11 @@ const router = createBrowserRouter([
   {
     path: "TablaUpa",
     element: (
-      <div className="flex h-full flex-shrink-0">
-        <MostrarSideBar />
-        <div className="flex flex-col flex-1 overflow-y-auto p-4 ">
+      <div className="flex h-screen">
+        <div className="flex-shrink-0">
+          <MostrarSideBar />
+        </div>
+        <div className="flex flex-1 flex-col overflow-y-auto p-4">
           <TablaUpa />
         </div>
       </div>

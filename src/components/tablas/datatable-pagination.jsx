@@ -7,9 +7,18 @@ import {
 } from "@/components/ui/select";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { Button } from "@/components/ui/Button";
+import { useMemo } from "react";
 
 const DataTablePagination = ({ table }) => {
   const pageSize = [5, 10, 20, table.getFilteredRowModel().rows.length];
+  const pageIndex = table.getState().pagination.pageIndex;
+  const pageCount = table.getPageCount();
+
+  const paginationRange = useMemo(() => {
+    const start = Math.max(0, pageIndex - 2);
+    const end = Math.min(pageCount, pageIndex + 3);
+    return Array.from({ length: end - start }, (_, i) => start + i);
+  }, [pageIndex, pageCount]);
 
   return (
     <div className="flex items-center justify-between px-2">
@@ -36,8 +45,7 @@ const DataTablePagination = ({ table }) => {
         </Select>
       </div>
       <div className="flex w-[100px] items-center justify-center text-sm font-medium">
-        Page {table.getState().pagination.pageIndex + 1} of{" "}
-        {table.getPageCount()}
+        Page {pageIndex + 1} of {pageCount}
       </div>
       <div className="flex items-center space-x-2">
         <Button
@@ -49,15 +57,15 @@ const DataTablePagination = ({ table }) => {
           <span className="sr-only">Ir a la pagina anterior</span>
           <ChevronLeft className="h-4 w-4" />
         </Button>
-        {Array.from({ length: table.getPageCount() }).map((_, PageIndex) => (
+        {paginationRange.map((page) => (
           <Button
-            key={PageIndex}
+            key={page}
             variant="outline"
             className="h-8 w-8 p-0"
-            onClick={() => table.setPageIndex(PageIndex)}
-            disabled={table.getState().pagination.pageIndex === PageIndex}
+            onClick={() => table.setPageIndex(page)}
+            disabled={pageIndex === page}
           >
-            {PageIndex + 1}
+            {page + 1}
           </Button>
         ))}
         <Button
