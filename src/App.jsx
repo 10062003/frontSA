@@ -16,6 +16,8 @@ import RegistroUsuario from "./Registro/RegistroUsuario";
 import "./index.css";
 import RolesInicio from "./Roles/RolesInicio";
 import RegistroRoles from "./Roles/RegistroRoles";
+import EstadosInicio from "./EstadosTicket/EstadosInicio";
+import RegistroEstados from "./EstadosTicket/RegistroEstados";
 
 const router = createBrowserRouter([
   {
@@ -60,13 +62,13 @@ const router = createBrowserRouter([
     ),
   },
   {
-  path: "Roles",
+    path: "Roles",
     element: (
       <div className="flex h-screen">
         <MostrarSideBar />
         <div className="flex flex-col flex-1 overflow-y-auto">
           <div className="flex flex-col flex-1 items-center justify-center p-4">
-            <RolesInicio/>
+            <RolesInicio />
           </div>
         </div>
       </div>
@@ -74,17 +76,43 @@ const router = createBrowserRouter([
   },
   {
     path: "RegistroRoles",
-      element: (
-        <div className="flex h-screen">
-          <MostrarSideBar />
-          <div className="flex flex-col flex-1 overflow-y-auto">
-            <div className="flex flex-col flex-1 items-center justify-center p-4">
-              <RegistroRoles/>
-            </div>
+    element: (
+      <div className="flex h-screen">
+        <MostrarSideBar />
+        <div className="flex flex-col flex-1 overflow-y-auto">
+          <div className="flex flex-col flex-1 items-center justify-center p-4">
+            <RegistroRoles />
           </div>
         </div>
-      ),
-    },
+      </div>
+    ),
+  },
+  {
+    path: "Estados",
+    element: (
+      <div className="flex h-screen">
+        <MostrarSideBar />
+        <div className="flex flex-col flex-1 overflow-y-auto">
+          <div className="flex flex-col flex-1 items-center justify-center p-4">
+            <EstadosInicio />
+          </div>
+        </div>
+      </div>
+    ),
+  },
+  {
+    path: "RegistroEstados",
+    element: (
+      <div className="flex h-screen">
+        <MostrarSideBar />
+        <div className="flex flex-col flex-1 overflow-y-auto">
+          <div className="flex flex-col flex-1 items-center justify-center p-4">
+            <RegistroEstados />
+          </div>
+        </div>
+      </div>
+    ),
+  },
   {
     path: "RegistroUpa",
     element: (
