@@ -73,7 +73,6 @@ const RegistroUpa = () => {
     ) {
       try {
         const respuesta = await servicioUpa.RegistrarUpa(upa);
-
         if (respuesta.respuesta === 1) {
           cambiarNombre({ campo: "", valido: null });
           cambiarDescripcion({ campo: "", valido: null });
