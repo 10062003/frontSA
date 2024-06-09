@@ -6,7 +6,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { ChevronLeft, ChevronRight } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { Button } from "@/components/ui/Button";
 
 const DataTablePagination = ({ table }) => {
   const pageSize = [5, 10, 20, table.getFilteredRowModel().rows.length];
