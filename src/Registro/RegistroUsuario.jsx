@@ -11,6 +11,7 @@ import {
   GraduationCap,
   KeyRound,
   NotepadText,
+  Orbit,
   User,
 } from "lucide-react";
 import ButtonBasic from "../components/ui/ButtonBasic";
@@ -285,7 +286,7 @@ const RegistroUsuario = () => {
             },
           ]}
           icon={
-            <BarChart3
+            <Orbit
               className={`${estado.valido === "true" ? "opacity-100 text-exito" : estado.valido === "false" ? "opacity-100 text-error" : estado.valido === null ? "opacity-100 text-green-800 dark:text-green-600" : ""}`}
             />
           }

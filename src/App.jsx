@@ -16,6 +16,8 @@ import RegistroUsuario from "./Registro/RegistroUsuario";
 import "./index.css";
 import RolesInicio from "./Roles/RolesInicio";
 import RegistroRoles from "./Roles/RegistroRoles";
+import EstadosInicio from "./EstadosTicket/EstadosInicio";
+import RegistroEstados from "./EstadosTicket/RegistroEstados";
 
 const router = createBrowserRouter([
   {

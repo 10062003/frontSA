@@ -1,7 +1,7 @@
 import { Toaster, toast } from "sonner";
 import ButtonBasic from "../components/ui/ButtonBasic";
 import InputRegistros from "../components/ui/InputRegistros";
-import { AlignLeft, BarChart3, BookUser, Church, MapPin } from "lucide-react";
+import { AlignLeft, BarChart3, BookUser, Church, MapPin, Map, Orbit } from "lucide-react";
 import { useState, useEffect } from "react";
 import SeleccionConValidacion from "../components/ui/SeleccionConValidacion";
 import ServiciosUpa from "./ServiciosUpa";
@@ -182,7 +182,7 @@ const RegistroUpa = () => {
           errorMsm="No debe contener números y un máximo de 20 caracteres"
           expRegular={expresiones.departamento}
           icon={
-            <BookUser
+            <Map
               className={`${departamento.valido === "true" ? "opacity-100 text-exito" : departamento.valido === "false" ? "opacity-100 text-error" : departamento.valido === null ? "opacity-100 text-green-800 dark:text-green-600" : ""}`}
             />
           }
@@ -217,7 +217,7 @@ const RegistroUpa = () => {
           cambiarEstado={cambiarEstado}
           opciones={opciones}
           icon={
-            <BarChart3
+            <Orbit
               className={`${municipio.valido === "true" ? "opacity-100 text-exito" : municipio.valido === "false" ? "opacity-100 text-error" : municipio.valido === null ? "opacity-100 text-green-800 dark:text-green-600" : ""}`}
             />
           }
