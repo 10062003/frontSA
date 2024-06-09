@@ -1,8 +1,8 @@
 import { Toaster, toast } from "sonner";
 import Button from "../components/ui/Button";
 import InputRegistros from "../components/ui/InputRegistros";
-import { AlignLeft, BookUser, Church, MapPin } from "lucide-react";
-import { useState } from "react";
+import { AlignLeft, BarChart3, BookUser, Church, MapPin } from "lucide-react";
+import { useState, useEffect } from "react";
 import SeleccionConValidacion from "../components/ui/SeleccionConValidacion";
 import ServiciosUpa from "./ServiciosUpa";
 
@@ -10,7 +10,7 @@ const RegistroUpa = () => {
   const servicioUpa = new ServiciosUpa();
   const expresiones = {
     nombre: /^[a-zA-ZÀ-ÿ\s]{3,20}$/, // Letras y espacios, pueden llevar acentos, de 3 a 20.
-    descripcion: /^[a-zA-ZÀ-ÿ0-9\s]{10,100}$/, // Letras y espacios, pueden llevar acentos, de 10 a 50.
+    descripcion: /^[a-zA-ZÀ-ÿ0-9\s]{10,100}$/, // Letras y espacios, pueden llevar acentos, de 10 a 100.
     ubicacion: /^[a-zA-Z0-9\s.,#-]{5,100}$/, // Letras y espacios, pueden llevar acentos, de 5 a 100.
     departamento: /^[a-zA-ZÀ-ÿ\s]{4,20}$/, // Letras y espacios, pueden llevar acentos, de 4 a 20.
     municipio: /^[a-zA-ZÀ-ÿ\s]{4,20}$/, // Letras y espacios, pueden llevar acentos, de 4 a 20.
@@ -42,7 +42,15 @@ const RegistroUpa = () => {
     valido: null,
   });
 
-  const handleSubmit = (e) => {
+  const validarCampo = (campo, expresion) => {
+    if (expresion.test(campo)) {
+      return "true";
+    } else {
+      return "false";
+    }
+  };
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     const upa = {
@@ -55,11 +63,7 @@ const RegistroUpa = () => {
       upsDepartamento: departamento.campo,
     };
 
-    //console.log(upa);
-    const respuesta = servicioUpa.RegistrarUpa(upa);
-
     if (
-      respuesta.respuesta === 1 &&
       nombre.valido === "true" &&
       descripcion.valido === "true" &&
       ubicacion.valido === "true" &&
@@ -67,23 +71,43 @@ const RegistroUpa = () => {
       municipio.valido === "true" &&
       departamento.valido === "true"
     ) {
-      cambiarNombre({ campo: "", valido: null });
-      cambiarDescripcion({ campo: "", valido: null });
-      cambiarUbicacion({ campo: "", valido: null });
-      cambiarEstado({ campo: "", valido: null });
-      cambiarMunicipio({ campo: "", valido: null });
-      cambiarDepartamento({ campo: "", valido: null });
-      toast.success("Upa " + nombre.campo + " registrada correctamente", {
-        duration: null,
-      });
+      try {
+        const respuesta = await servicioUpa.RegistrarUpa(upa);
+
+        if (respuesta.respuesta === 1) {
+          cambiarNombre({ campo: "", valido: null });
+          cambiarDescripcion({ campo: "", valido: null });
+          cambiarUbicacion({ campo: "", valido: null });
+          cambiarEstado({ campo: "", valido: null });
+          cambiarMunicipio({ campo: "", valido: null });
+          cambiarDepartamento({ campo: "", valido: null });
+          toast.success("Upa " + nombre.campo + " registrada correctamente", {
+            duration: 4000,
+          });
+        } else {
+          toast.error("Error al enviar la Upa, revise los campos");
+        }
+      } catch (error) {
+        toast.error("Error de servidor: no se pudo registrar la Upa");
+      }
     } else {
-      toast.error("Error al enviar la Upa revise los campos");
+      toast.error("Error al enviar la Upa, revise los campos");
     }
   };
 
+  useEffect(() => {
+    // Set up the toaster options if needed
+    const toasterOptions = {
+      duration: 4000,
+    };
+
+    // Return a cleanup function to remove toasts when the component unmounts
+    return () => {};
+  }, []);
+
   return (
     <main className="max-w-4xl w-11/12 m-auto p-10">
-      <p className="flex justify-center text-bold font-bold mb-11 text-green-800 text-7xl dark:text-green-500">
+      <p className="flex justify-center text-bold text-center font-bold mb-11 text-green-700 text-7xl dark:text-green-500">
         Registro Upas
       </p>
       <form
@@ -193,6 +217,11 @@ const RegistroUpa = () => {
           estado={estado}
           cambiarEstado={cambiarEstado}
           opciones={opciones}
+          icon={
+            <BarChart3
+              className={`${municipio.valido === "true" ? "opacity-100 text-exito" : municipio.valido === "false" ? "opacity-100 text-error" : municipio.valido === null ? "opacity-100 text-green-800 dark:text-green-600" : ""}`}
+            />
+          }
           className="col-span-1 sm:col-span-2"
         />
 
@@ -201,7 +230,7 @@ const RegistroUpa = () => {
           <Button
             children={"Registrar"}
             className={
-              "sm:w-[30%] cursor-pointer text-white hover:shadow-[3px_0px_30px_rgba(163,163,163,0.4)] hover:bg-green-700"
+              "sm:w-[30%] cursor-pointer text-white hover:shadow-[3px_0px_30px_rgba(163,163,163,0.4)] bg-green-700 border-green-700 text-xl"
             }
           />
         </div>

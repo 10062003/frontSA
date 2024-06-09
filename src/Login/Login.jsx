@@ -26,8 +26,6 @@ const Login = () => {
     }
   };
 
-  // En tu componente Login:
-
   const submit = async (e) => {
     e.preventDefault();
 
@@ -61,7 +59,7 @@ const Login = () => {
         <div className="sm:mx-auto sm:w-full sm:max-w-sm">
           {/*<LogoIcon className="mx-auto h-12 w-auto dark:text-green-600" fill="#16a34a" />*/}
           <Cctv className="mx-auto h-12 w-auto dark:text-green-600 text-green-600"></Cctv>
-          <h2 className="mt-5 text-center text-4xl font-bold leading-9 tracking-tight text-green-600">
+          <h2 className="mt-5 text-center text-4xl font-extrabold leading-9 tracking-tight text-green-600">
             Super Administrador
           </h2>
         </div>
@@ -102,7 +100,7 @@ const Login = () => {
                     id="password"
                     name="password"
                     type="password"
-                    placeholder="********"
+                    placeholder="Ingresa tu contraseña"
                     onChange={(e) => setContrasenna(e.target.value)}
                     required
                   />

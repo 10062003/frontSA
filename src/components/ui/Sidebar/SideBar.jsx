@@ -75,11 +75,11 @@ export function SidebarItem({ icon, text, to, active, alert }) {
       <li
         className={`
         relative flex items-center py-2 px-3 my-1
-        font-medium rounded-md cursor-pointer
-        transition-colors group
+        font-normal rounded-md cursor-pointer
+        transition-colors group 
         ${
           active
-            ? "bg-gradient-to-tr from-stone-200 to-stone-100 text-green-800 "
+            ? "bg-gradient-to-tr font-semibold from-stone-200 to-stone-100 text-green-800 "
             : "hover:bg-stone-200 text-gray-600 dark:text-white dark:hover:bg-neutral-800"
         }
     `}
@@ -104,7 +104,7 @@ export function SidebarItem({ icon, text, to, active, alert }) {
           <div
             className={`
           absolute left-full rounded-md px-2 py-1 ml-6
-          bg-stone-100 text-green-800 text-sm
+          bg-stone-100 text-green-800 font-semibold text-sm
           invisible opacity-20 -translate-x-3 transition-all
           group-hover:visible group-hover:opacity-100 group-hover:translate-x-0
           dark:bg-neutral-900 dark:text-white w-auto

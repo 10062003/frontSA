@@ -1,20 +1,18 @@
-// Registro de usuario
-// nombre
-// apellido
-// correo
-// contraseña
-// tipo de documento(Por seleccion)
-// numero de documento
-// fecha de nacimiento
-// Modulo (por seleccion)
-// profesion (por seleccion)
-// rol (por seleccion)
-// estado (por seleccion)
-// upa (por seleccion)
-// boton
 import React, { useState } from "react";
 import InputRegistros from "../components/ui/InputRegistros";
-import { BookUser, User } from "lucide-react";
+import {
+  AtSign,
+  BarChart3,
+  CalendarDays,
+  Component,
+  Dock,
+  Drama,
+  FileText,
+  GraduationCap,
+  KeyRound,
+  NotepadText,
+  User,
+} from "lucide-react";
 import Button from "../components/ui/Button";
 import { Toaster } from "sonner";
 import SeleccionConValidacion from "../components/ui/SeleccionConValidacion";
@@ -22,10 +20,6 @@ import SeleccionConValidacion from "../components/ui/SeleccionConValidacion";
 const RegistroUsuario = () => {
   const expresiones = {
     nombre: /^[a-zA-ZÀ-ÿ\s]{3,20}$/, // Letras y espacios, pueden llevar acentos, de 3 a 20.
-    // descripcion: /^[a-zA-ZÀ-ÿ0-9\s]{10,100}$/, // Letras y espacios, pueden llevar acentos, de 10 a 50.
-    // ubicacion: /^[a-zA-Z0-9\s.,#-]{5,100}$/, // Letras y espacios, pueden llevar acentos, de 5 a 100.
-    // departamento: /^[a-zA-ZÀ-ÿ\s]{4,20}$/, // Letras y espacios, pueden llevar acentos, de 4 a 20.
-    // municipio: /^[a-zA-ZÀ-ÿ\s]{4,20}$/, // Letras y espacios, pueden llevar acentos, de 4 a 20.
   };
 
   const [nombre, cambiarNombre] = useState({ campo: "", valido: null });
@@ -52,7 +46,7 @@ const RegistroUsuario = () => {
 
   return (
     <main className="max-w-4xl w-11/12 m-auto p-10">
-      <p className="flex justify-center text-bold font-bold mb-11 text-green-800 text-7xl dark:text-green-500">
+      <p className="flex justify-center text-bold text-center font-bold mb-11 text-green-700 text-7xl dark:text-green-500">
         Registro Usuarios
       </p>
       <form
@@ -72,7 +66,7 @@ const RegistroUsuario = () => {
           expRegular={expresiones.nombre}
           icon={
             <User
-              className={`${nombre.valido === "true" ? "opacity-100 text-exito" : nombre.valido === "false" ? "opacity-100 text-error" : nombre.valido === null ? "opacity-100 text-green-800 dark:text-green-600" : ""}`}
+              className={`${nombre.valido === "true" ? "opacity-100 text-exito" : nombre.valido === "false" ? "opacity-100 text-error" : nombre.valido === null ? "opacity-100 text-green-700 dark:text-green-600" : ""}`}
             />
           }
           className="col-span-1 sm:col-span-2"
@@ -102,14 +96,14 @@ const RegistroUsuario = () => {
           estado={correo}
           cambiarEstado={cambiarCorreo}
           label="Correo"
-          placeholder="jPerez@ucundinamarca.edu.co"
+          placeholder="jperez@ucundinamarca.edu.co"
           id="correo"
           type="email"
           name="correo"
           errorMsm="El correo debe terminar en @ucundinamarca.edu.co"
           expRegular={expresiones.nombre}
           icon={
-            <User
+            <AtSign
               className={`${correo.valido === "true" ? "opacity-100 text-exito" : correo.valido === "false" ? "opacity-100 text-error" : correo.valido === null ? "opacity-100 text-green-800 dark:text-green-600" : ""}`}
             />
           }
@@ -128,14 +122,14 @@ const RegistroUsuario = () => {
           errorMsm="La contraseña debe tener mínimo 8 caracteres y puede contener letras, números y caracteres especiales"
           expRegular={expresiones.nombre}
           icon={
-            <User
+            <KeyRound
               className={`${contraseña.valido === "true" ? "opacity-100 text-exito" : contraseña.valido === "false" ? "opacity-100 text-error" : contraseña.valido === null ? "opacity-100 text-green-800 dark:text-green-600" : ""}`}
             />
           }
           className="col-span-1 sm:col-span-2"
         ></InputRegistros>
 
-        {/* Input Tipo de Documento */}
+        {/* Input Tipo de documento */}
         <SeleccionConValidacion
           label="Tipo de Documento"
           name="tipoDocumento"
@@ -143,13 +137,14 @@ const RegistroUsuario = () => {
           estado={tipoDocumento}
           cambiarEstado={cambiarTipoDocumento}
           icon={
-            <BookUser
-              className={`${nombre.valido === "true" ? "opacity-100 text-exito" : nombre.valido === "false" ? "opacity-100 text-error" : nombre.valido === null ? "opacity-100 text-green-800 dark:text-green-600" : ""}`}
+            <FileText
+              className={`${tipoDocumento.valido === "true" ? "opacity-100 text-exito" : tipoDocumento.valido === "false" ? "opacity-100 text-error" : tipoDocumento.valido === null ? "opacity-100 text-green-800 dark:text-green-600" : ""}`}
             />
           }
           opciones={[
             {
               campo: "Cedula de Ciudadania",
+              label: "Cedula de Ciudadania",
             },
             {
               campo: "Tarjeta de Identidad",
@@ -158,7 +153,7 @@ const RegistroUsuario = () => {
           className="col-span-1 sm:col-span-2"
         ></SeleccionConValidacion>
 
-        {/* Input Numero de Documento */}
+        {/* Input Numero de documento */}
         <InputRegistros
           estado={numeroDocumento}
           cambiarEstado={cambiarNumeroDocumento}
@@ -170,14 +165,14 @@ const RegistroUsuario = () => {
           errorMsm="El número de documento debe ser un número"
           expRegular={expresiones.nombre}
           icon={
-            <User
+            <FileText
               className={`${numeroDocumento.valido === "true" ? "opacity-100 text-exito" : numeroDocumento.valido === "false" ? "opacity-100 text-error" : numeroDocumento.valido === null ? "opacity-100 text-green-800 dark:text-green-600" : ""}`}
             />
           }
           className="col-span-1 sm:col-span-2"
         ></InputRegistros>
 
-        {/* Input Fecha de Nacimiento */}
+        {/* Input Fecha de nacimiento */}
         <InputRegistros
           estado={fechaNacimiento}
           cambiarEstado={cambiarFechaNacimiento}
@@ -189,14 +184,14 @@ const RegistroUsuario = () => {
           errorMsm="La fecha de nacimiento debe ser una fecha"
           expRegular={expresiones.nombre}
           icon={
-            <User
+            <CalendarDays
               className={`${fechaNacimiento.valido === "true" ? "opacity-100 text-exito" : fechaNacimiento.valido === "false" ? "opacity-100 text-error" : fechaNacimiento.valido === null ? "opacity-100 text-green-800 dark:text-green-600" : ""}`}
             />
           }
           className="col-span-1 sm:col-span-2"
         ></InputRegistros>
 
-        {/* Input Modulo */}
+        {/* Input Módulo */}
         <SeleccionConValidacion
           label="Modulo"
           name="modulo"
@@ -214,27 +209,37 @@ const RegistroUsuario = () => {
               campo: "Modulo 3",
             },
           ]}
+          icon={
+            <Component
+              className={`${modulo.valido === "true" ? "opacity-100 text-exito" : modulo.valido === "false" ? "opacity-100 text-error" : modulo.valido === null ? "opacity-100 text-green-800 dark:text-green-600" : ""}`}
+            />
+          }
           className="col-span-1 sm:col-span-2"
         ></SeleccionConValidacion>
 
-        {/* Input Profesion */}
+        {/* Input Profesión */}
         <SeleccionConValidacion
-          label="Profesion"
+          label="Profesión"
           name="profesion"
           errorMsm="Este campo es requerido"
           estado={profesion}
           cambiarEstado={cambiarProfesion}
           opciones={[
             {
-              campo: "Ingeniero de Sistemas",
+              campo: "Ingeniero",
             },
             {
-              campo: "Ingeniero Industrial",
+              campo: "Abogado",
             },
             {
-              campo: "Ingeniero Ambiental",
+              campo: "Profesor",
             },
           ]}
+          icon={
+            <GraduationCap
+              className={`${profesion.valido === "true" ? "opacity-100 text-exito" : profesion.valido === "false" ? "opacity-100 text-error" : profesion.valido === null ? "opacity-100 text-green-800 dark:text-green-600" : ""}`}
+            />
+          }
           className="col-span-1 sm:col-span-2"
         ></SeleccionConValidacion>
 
@@ -247,12 +252,20 @@ const RegistroUsuario = () => {
           cambiarEstado={cambiarRol}
           opciones={[
             {
-              campo: "Administrador",
+              campo: "Estudiante",
             },
             {
-              campo: "Usuario",
+              campo: "Docente",
+            },
+            {
+              campo: "Administrativo",
             },
           ]}
+          icon={
+            <Dock
+              className={`${rol.valido === "true" ? "opacity-100 text-exito" : rol.valido === "false" ? "opacity-100 text-error" : rol.valido === null ? "opacity-100 text-green-800 dark:text-green-600" : ""}`}
+            />
+          }
           className="col-span-1 sm:col-span-2"
         ></SeleccionConValidacion>
 
@@ -271,6 +284,11 @@ const RegistroUsuario = () => {
               campo: "Inactivo",
             },
           ]}
+          icon={
+            <BarChart3
+              className={`${estado.valido === "true" ? "opacity-100 text-exito" : estado.valido === "false" ? "opacity-100 text-error" : estado.valido === null ? "opacity-100 text-green-800 dark:text-green-600" : ""}`}
+            />
+          }
           className="col-span-1 sm:col-span-2"
         ></SeleccionConValidacion>
 
@@ -292,20 +310,24 @@ const RegistroUsuario = () => {
               campo: "UPA 3",
             },
           ]}
+          icon={
+            <NotepadText
+              className={`${upa.valido === "true" ? "opacity-100 text-exito" : upa.valido === "false" ? "opacity-100 text-error" : upa.valido === null ? "opacity-100 text-green-800 dark:text-green-600" : ""}`}
+            />
+          }
           className="col-span-1 sm:col-span-2"
         ></SeleccionConValidacion>
 
-        {/* Boton Registrar */}
-        <div className="flex flex-col col-span-1 sm:col-span-2 items-center">
+        {/* Botón de registro */}
+        <div className="flex justify-center col-span-1 sm:col-span-2">
           <Button
-            children={"Registrar"}
-            className={
-              "sm:w-[30%] cursor-pointer text-white hover:shadow-[3px_0px_30px_rgba(163,163,163,0.4)] hover:bg-green-700"
-            }
-          />
+            className={"text-white bg-green-700 border-green-700 text-xl"}
+          >
+            Registrarse
+          </Button>
         </div>
       </form>
-      <Toaster richColors closeButton />
+      <Toaster position="bottom-right" richColors />
     </main>
   );
 };

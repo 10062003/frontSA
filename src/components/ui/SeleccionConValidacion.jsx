@@ -24,10 +24,10 @@ const SeleccionConValidacion = ({
   };
 
   return (
-    <div>
+    <div className="text-green-700">
       <label
         htmlFor={name}
-        className={`block text-base font-bold p-1 ml-4 min-h-2.5 cursor-pointer dark:text-white ${classNamelabel} ${estado.valido === "true" ? "text-exito" : ""} ${estado.valido === "false" ? "text-error" : ""}`}
+        className={`block text-base font-medium p-1 ml-4 min-h-2.5 cursor-pointer dark:text-white ${classNamelabel} ${estado.valido === "true" ? "text-exito" : ""} ${estado.valido === "false" ? "text-error" : ""}`}
       >
         {label}
       </label>
@@ -35,7 +35,7 @@ const SeleccionConValidacion = ({
         <select
           name={name}
           value={estado.campo}
-          className={`w-full text-sm bg-white border-2 border-gray-300 rounded-md h-11 leading-[45px] px-[10px] pl-[40px] transition-all duration-200 ease-in-out focus:border-blue-400 focus:outline-none focus:shadow-[3px_0px_30px_rgba(163,163,163,0.4)] dark:bg-neutral-800 dark:text-white dark:border-neutral-100 ${estado.valido === "false" ? "border-error focus:border-error" : ""} ${estado.valido === "true" ? "border-exito focus:border-exito" : ""}`}
+          className={`w-full text-[13px] bg-white border-2 border-gray-300 rounded-md h-11 leading-[45px] px-[10px] pl-[40px] transition-all duration-200 ease-in-out focus:border-blue-400 focus:outline-none focus:shadow-[3px_0px_30px_rgba(163,163,163,0.4)] dark:bg-neutral-800 dark:text-white dark:border-neutral-100 ${estado.valido === "false" ? "border-error focus:border-error text-black" : ""} ${estado.valido === "true" ? "border-exito focus:border-exito text-black" : ""} ${estado.valido === null ? "text-neutral-400" : ""}`}
           onChange={(e) => {
             const valor = e.target.value;
             cambiarEstado({ campo: valor });
@@ -61,7 +61,7 @@ const SeleccionConValidacion = ({
         />
       </div>
       <p
-        className={`text-sm text-error mb-0 mt-2 ml-3 mr-3 opacity-0 ${estado.valido === "false" ? "opacity-100" : ""}`}
+        className={`text-xs text-error mb-0 mt-2 ml-3 mr-3 opacity-0 ${estado.valido === "false" ? "opacity-100" : ""}`}
       >
         {errorMsm}
       </p>

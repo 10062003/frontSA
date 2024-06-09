@@ -10,7 +10,7 @@ const NavBar = (props) => {
           <ul className="flex flex-col md:flex-row md:p-0 font-medium rounded-lg md:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0 md:bg-slate-50 md:dark:bg-neutral-950">
             <li>
               <div
-                className="text-2xl md:text-4xl font-bold flex justify-center py-2 px-3 text-center rounded md:bg-transparent dark:text-green-600 text-green-700 md:p-0 md:dark:text-green-600"
+                className="text-2xl md:text-4xl font-black flex justify-center py-2 px-3 text-center rounded md:bg-transparent dark:text-green-600 text-green-700 md:p-0 md:dark:text-green-600"
                 aria-current="page"
               >
                 {title}

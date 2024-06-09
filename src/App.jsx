@@ -13,6 +13,7 @@ import RegistroUpa from "./Upas/RegistroUpa";
 import TablaUpa from "./Upas/TablaUpa";
 import ToasterWrapper from "./components/ui/Toast";
 import RegistroUsuario from "./Registro/RegistroUsuario";
+import "./index.css";
 
 const router = createBrowserRouter([
   {
@@ -93,7 +94,7 @@ const router = createBrowserRouter([
 
 const App = () => {
   return (
-    <div className="bg-gray-200 dark:bg-neutral-900">
+    <div className="bg-gray-200 dark:bg-neutral-900 font-sans">
       {/* Mantén el Toaster fuera de las rutas para que esté presente en todas las páginas */}
       <ToasterWrapper richColors closeButton />
 

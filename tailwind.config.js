@@ -4,6 +4,9 @@ export default {
   darkMode: "selector", // or 'media' or 'class'
   theme: {
     extend: {
+      fontFamily: {
+        sans: ["var(--font-geist-sans)"],
+      },
       colors: {
         borde: "#0075FF",
         error: "#BB2929",

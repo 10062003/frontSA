@@ -57,11 +57,11 @@ const MostrarSideBar = () => {
           text="Historial"
           to={"/Historial"}
         />
-        <SidebarItem
+        {/* <SidebarItem
           icon={<Settings size={20} />}
           text="Configuración"
           to={"/Configuracion"}
-        />
+        /> */}
       </Sidebar>
     </div>
   );

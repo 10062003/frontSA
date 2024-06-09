@@ -1,7 +1,7 @@
 const Input = (props, className) => {
   return (
     <input
-      className={`border-2 appearance-none text-slate-900 bg-slate-50 rounded-md block w-full px-3 h-10 shadow-sm sm:text-base font-normal focus:outline-none placeholder:text-slate-400 focus:ring-2 focus:ring-sky-500 text-sm pl-11 dark:bg-neutral-800 dark:text-white dark:border-green-500 ${className}`}
+      className={`input-placeholder w-full text-[13px] bg-white border-2 border-gray-300 rounded-md h-11 leading-[45px] px-[10px] pr-[40px] pl-[40px] transition-all duration-200 ease-in-out focus:border-blue-400 focus:outline-none focus:shadow-[3px_0px_30px_rgba(163,163,163,0.4)] dark:bg-neutral-800 dark:text-white dark:border-neutral-100 ${className}`}
       {...props}
     />
   );
