@@ -114,33 +114,6 @@ const router = createBrowserRouter([
     ),
   },
   {
-<<<<<<< HEAD
-    path: "RegistroUpa",
-    element: (
-      <div className="flex h-screen">
-        <MostrarSideBar />
-        <div className="flex flex-col flex-1 overflow-y-auto">
-          <RegistroUpa />
-        </div>
-      </div>
-    ),
-  },
-  {
-    path: "TablaUpa",
-    element: (
-      <div className="flex h-screen">
-        <div className="flex-shrink-0">
-          <MostrarSideBar />
-        </div>
-        <div className="flex flex-1 flex-col p-4">
-          <TablaUpa />
-        </div>
-      </div>
-    ),
-  },
-  {
-=======
->>>>>>> a631e7fbf56c482ec05ccf1b633e924bee56fb50
     path: "RegistroUsuario",
     element: (
       <div className="flex h-screen">
