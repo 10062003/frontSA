@@ -59,7 +59,7 @@ const MostrarSideBar = () => {
           to={"/Estados"}
         />
         <SidebarItem icon={<Drama size={20} />} text="Roles" to={"/Roles"} />
-        <SidebarItem icon={<Tags size={20} />} text="Ticket" to={"/Ticket"} />
+        <SidebarItem icon={<Tags size={20} />} text="Ticket" to={"/Tickets"} />
         <SidebarItem
           icon={<Clock size={20} />}
           text="Historial"

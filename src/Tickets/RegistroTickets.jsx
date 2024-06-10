@@ -2,14 +2,14 @@ import { Toaster, toast } from "sonner";
 import ButtonBasic from "../components/ui/ButtonBasic";
 import InputRegistros from "../components/ui/InputRegistros";
 import SeleccionConValidacion from "../components/ui/SeleccionConValidacion";
-import ServiciosDocumentos from "./ServiciosDocumentos"; // Cambiado de ServiciosRoles a ServiciosDocumentos
+import ServiciosTickets from "./ServiciosTickets"; // Importar el servicio correcto
 import { useState } from "react";
-import { BookUser, BarChart3, TextCursorInput, Orbit, Files } from "lucide-react";
+import { BookUser, BarChart3, TextCursorInput, Orbit, MessageSquareDiff } from "lucide-react";
 
-const RegistroDocumentos = () => {
-  const servicioDocumento = new ServiciosDocumentos(); // Cambiado de ServiciosRoles a ServiciosDocumentos
+const RegistroTiposTickets = () => {
+  const servicioTicket = new ServiciosTickets(); // Crear una instancia del servicio correcto
   const expresiones = {
-    nombre: /^[a-zA-ZÀ-ÿ\s]{2,20}$/, // Letras y espacios, pueden llevar acentos, de 3 a 20.
+    nombre: /^[a-zA-ZÀ-ÿ\s]{3,30}$/, // Expresión regular para el nombre de los tipos de tickets
   };
 
   const opciones = [
@@ -30,35 +30,32 @@ const RegistroDocumentos = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-  
-    const documento = {
-      tdocTipoDocumento: nombre.campo,
-      tdocIdEstado: estado.campo
+
+    const ticket = {
+      mtTipoTicKets: nombre.campo,
+      mtTipoIdEstado: estado.campo
     };
-  
-    console.log("Nombre:", nombre.campo);
-    console.log("Estado:", estado.campo);
-  
+
     if (validarCampo(nombre.campo, expresiones.nombre) && estado.campo) {
       try {
-        const respuesta = await servicioDocumento.RegistrarDocumento(documento); // Cambiado de servicioRol.RegistrarRol a servicioDocumento.RegistrarDocumento
+        const respuesta = await servicioTicket.RegistrarTipoTicket(ticket);
         console.log("Respuesta del servidor:", respuesta);
-  
+
         if (respuesta && respuesta.respuesta === 1) {
           cambiarNombre({ campo: "", valido: null });
           cambiarEstado({ campo: "", valido: null });
-          toast.success("Tipo de documento " + nombre.campo + " registrado correctamente", { // Cambiado de Rol a Tipo de documento
+          toast.success("Tipo de ticket " + nombre.campo + " registrado correctamente", {
             duration: 4000,
           });
         } else {
-          toast.error("Error al enviar el tipo de documento, revise los campos"); // Cambiado de Rol a Tipo de documento
+          toast.error("Error al enviar el tipo de ticket, revise los campos");
         }
       } catch (error) {
-        toast.error("Error de servidor: no se pudo registrar el tipo de documento"); // Cambiado de Rol a Tipo de documento
+        toast.error("Error de servidor: no se pudo registrar el tipo de ticket");
         console.error("Error en el servidor:", error);
       }
     } else {
-      toast.error("Error al enviar el tipo de documento, revise los campos"); // Cambiado de Rol a Tipo de documento
+      toast.error("Error al enviar el tipo de ticket, revise los campos");
       console.log("Error de validación de campos");
     }
   };
@@ -66,7 +63,7 @@ const RegistroDocumentos = () => {
   return (
     <main className="max-w-4xl w-11/12 m-auto p-10">
       <p className="flex justify-center text-bold text-center font-bold mb-11 text-green-700 text-7xl dark:text-green-500">
-        Registro de tipos de Documento
+        Registro de Tipos de Tickets
       </p>
       <form
         onSubmit={handleSubmit}
@@ -76,16 +73,16 @@ const RegistroDocumentos = () => {
         <InputRegistros
           estado={nombre}
           cambiarEstado={cambiarNombre}
-          label="Tipo de documento"
-          placeholder="CC"
+          label="Tipo de ticket"
+          placeholder="Consulta general"
           id="nombre"
           type="text"
           name="nombre"
           errorMsm="El nombre no debe contener números y máximo 20 caracteres"
           expRegular={expresiones.nombre}
           icon={
-            <Files
-            className={`${nombre.valido === "true" ? "opacity-100 text-exito" : nombre.valido === "false" ? "opacity-100 text-error" : nombre.valido === null ? "opacity-100 text-green-800 dark:text-green-600" : ""}`}
+            <MessageSquareDiff
+              className={`${nombre.valido === "true" ? "opacity-100 text-exito" : nombre.valido === "false" ? "opacity-100 text-error" : nombre.valido === null ? "opacity-100 text-green-800 dark:text-green-600" : ""}`}
             />
           }
           className="col-span-1 sm:col-span-2"
@@ -101,7 +98,7 @@ const RegistroDocumentos = () => {
           opciones={opciones}
           icon={
             <Orbit
-            className={`${estado.valido === "true" ? "opacity-100 text-exito" : estado.valido === "false" ? "opacity-100 text-error" : estado.valido === null ? "opacity-100 text-green-800 dark:text-green-600" : ""}`}
+              className={`${estado.valido === "true" ? "opacity-100 text-exito" : estado.valido === "false" ? "opacity-100 text-error" : estado.valido === null ? "opacity-100 text-green-800 dark:text-green-600" : ""}`}
             />
           }
           className="col-span-1 sm:col-span-2"
@@ -120,4 +117,4 @@ const RegistroDocumentos = () => {
   );
 };
 
-export default RegistroDocumentos;
+export default RegistroTiposTickets;

@@ -1,10 +1,10 @@
 import Axios from "axios";
 
-class ServiciosDocumentos {
+class ServiciosTickets {
   constructor() {}
 
-  RegistrarDocumento = async (documento) => {
-    const respuestaDocumento = {
+  RegistrarTipoTicket = async (ticket) => {
+    const respuestaTipoTicket = {
       respuesta: 0,
       mensaje: "",
     };
@@ -13,7 +13,7 @@ class ServiciosDocumentos {
     console.log(Token);
   
     try {
-      const res = await Axios.post("/PostCreaTipoDocumento", documento, {
+      const res = await Axios.post("/PostCrearTipoTicket", ticket, {
         headers: {
           Authorization: "Bearer " + Token,
         },
@@ -23,17 +23,17 @@ class ServiciosDocumentos {
       const RespuestaServicio = mensaje.split(" ")[1];
       console.log(RespuestaServicio);
       
-      respuestaDocumento.respuesta = 1;
-      respuestaDocumento.mensaje = RespuestaServicio;
+      respuestaTipoTicket.respuesta = 1;
+      respuestaTipoTicket.mensaje = RespuestaServicio;
     } catch (error) {
       console.log(error);
-      respuestaDocumento.respuesta = 0;
-      respuestaDocumento.mensaje = "Error al crear el tipo de documento.";
+      respuestaTipoTicket.respuesta = 0;
+      respuestaTipoTicket.mensaje = "Error al crear el rol.";
     }
   
-    return respuestaDocumento;
+    return respuestaTipoTicket;
   };
   
 }
 
-export default ServiciosDocumentos;
+export default ServiciosTickets;

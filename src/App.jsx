@@ -20,6 +20,8 @@ import EstadosInicio from "./EstadosTicket/EstadosInicio";
 import RegistroEstados from "./EstadosTicket/RegistroEstados";
 import DocumentosInicio from "./Documentos/DocumentosInicio";
 import RegistroDocumentos from "./Documentos/RegistroDocumentos";
+import TicketsInicio from "./Tickets/TicketsInicio";
+import RegistroTiposTickets from "./Tickets/RegistroTickets";
 
 const router = createBrowserRouter([
   {
@@ -171,6 +173,32 @@ const router = createBrowserRouter([
         <div className="flex flex-col flex-1 overflow-y-auto">
           <div className="flex flex-col flex-1 items-center justify-center p-4">
             <RegistroDocumentos />
+          </div>
+        </div>
+      </div>
+    ),
+  },
+  {
+    path: "Tickets",
+    element: (
+      <div className="flex h-screen">
+        <MostrarSideBar />
+        <div className="flex flex-col flex-1 overflow-y-auto">
+          <div className="flex flex-col flex-1 items-center justify-center p-4">
+            <TicketsInicio />
+          </div>
+        </div>
+      </div>
+    ),
+  },
+  {
+    path: "RegistroTickets",
+    element: (
+      <div className="flex h-screen">
+        <MostrarSideBar />
+        <div className="flex flex-col flex-1 overflow-y-auto">
+          <div className="flex flex-col flex-1 items-center justify-center p-4">
+            <RegistroTiposTickets />
           </div>
         </div>
       </div>
