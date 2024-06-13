@@ -46,9 +46,18 @@ const UsuarioActividades = () => {
   const [actividadUpa, cambiarActividadUpa] = useState({
     campo: "",
     valido: null,
+    label: "",
   });
-  const [estado, cambiarEstado] = useState({ campo: "", valido: null });
-  const [usuario, cambiarUsuario] = useState({ campo: "", valido: null });
+  const [estado, cambiarEstado] = useState({
+    campo: "",
+    valido: null,
+    label: "",
+  });
+  const [usuario, cambiarUsuario] = useState({
+    campo: "",
+    valido: null,
+    label: "",
+  });
 
   const validarCampo = (campo, expresion) => expresion.test(campo);
 
@@ -76,12 +85,9 @@ const UsuarioActividades = () => {
           cambiarActividadUpa({ campo: "", valido: null });
           cambiarEstado({ campo: "", valido: null });
           cambiarUsuario({ campo: "", valido: null });
-          toast.success(
-            "Actividad " + nombre.campo + " registrado correctamente",
-            {
-              duration: 4000,
-            }
-          );
+          toast.success("Actividad asignada correctamente", {
+            duration: 4000,
+          });
         } else {
           toast.error("Error al asignar actividad, revise los campos arriba");
         }

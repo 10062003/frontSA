@@ -28,8 +28,20 @@ class ServiciosUsuariosAct {
     } catch (error) {
       console.log(error);
       respuestaUsuarioAct.respuesta = 0;
-      console.log(Axios.response);
-      respuestaUsuarioAct.mensaje = "Error al asignar actividad.";
+
+      // Verifica si el error tiene una respuesta
+      if (error.response) {
+        // Extrae los datos de la respuesta del error
+        const errorData = error.response.data;
+        const errorStatus = error.response.status;
+        toast.error(errorData);
+
+        // Usa los datos del error para construir el mensaje
+        respuestaUsuarioAct.mensaje = `Error ${errorStatus}: ${errorData}`;
+      } else {
+        // Manejo de errores sin respuesta (posibles errores de red)
+        respuestaUsuarioAct.mensaje = "Error al asignar actividad.";
+      }
     }
 
     return respuestaUsuarioAct;
