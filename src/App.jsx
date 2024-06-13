@@ -22,6 +22,9 @@ import DocumentosInicio from "./Documentos/DocumentosInicio";
 import RegistroDocumentos from "./Documentos/RegistroDocumentos";
 import TicketsInicio from "./Tickets/TicketsInicio";
 import RegistroTiposTickets from "./Tickets/RegistroTickets";
+import ActividadesInicio from "./Actividades/ActividadesInicio";
+import RegistroActividad from "./Actividades/RegistroActividades";
+import UsuarioActividades from "./Actividades/Actividades por Usuario/UsuarioActividades";
 
 const router = createBrowserRouter([
   {
@@ -199,6 +202,45 @@ const router = createBrowserRouter([
         <div className="flex flex-col flex-1 overflow-y-auto">
           <div className="flex flex-col flex-1 items-center justify-center p-4">
             <RegistroTiposTickets />
+          </div>
+        </div>
+      </div>
+    ),
+  },
+  {
+    path: "Actividades",
+    element: (
+      <div className="flex h-screen">
+        <MostrarSideBar />
+        <div className="flex flex-col flex-1 overflow-y-auto">
+          <div className="flex flex-col flex-1 items-center justify-center p-4">
+            <ActividadesInicio />
+          </div>
+        </div>
+      </div>
+    ),
+  },
+  {
+    path: "RegistroActividades",
+    element: (
+      <div className="flex h-screen">
+        <MostrarSideBar />
+        <div className="flex flex-col flex-1 overflow-y-auto">
+          <div className="flex flex-col flex-1 items-center justify-center p-4">
+            <RegistroActividad />
+          </div>
+        </div>
+      </div>
+    ),
+  },
+  {
+    path: "RegistroUsuarioActividad",
+    element: (
+      <div className="flex h-screen">
+        <MostrarSideBar />
+        <div className="flex flex-col flex-1 overflow-y-auto">
+          <div className="flex flex-col flex-1 items-center justify-center p-4">
+            <UsuarioActividades />
           </div>
         </div>
       </div>

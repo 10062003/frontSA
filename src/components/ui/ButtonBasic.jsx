@@ -16,8 +16,4 @@ ButtonBasic.propTypes = {
   className: PropTypes.string,
 };
 
-ButtonBasic.defaultProps = {
-  className: "",
-};
-
 export default ButtonBasic;
