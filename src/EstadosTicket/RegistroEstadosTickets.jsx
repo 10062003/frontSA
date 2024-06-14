@@ -1,3 +1,4 @@
+<<<<<<< HEAD:src/EstadosTicket/RegistroEstados.jsx
 // import { Toaster, toast } from "sonner";
 // import ButtonBasic from "../components/ui/ButtonBasic";
 // import InputRegistros from "../components/ui/InputRegistros";
@@ -10,6 +11,20 @@
 //   const expresiones = {
 //     nombre: /^[a-zA-ZÀ-ÿ\s]{3,20}$/,
 //   };
+=======
+import { Toaster, toast } from "sonner";
+import ButtonBasic from "../components/ui/ButtonBasic";
+import InputRegistros from "../components/ui/InputRegistros";
+import SeleccionConValidacion from "../components/ui/SeleccionConValidacion";
+import { useState } from "react";
+import { TextCursorInput, Orbit } from "lucide-react";
+import ServiciosEstados from "./ServiciosEstadosTickets"; // Asegúrate de que este import sea correcto
+
+const RegistroEstadosTickets = () => {
+  const expresiones = {
+    nombre: /^[a-zA-ZÀ-ÿ\s]{3,20}$/,
+  };
+>>>>>>> 5e78b8dd72cedcd2362258b1790dd22ca4cf9237:src/EstadosTicket/RegistroEstadosTickets.jsx
 
 //   const opciones = [
 //     {
@@ -38,10 +53,17 @@
 //     console.log("Nombre:", nombre.campo);
 //     console.log("Estado:", estado.campo);
 
+<<<<<<< HEAD:src/EstadosTicket/RegistroEstados.jsx
 //     if (validarCampo(nombre.campo, expresiones.nombre) && estado.campo) {
 //       try {
 //         const respuesta = await ServiciosEstados.RegistrarEstado(estadoObj);
 //         console.log("Respuesta del servidor:", respuesta);
+=======
+    if (validarCampo(nombre.campo, expresiones.nombre) && estado.campo) {
+      try {
+        const respuesta = await ServiciosEstados.RegistrarEstadoTickets(estadoObj); 
+        console.log("Respuesta del servidor:", respuesta);
+>>>>>>> 5e78b8dd72cedcd2362258b1790dd22ca4cf9237:src/EstadosTicket/RegistroEstadosTickets.jsx
 
 //         if (respuesta && respuesta.respuesta === 1) {
 //           cambiarNombre({ campo: "", valido: null });
@@ -119,4 +141,8 @@
 //   );
 // };
 
+<<<<<<< HEAD:src/EstadosTicket/RegistroEstados.jsx
 // export default RegistroEstados;
+=======
+export default RegistroEstadosTickets;
+>>>>>>> 5e78b8dd72cedcd2362258b1790dd22ca4cf9237:src/EstadosTicket/RegistroEstadosTickets.jsx
