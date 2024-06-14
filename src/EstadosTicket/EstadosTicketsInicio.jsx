@@ -1,14 +1,14 @@
 import { useNavigate } from "react-router-dom";
 import CardGeneral from "../components/ui/CardGeneral";
 
-const EstadosInicio = () => {
+const EstadosTicketsInicio = () => {
   const navigate = useNavigate();
-  const ButtonRegistroEstado= () => {
+  const ButtonRegistroEstado = () => {
     navigate("/RegistroEstados");
   };
 
   const ButtonListarEstados = () => {
-    navigate("/TablaEstados");
+    navigate("/TablaEstadosTickets"); 
   };
 
   return (
@@ -25,4 +25,4 @@ const EstadosInicio = () => {
     </div>
   );
 };
-export default EstadosInicio;
+export default EstadosTicketsInicio;
