@@ -8,7 +8,7 @@ const TicketsInicio = () => {
   };
 
   const ButtonListarTickets = () => {
-    navigate("/TablaTickets");
+    navigate("/");
   };
 
   const ButtonCrearTicket = () => {
@@ -16,7 +16,15 @@ const TicketsInicio = () => {
   };
 
   const ButtonConsultarTickets = () => {
-    navigate("/TablaTickets");
+    navigate("/");
+  };
+
+  const ButtonRegistroEstadoTickets = () => {
+    navigate("/RegistroEstadosTickets");
+  };
+
+  const ButtonListarEstadoTickets = () => {
+    navigate("/");
   };
 
   return (
@@ -34,6 +42,17 @@ const TicketsInicio = () => {
       </div>
       <div>
         <CardGeneral
+          title="Estados de tickets"
+          description={
+            "Aquí podrás registrar un nuevo tipo de ticket y listar los ya existentes."
+          }
+          toFrist={"/Inicio"}
+          onClickOne={ButtonRegistroEstadoTickets}
+          onClickTwo={ButtonListarEstadoTickets}
+        />
+      </div>
+      <div>
+        <CardGeneral
           title="Tickets"
           description={
             "Aquí podrás generar un nuevo ticket y dar seguimiento a tu solicitud   ."
@@ -44,7 +63,6 @@ const TicketsInicio = () => {
         />
       </div>
     </div>
-    
   );
 };
 export default TicketsInicio;

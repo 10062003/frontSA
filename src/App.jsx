@@ -26,6 +26,8 @@ import UsuarioActividades from "./Actividades/Actividades por Usuario/UsuarioAct
 import RegistroEstadosTickets from "./Tickets/EstadosTicket/RegistroEstadosTickets";
 import EstadoInicio from "./Estados/EstadosInicio";
 import RegistroEstado from "./Estados/RegistroEstados";
+import ModuloInicio from "./Modulo/ModuloInicio";
+import RegistroModulo from "./Modulo/RegistroModulo";
 
 const router = createBrowserRouter([
   {
@@ -255,6 +257,32 @@ const router = createBrowserRouter([
         <div className="flex flex-col flex-1 overflow-y-auto">
           <div className="flex flex-col flex-1 items-center justify-center p-4">
             <RegistroEstado />
+          </div>
+        </div>
+      </div>
+    ),
+  },
+  {
+    path: "Modulos",
+    element: (
+      <div className="flex h-screen">
+        <MostrarSideBar />
+        <div className="flex flex-col flex-1 overflow-y-auto">
+          <div className="flex flex-col flex-1 items-center justify-center p-4">
+            <ModuloInicio />
+          </div>
+        </div>
+      </div>
+    ),
+  },
+  {
+    path: "RegistroModulo",
+    element: (
+      <div className="flex h-screen">
+        <MostrarSideBar />
+        <div className="flex flex-col flex-1 overflow-y-auto">
+          <div className="flex flex-col flex-1 items-center justify-center p-4">
+            <RegistroModulo />
           </div>
         </div>
       </div>
