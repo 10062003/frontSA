@@ -4,11 +4,11 @@ import CardGeneral from "../components/ui/CardGeneral";
 const EstadosTicketsInicio = () => {
   const navigate = useNavigate();
   const ButtonRegistroEstado = () => {
-    navigate("/RegistroEstados");
+    navigate("/RegistroEstadosTikets");
   };
 
   const ButtonListarEstados = () => {
-    navigate("/TablaEstadosTickets"); 
+    navigate("/TablaEstadosTickets");
   };
 
   return (

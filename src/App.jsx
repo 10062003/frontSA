@@ -130,20 +130,7 @@ const router = createBrowserRouter([
     ),
   },
   {
-    path: "Estados",
-    element: (
-      <div className="flex h-screen">
-        <MostrarSideBar />
-        <div className="flex flex-col flex-1 overflow-y-auto">
-          <div className="flex flex-col flex-1 items-center justify-center p-4">
-            <EstadosTicketsInicio />
-          </div>
-        </div>
-      </div>
-    ),
-  },
-  {
-    path: "RegistroEstados",
+    path: "RegistroEstadosTickets",
     element: (
       <div className="flex h-screen">
         <MostrarSideBar />
