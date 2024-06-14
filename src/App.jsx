@@ -23,6 +23,8 @@ import RegistroTiposTickets from "./Tickets/RegistroTickets";
 import ActividadesInicio from "./Actividades/ActividadesInicio";
 import RegistroActividad from "./Actividades/RegistroActividades";
 import UsuarioActividades from "./Actividades/Actividades por Usuario/UsuarioActividades";
+import RegistroEstadosTickets from "./EstadosTicket/RegistroEstadosTickets";
+import EstadosTicketsInicio from "./EstadosTicket/EstadosTicketsInicio";
 
 const router = createBrowserRouter([
   {
