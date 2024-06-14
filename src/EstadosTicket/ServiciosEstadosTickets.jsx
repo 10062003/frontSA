@@ -1,7 +1,7 @@
 import Axios from "axios";
 
-class ServiciosEstados {
-  async RegistrarEstado(estado) {
+class ServiciosEstadosTickets {
+  async RegistrarEstadoTickets(estado) {
     const respuestaEstado = {
       respuesta: 0,
       mensaje: "",
@@ -33,5 +33,5 @@ class ServiciosEstados {
   }
 }
 
-const serviciosEstados = new ServiciosEstados();
-export default serviciosEstados;
+const ServiciosEstados = new ServiciosEstadosTickets();
+export default ServiciosEstados;

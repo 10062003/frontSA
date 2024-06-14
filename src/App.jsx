@@ -16,12 +16,12 @@ import RegistroUsuario from "./Registro/RegistroUsuario";
 import "./index.css";
 import RolesInicio from "./Roles/RolesInicio";
 import RegistroRoles from "./Roles/RegistroRoles";
-import EstadosInicio from "./EstadosTicket/EstadosInicio";
-import RegistroEstados from "./EstadosTicket/RegistroEstados";
 import DocumentosInicio from "./Documentos/DocumentosInicio";
 import RegistroDocumentos from "./Documentos/RegistroDocumentos";
 import TicketsInicio from "./Tickets/TicketsInicio";
 import RegistroTiposTickets from "./Tickets/RegistroTickets";
+import RegistroEstadosTickets from "./EstadosTicket/RegistroEstadosTickets";
+import EstadosTicketsInicio from "./EstadosTicket/EstadosTicketsInicio";
 
 const router = createBrowserRouter([
   {
@@ -133,7 +133,7 @@ const router = createBrowserRouter([
         <MostrarSideBar />
         <div className="flex flex-col flex-1 overflow-y-auto">
           <div className="flex flex-col flex-1 items-center justify-center p-4">
-            <EstadosInicio />
+            <EstadosTicketsInicio />
           </div>
         </div>
       </div>
@@ -146,7 +146,7 @@ const router = createBrowserRouter([
         <MostrarSideBar />
         <div className="flex flex-col flex-1 overflow-y-auto">
           <div className="flex flex-col flex-1 items-center justify-center p-4">
-            <RegistroEstados />
+            <RegistroEstadosTickets />
           </div>
         </div>
       </div>

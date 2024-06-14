@@ -3,10 +3,10 @@ import ButtonBasic from "../components/ui/ButtonBasic";
 import InputRegistros from "../components/ui/InputRegistros";
 import SeleccionConValidacion from "../components/ui/SeleccionConValidacion";
 import { useState } from "react";
-import { BookUser, BarChart3, TextCursorInput, Orbit } from "lucide-react";
-import ServiciosEstados from "./ServiciosEstados"; // Ensure this import exists
+import { TextCursorInput, Orbit } from "lucide-react";
+import ServiciosEstados from "./ServiciosEstadosTickets"; // Asegúrate de que este import sea correcto
 
-const RegistroEstados = () => {
+const RegistroEstadosTickets = () => {
   const expresiones = {
     nombre: /^[a-zA-ZÀ-ÿ\s]{3,20}$/,
   };
@@ -40,7 +40,7 @@ const RegistroEstados = () => {
 
     if (validarCampo(nombre.campo, expresiones.nombre) && estado.campo) {
       try {
-        const respuesta = await ServiciosEstados.RegistrarEstado(estadoObj);
+        const respuesta = await ServiciosEstados.RegistrarEstadoTickets(estadoObj); 
         console.log("Respuesta del servidor:", respuesta);
 
         if (respuesta && respuesta.respuesta === 1) {
@@ -119,4 +119,4 @@ const RegistroEstados = () => {
   );
 };
 
-export default RegistroEstados;
+export default RegistroEstadosTickets;
