@@ -17,10 +17,10 @@ const InputRegistros = ({
   const validacion = (expRegular) => {
     if (expRegular.test(estado.campo)) {
       cambiarEstado({ ...estado, valido: "true" });
-      //console.log("bien");
+      console.log("bien");
     } else {
       cambiarEstado({ ...estado, valido: "false" });
-      //console.log("mal");
+      console.log("mal");
     }
   };
 

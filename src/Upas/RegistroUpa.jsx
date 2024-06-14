@@ -1,7 +1,16 @@
 import { Toaster, toast } from "sonner";
 import ButtonBasic from "../components/ui/ButtonBasic";
 import InputRegistros from "../components/ui/InputRegistros";
-import { AlignLeft, BarChart3, BookUser, Church, MapPin, Map, Orbit, TextCursorInput } from "lucide-react";
+import {
+  AlignLeft,
+  BarChart3,
+  BookUser,
+  Church,
+  MapPin,
+  Map,
+  Orbit,
+  TextCursorInput,
+} from "lucide-react";
 import { useState, useEffect } from "react";
 import SeleccionConValidacion from "../components/ui/SeleccionConValidacion";
 import ServiciosUpa from "./ServiciosUpa";
@@ -93,16 +102,6 @@ const RegistroUpa = () => {
       toast.error("Error al enviar la Upa, revise los campos");
     }
   };
-
-  useEffect(() => {
-    // Set up the toaster options if needed
-    const toasterOptions = {
-      duration: 4000,
-    };
-
-    // Return a cleanup function to remove toasts when the component unmounts
-    return () => {};
-  }, []);
 
   return (
     <main className="max-w-4xl w-11/12 m-auto p-10">
