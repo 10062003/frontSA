@@ -131,19 +131,6 @@ const router = createBrowserRouter([
     ),
   },
   {
-    path: "RegistroEstadosTickets",
-    element: (
-      <div className="flex h-screen">
-        <MostrarSideBar />
-        <div className="flex flex-col flex-1 overflow-y-auto">
-          <div className="flex flex-col flex-1 items-center justify-center p-4">
-            <RegistroEstadosTickets />
-          </div>
-        </div>
-      </div>
-    ),
-  },
-  {
     path: "Documentos",
     element: (
       <div className="flex h-screen">
@@ -190,6 +177,19 @@ const router = createBrowserRouter([
         <div className="flex flex-col flex-1 overflow-y-auto">
           <div className="flex flex-col flex-1 items-center justify-center p-4">
             <RegistroTiposTickets />
+          </div>
+        </div>
+      </div>
+    ),
+  },
+  {
+    path: "RegistroEstadosTickets",
+    element: (
+      <div className="flex h-screen">
+        <MostrarSideBar />
+        <div className="flex flex-col flex-1 overflow-y-auto">
+          <div className="flex flex-col flex-1 items-center justify-center p-4">
+            <RegistroEstadosTickets />
           </div>
         </div>
       </div>
