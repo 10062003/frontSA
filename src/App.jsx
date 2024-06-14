@@ -16,11 +16,6 @@ import RegistroUsuario from "./Registro/RegistroUsuario";
 import "./index.css";
 import RolesInicio from "./Roles/RolesInicio";
 import RegistroRoles from "./Roles/RegistroRoles";
-<<<<<<< HEAD
-// import EstadosInicio from "./EstadosTicket/EstadosInicio";
-// import RegistroEstados from "./EstadosTicket/RegistroEstados";
-=======
->>>>>>> 5e78b8dd72cedcd2362258b1790dd22ca4cf9237
 import DocumentosInicio from "./Documentos/DocumentosInicio";
 import RegistroDocumentos from "./Documentos/RegistroDocumentos";
 import TicketsInicio from "./Tickets/TicketsInicio";
@@ -28,13 +23,8 @@ import RegistroTiposTickets from "./Tickets/RegistroTickets";
 import ActividadesInicio from "./Actividades/ActividadesInicio";
 import RegistroActividad from "./Actividades/RegistroActividades";
 import UsuarioActividades from "./Actividades/Actividades por Usuario/UsuarioActividades";
-<<<<<<< HEAD
-import EstadoInicio from "./Estado/EstadoInicio";
-import RegistroEstado from "./Estado/RegistroEstado";
-=======
 import RegistroEstadosTickets from "./EstadosTicket/RegistroEstadosTickets";
 import EstadosTicketsInicio from "./EstadosTicket/EstadosTicketsInicio";
->>>>>>> 5e78b8dd72cedcd2362258b1790dd22ca4cf9237
 
 const router = createBrowserRouter([
   {
@@ -139,32 +129,6 @@ const router = createBrowserRouter([
       </div>
     ),
   },
-  // {
-  //   path: "Estados",
-  //   element: (
-  //     <div className="flex h-screen">
-  //       <MostrarSideBar />
-  //       <div className="flex flex-col flex-1 overflow-y-auto">
-  //         <div className="flex flex-col flex-1 items-center justify-center p-4">
-  //           <EstadosInicio />
-  //         </div>
-  //       </div>
-  //     </div>
-  //   ),
-  // },
-  // {
-  //   path: "RegistroEstados",
-  //   element: (
-  //     <div className="flex h-screen">
-  //       <MostrarSideBar />
-  //       <div className="flex flex-col flex-1 overflow-y-auto">
-  //         <div className="flex flex-col flex-1 items-center justify-center p-4">
-  //           <RegistroEstados />
-  //         </div>
-  //       </div>
-  //     </div>
-  //   ),
-  // },
   {
     path: "Estados",
     element: (
