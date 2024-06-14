@@ -1,7 +1,7 @@
 import { Toaster, toast } from "sonner";
-import ButtonBasic from "../components/ui/ButtonBasic";
-import InputRegistros from "../components/ui/InputRegistros";
-import SeleccionConValidacion from "../components/ui/SeleccionConValidacion";
+import ButtonBasic from "../../components/ui/ButtonBasic";
+import InputRegistros from "../../components/ui/InputRegistros";
+import SeleccionConValidacion from "../../components/ui/SeleccionConValidacion";
 import { useState } from "react";
 import { TextCursorInput, Orbit } from "lucide-react";
 import ServiciosEstados from "./ServiciosEstadosTickets"; // Asegúrate de que este import sea correcto
@@ -40,15 +40,19 @@ const RegistroEstadosTickets = () => {
 
     if (validarCampo(nombre.campo, expresiones.nombre) && estado.campo) {
       try {
-        const respuesta = await ServiciosEstados.RegistrarEstadoTickets(estadoObj); 
+        const respuesta =
+          await ServiciosEstados.RegistrarEstadoTickets(estadoObj);
         console.log("Respuesta del servidor:", respuesta);
 
         if (respuesta && respuesta.respuesta === 1) {
           cambiarNombre({ campo: "", valido: null });
           cambiarEstado({ campo: "", valido: null });
-          toast.success("Estado " + nombre.campo + " registrado correctamente", {
-            duration: 4000,
-          });
+          toast.success(
+            "Estado " + nombre.campo + " registrado correctamente",
+            {
+              duration: 4000,
+            }
+          );
         } else {
           toast.error("Error al enviar el estado, revise los campos");
         }

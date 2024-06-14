@@ -23,8 +23,7 @@ import RegistroTiposTickets from "./Tickets/RegistroTickets";
 import ActividadesInicio from "./Actividades/ActividadesInicio";
 import RegistroActividad from "./Actividades/RegistroActividades";
 import UsuarioActividades from "./Actividades/Actividades por Usuario/UsuarioActividades";
-import RegistroEstadosTickets from "./EstadosTicket/RegistroEstadosTickets";
-import EstadosTicketsInicio from "./EstadosTicket/EstadosTicketsInicio";
+import RegistroEstadosTickets from "./Tickets/EstadosTicket/RegistroEstadosTickets";
 
 const router = createBrowserRouter([
   {
@@ -228,6 +227,19 @@ const router = createBrowserRouter([
         <div className="flex flex-col flex-1 overflow-y-auto">
           <div className="flex flex-col flex-1 items-center justify-center p-4">
             <UsuarioActividades />
+          </div>
+        </div>
+      </div>
+    ),
+  },
+  {
+    path: "Estados",
+    element: (
+      <div className="flex h-screen">
+        <MostrarSideBar />
+        <div className="flex flex-col flex-1 overflow-y-auto">
+          <div className="flex flex-col flex-1 items-center justify-center p-4">
+            <TicketsInicio />
           </div>
         </div>
       </div>
