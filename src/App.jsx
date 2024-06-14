@@ -28,6 +28,8 @@ import EstadoInicio from "./Estados/EstadosInicio";
 import RegistroEstado from "./Estados/RegistroEstados";
 import ModuloInicio from "./Modulo/ModuloInicio";
 import RegistroModulo from "./Modulo/RegistroModulo";
+import ProfesionInicio from "./Profesion/ProfesionInicio";
+import RegistroProfesion from "./Profesion/RegistroProfesion";
 
 const router = createBrowserRouter([
   {
@@ -283,6 +285,32 @@ const router = createBrowserRouter([
         <div className="flex flex-col flex-1 overflow-y-auto">
           <div className="flex flex-col flex-1 items-center justify-center p-4">
             <RegistroModulo />
+          </div>
+        </div>
+      </div>
+    ),
+  },
+  {
+    path: "Profesiones",
+    element: (
+      <div className="flex h-screen">
+        <MostrarSideBar />
+        <div className="flex flex-col flex-1 overflow-y-auto">
+          <div className="flex flex-col flex-1 items-center justify-center p-4">
+            <ProfesionInicio />
+          </div>
+        </div>
+      </div>
+    ),
+  },
+  {
+    path: "RegistroProfesion",
+    element: (
+      <div className="flex h-screen">
+        <MostrarSideBar />
+        <div className="flex flex-col flex-1 overflow-y-auto">
+          <div className="flex flex-col flex-1 items-center justify-center p-4">
+            <RegistroProfesion />
           </div>
         </div>
       </div>
