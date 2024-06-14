@@ -23,8 +23,9 @@ import RegistroTiposTickets from "./Tickets/RegistroTickets";
 import ActividadesInicio from "./Actividades/ActividadesInicio";
 import RegistroActividad from "./Actividades/RegistroActividades";
 import UsuarioActividades from "./Actividades/Actividades por Usuario/UsuarioActividades";
-import RegistroEstadosTickets from "./EstadosTicket/RegistroEstadosTickets";
-import EstadosTicketsInicio from "./EstadosTicket/EstadosTicketsInicio";
+import RegistroEstadosTickets from "./Tickets/EstadosTicket/RegistroEstadosTickets";
+import EstadoInicio from "./Estados/EstadosInicio";
+import RegistroEstado from "./Estados/RegistroEstados";
 
 const router = createBrowserRouter([
   {
@@ -130,32 +131,6 @@ const router = createBrowserRouter([
     ),
   },
   {
-    path: "Estados",
-    element: (
-      <div className="flex h-screen">
-        <MostrarSideBar />
-        <div className="flex flex-col flex-1 overflow-y-auto">
-          <div className="flex flex-col flex-1 items-center justify-center p-4">
-            <EstadosTicketsInicio />
-          </div>
-        </div>
-      </div>
-    ),
-  },
-  {
-    path: "RegistroEstados",
-    element: (
-      <div className="flex h-screen">
-        <MostrarSideBar />
-        <div className="flex flex-col flex-1 overflow-y-auto">
-          <div className="flex flex-col flex-1 items-center justify-center p-4">
-            <RegistroEstadosTickets />
-          </div>
-        </div>
-      </div>
-    ),
-  },
-  {
     path: "Documentos",
     element: (
       <div className="flex h-screen">
@@ -202,6 +177,19 @@ const router = createBrowserRouter([
         <div className="flex flex-col flex-1 overflow-y-auto">
           <div className="flex flex-col flex-1 items-center justify-center p-4">
             <RegistroTiposTickets />
+          </div>
+        </div>
+      </div>
+    ),
+  },
+  {
+    path: "RegistroEstadosTickets",
+    element: (
+      <div className="flex h-screen">
+        <MostrarSideBar />
+        <div className="flex flex-col flex-1 overflow-y-auto">
+          <div className="flex flex-col flex-1 items-center justify-center p-4">
+            <RegistroEstadosTickets />
           </div>
         </div>
       </div>
