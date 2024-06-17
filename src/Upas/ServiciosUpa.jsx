@@ -27,6 +27,58 @@ class ServiciosUpa {
     }
     return respuestaUpa;
   };
+
+  ListarUpas = async () => {
+    const respuestaListaUpas = {
+      respuesta: 0,
+      mensaje: "",
+      listaUpas: [],
+    };
+
+    const Token = sessionStorage.getItem("Token");
+
+    try {
+      const res = await Axios.get("/GetListarUpas", {
+        headers: {
+          Authorization: "Bearer " + Token,
+        },
+      });
+      respuestaListaUpas.respuesta = 1;
+      respuestaListaUpas.mensaje = "Operación Exitosa";
+      respuestaListaUpas.listaUpas = res.data;
+    } catch (err) {
+      respuestaListaUpas.respuesta = 0;
+      respuestaListaUpas.mensaje = "Error al listar Upas - " + err;
+    }
+
+    return respuestaListaUpas;
+  };
+
+  ListarEstados = async () => {
+    const respuestaListaUpas = {
+      respuesta: 0,
+      mensaje: "",
+      listaUpas: [],
+    };
+
+    const Token = sessionStorage.getItem("Token");
+
+    try {
+      const res = await Axios.get("/GetListarEstado", {
+        headers: {
+          Authorization: "Bearer " + Token,
+        },
+      });
+      respuestaListaUpas.respuesta = 1;
+      respuestaListaUpas.mensaje = "Operación Exitosa";
+      respuestaListaUpas.listaUpas = res.data;
+    } catch (err) {
+      respuestaListaUpas.respuesta = 0;
+      respuestaListaUpas.mensaje = "Error al listar Upas - " + err;
+    }
+
+    return respuestaListaUpas;
+  };
 }
 
 export default ServiciosUpa;
