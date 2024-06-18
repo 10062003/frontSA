@@ -8,7 +8,7 @@ const ModuloInicio = () => {
   };
 
   const ButtonListarModulo = () => {
-    navigate("/");
+    navigate("/TablaModulo");
   };
 
   return (

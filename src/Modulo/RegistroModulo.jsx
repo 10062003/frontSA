@@ -47,6 +47,7 @@ const RegistroModulo = () => {
     ObtenerDatosEstados();
   }, []);
 
+  //Verificar que los datos se estén actualizando
   // useEffect(() => {
   //   console.log("Data Estados actualizado:", dataEstados);
   // }, [dataEstados]);

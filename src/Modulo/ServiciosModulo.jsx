@@ -34,31 +34,31 @@ class ServiciosModulo {
     return respuestaModulo;
   };
 
-  // ListarEstados = async () => {
-  //   const respuestaListaEstados = {
-  //     respuesta: 0,
-  //     mensaje: "",
-  //     listaEstados: [],
-  //   };
+  ListarModulos = async () => {
+    const respuestaListaModulos = {
+      respuesta: 0,
+      mensaje: "",
+      listaModulos: [],
+    };
 
-  //   const Token = sessionStorage.getItem("Token");
+    const Token = sessionStorage.getItem("Token");
 
-  //   try {
-  //     const res = await Axios.get("/GetListarEstado", {
-  //       headers: {
-  //         Authorization: "Bearer " + Token,
-  //       },
-  //     });
-  //     respuestaListaEstados.respuesta = 1;
-  //     respuestaListaEstados.mensaje = "Operación Exitosa";
-  //     respuestaListaEstados.listaEstados = res.data;
-  //   } catch (err) {
-  //     respuestaListaEstados.respuesta = 0;
-  //     respuestaListaEstados.mensaje = "Error al listar Upas - " + err;
-  //   }
+    try {
+      const res = await Axios.get("/GetListarModulo", {
+        headers: {
+          Authorization: "Bearer " + Token,
+        },
+      });
+      respuestaListaModulos.respuesta = 1;
+      respuestaListaModulos.mensaje = "Operación Exitosa";
+      respuestaListaModulos.listaModulos = res.data;
+    } catch (err) {
+      respuestaListaModulos.respuesta = 0;
+      respuestaListaModulos.mensaje = "Error al listar Modulos - " + err;
+    }
 
-  //   return respuestaListaEstados;
-  // };
+    return respuestaListaModulos;
+  };
 }
 
 export default ServiciosModulo;
