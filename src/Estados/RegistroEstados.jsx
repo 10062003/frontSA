@@ -5,7 +5,7 @@ import { useState } from "react";
 import { Orbit } from "lucide-react";
 import ServiciosEstados from "./ServiciosEstados";
 
-const RegistroEstado = () => {
+const RegistroEstados = () => {
   const servicioEstados = new ServiciosEstados();
   const expresiones = {
     estado: /^[a-zA-ZÀ-ÿ\s]{3,30}$/,
@@ -86,4 +86,4 @@ const RegistroEstado = () => {
   );
 };
 
-export default RegistroEstado;
+export default RegistroEstados;

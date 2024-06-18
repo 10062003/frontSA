@@ -1,28 +1,19 @@
+import React, { useState, useEffect } from "react";
 import { Toaster, toast } from "sonner";
 import ButtonBasic from "../components/ui/ButtonBasic";
 import InputRegistros from "../components/ui/InputRegistros";
 import SeleccionConValidacion from "../components/ui/SeleccionConValidacion";
-import { useState } from "react";
 import { TextCursorInput, Orbit } from "lucide-react";
 import ServiciosModulo from "./ServiciosModulo";
+import ServiciosEstados from "../Estados/ServiciosEstados";
 
 const RegistroModulo = () => {
   const servicioModulo = new ServiciosModulo();
+  const servicioEstados = new ServiciosEstados();
   const expresiones = {
-    nombre: /^[a-zA-ZÀ-ÿ\s]{3,20}$/, // Letras y espacios, pueden llevar acentos, de 3 a 20.
-    descripcion: /^[a-zA-ZÀ-ÿ0-9\s]{10,100}$/, // Letras y espacios, pueden llevar acentos, de 10 a 100.
+    nombre: /^[a-zA-ZÀ-ÿ\s]{3,20}$/,
+    descripcion: /^[a-zA-ZÀ-ÿ0-9\s]{10,100}$/,
   };
-
-  const opciones = [
-    {
-      campo: "3fa85f64-5717-4562-b3fc-2c963f66afa6",
-      label: "Activado",
-    },
-    {
-      campo: "1a9d5660-0fb2-4b3e-857f-a45e3d1a5dbd",
-      label: "Desactivado",
-    },
-  ];
 
   const [nombre, cambiarNombre] = useState({ campo: "", valido: null });
   const [descripcion, cambiarDescripcion] = useState({
@@ -32,6 +23,40 @@ const RegistroModulo = () => {
   const [estado, cambiarEstado] = useState({ campo: "", valido: null });
 
   const validarCampo = (campo, expresion) => expresion.test(campo);
+  const [dataEstados, setDataEstados] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  const ObtenerDatosEstados = async () => {
+    try {
+      const respuesta = await servicioEstados.ListarEstados();
+      //console.log(respuesta.listaEstados);
+      if (respuesta.respuesta === 1) {
+        setDataEstados(respuesta.listaEstados);
+      } else {
+        toast.error("Error al cargar los datos");
+      }
+      setLoading(false);
+    } catch (error) {
+      //console.error("Error al obtener los datos:", error);
+      toast.error("Error al cargar los datos");
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    ObtenerDatosEstados();
+  }, []);
+
+  // useEffect(() => {
+  //   console.log("Data Estados actualizado:", dataEstados);
+  // }, [dataEstados]);
+
+  // Dar formato a los datos de los estados para el select
+  const DatosEstados = dataEstados.map((estado) => ({
+    campo: estado.mEstadoId,
+    label: estado.mEtdEstado,
+    valido: null,
+  }));
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -56,12 +81,9 @@ const RegistroModulo = () => {
           cambiarNombre({ campo: "", valido: null });
           cambiarDescripcion({ campo: "", valido: null });
           cambiarEstado({ campo: "", valido: null });
-          toast.success(
-            "Módulo " + nombre.campo + " registrado correctamente",
-            {
-              duration: 4000,
-            }
-          );
+          toast.success(`Módulo ${nombre.campo} registrado correctamente`, {
+            duration: 4000,
+          });
         } else {
           toast.error("Error al enviar el módulo, revise los campos");
         }
@@ -97,7 +119,15 @@ const RegistroModulo = () => {
           expRegular={expresiones.nombre}
           icon={
             <TextCursorInput
-              className={`${nombre.valido === "true" ? "opacity-100 text-exito" : nombre.valido === "false" ? "opacity-100 text-error" : nombre.valido === null ? "opacity-100 text-green-800 dark:text-green-600" : ""}`}
+              className={`${
+                nombre.valido === "true"
+                  ? "opacity-100 text-exito"
+                  : nombre.valido === "false"
+                    ? "opacity-100 text-error"
+                    : nombre.valido === null
+                      ? "opacity-100 text-green-800 dark:text-green-600"
+                      : ""
+              }`}
             />
           }
           className="col-span-1 sm:col-span-2"
@@ -116,7 +146,15 @@ const RegistroModulo = () => {
           expRegular={expresiones.descripcion}
           icon={
             <TextCursorInput
-              className={`${descripcion.valido === "true" ? "opacity-100 text-exito" : descripcion.valido === "false" ? "opacity-100 text-error" : descripcion.valido === null ? "opacity-100 text-green-800 dark:text-green-600" : ""}`}
+              className={`${
+                descripcion.valido === "true"
+                  ? "opacity-100 text-exito"
+                  : descripcion.valido === "false"
+                    ? "opacity-100 text-error"
+                    : descripcion.valido === null
+                      ? "opacity-100 text-green-800 dark:text-green-600"
+                      : ""
+              }`}
             />
           }
           className="col-span-1 sm:col-span-2"
@@ -129,10 +167,18 @@ const RegistroModulo = () => {
           errorMsm="Este campo es requerido"
           estado={estado}
           cambiarEstado={cambiarEstado}
-          opciones={opciones}
+          opciones={DatosEstados}
           icon={
             <Orbit
-              className={`${estado.valido === "true" ? "opacity-100 text-exito" : estado.valido === "false" ? "opacity-100 text-error" : estado.valido === null ? "opacity-100 text-green-800 dark:text-green-600" : ""}`}
+              className={`${
+                estado.valido === "true"
+                  ? "opacity-100 text-exito"
+                  : estado.valido === "false"
+                    ? "opacity-100 text-error"
+                    : estado.valido === null
+                      ? "opacity-100 text-green-800 dark:text-green-600"
+                      : ""
+              }`}
             />
           }
           className="col-span-1 sm:col-span-2"

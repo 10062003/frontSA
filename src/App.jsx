@@ -25,11 +25,12 @@ import RegistroActividad from "./Actividades/RegistroActividades";
 import UsuarioActividades from "./Actividades/Actividades por Usuario/UsuarioActividades";
 import RegistroEstadosTickets from "./Tickets/EstadosTicket/RegistroEstadosTickets";
 import EstadoInicio from "./Estados/EstadosInicio";
-import RegistroEstado from "./Estados/RegistroEstados";
+import RegistroEstados from "./Estados/RegistroEstados";
 import ModuloInicio from "./Modulo/ModuloInicio";
 import RegistroModulo from "./Modulo/RegistroModulo";
 import ProfesionInicio from "./Profesion/ProfesionInicio";
 import RegistroProfesion from "./Profesion/RegistroProfesion";
+import TablaEstados from "./Estados/TablaEstados";
 
 const router = createBrowserRouter([
   {
@@ -258,7 +259,20 @@ const router = createBrowserRouter([
         <MostrarSideBar />
         <div className="flex flex-col flex-1 overflow-y-auto">
           <div className="flex flex-col flex-1 items-center justify-center p-4">
-            <RegistroEstado />
+            <RegistroEstados />
+          </div>
+        </div>
+      </div>
+    ),
+  },
+  {
+    path: "ListarEstados",
+    element: (
+      <div className="flex h-screen">
+        <MostrarSideBar />
+        <div className="flex flex-col flex-1 overflow-y-auto">
+          <div className="flex flex-col flex-1 items-center justify-center p-4">
+            <TablaEstados />
           </div>
         </div>
       </div>

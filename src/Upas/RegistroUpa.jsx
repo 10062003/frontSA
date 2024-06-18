@@ -25,19 +25,6 @@ const RegistroUpa = () => {
     municipio: /^[a-zA-ZÀ-ÿ\s]{4,20}$/, // Letras y espacios, pueden llevar acentos, de 4 a 20.
   };
 
-  const opciones = [
-    {
-      campo: "3fa85f64-5717-4562-b3fc-2c963f66afa6",
-      label: "Activado",
-      valido: null,
-    },
-    {
-      campo: "1a9d5660-0fb2-4b3e-857f-a45e3d1a5dbd",
-      label: "Desactivado",
-      valido: null,
-    },
-  ];
-
   const [nombre, cambiarNombre] = useState({ campo: "", valido: null });
   const [descripcion, cambiarDescripcion] = useState({
     campo: "",

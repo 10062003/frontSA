@@ -9,7 +9,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import ServiciosUpa from "./ServiciosUpa";
+import ServiciosEstados from "./ServiciosEstados";
 import { Button } from "@/components/ui/Button";
 import { Toaster, toast } from "sonner";
 
@@ -27,15 +27,16 @@ const Badge = ({ status }) => {
   return <span style={badgeStyle}>{status}</span>;
 };
 
-const TablaUpa = () => {
-  const servicioUpa = new ServiciosUpa();
+const TablaEstados = () => {
+  const servicioEstados = new ServiciosEstados();
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
 
   const ObtenerDatosTabla = async () => {
-    const respuesta = await servicioUpa.ListarUpas();
+    const respuesta = await servicioEstados.ListarEstados();
+    console.log(respuesta.listaEstados);
     if (respuesta.respuesta === 1) {
-      setData(respuesta.listaUpas);
+      setData(respuesta.listaEstados);
     } else {
       toast.error("Error al cargar los datos");
     }
@@ -49,43 +50,12 @@ const TablaUpa = () => {
   const columns = [
     {
       header: "ID",
-      accessorKey: "mlUpsId",
+      accessorKey: "mEstadoId",
       hidden: true,
     },
     {
       header: "Nombre",
-      accessorKey: "mlUpsNombre",
-    },
-    {
-      header: "Descripcion",
-      accessorKey: "mlUpsDescipcion",
-    },
-    {
-      header: "Ubicacion",
-      accessorKey: "mlUpsUbicacion",
-    },
-    {
-      header: "ID Estado",
-      accessorKey: "mlUpsIdEstado",
-      hidden: true,
-    },
-    {
-      header: "Estado",
-      accessorKey: "mlUpsEstado",
-      cell: ({ cell }) => <Badge status={cell.getValue()} />,
-    },
-    {
-      header: "Ultima Modificacion",
-      accessorKey: "mlUpsUltimaModificacion",
-      hidden: true,
-    },
-    {
-      header: "Ciudad",
-      accessorKey: "mlUpsCiudad",
-    },
-    {
-      header: "Departamento",
-      accessorKey: "mlUpsDepartamento",
+      accessorKey: "mEtdEstado",
     },
     {
       id: "actions",
@@ -123,7 +93,7 @@ const TablaUpa = () => {
     <section className="py-10">
       <div className="container">
         <h1 className="mb-10 text-5xl font-bold text-green-700">
-          Listado de Upas
+          Listado de estados
         </h1>
         <DataTable
           data={data}
@@ -136,4 +106,4 @@ const TablaUpa = () => {
   );
 };
 
-export default TablaUpa;
+export default TablaEstados;
