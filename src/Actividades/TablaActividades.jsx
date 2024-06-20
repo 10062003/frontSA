@@ -11,7 +11,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Button } from "@/components/ui/Button";
 import { Toaster, toast } from "sonner";
-import ServiciosEstados from "./ServicioEstados";
+import ServiciosActividad from "./ServiciosActividad";
 
 const Badge = ({ status }) => {
   const isActive = status === "Activado";
@@ -27,15 +27,15 @@ const Badge = ({ status }) => {
   return <span style={badgeStyle}>{status}</span>;
 };
 
-const TablaEstados = () => {
-  const servicioEstados = new ServiciosEstados();
+const TablaActividades = () => {
+  const servicioActividades = new ServiciosActividad();
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
 
   const ObtenerDatosTabla = async () => {
-    const respuesta = await servicioEstados.ListarEstados();
+    const respuesta = await servicioActividades.ListarActividad();
     if (respuesta.respuesta === 1) {
-      setData(respuesta.listaEstado);
+      setData(respuesta.listaActividades);
     } else {
       toast.error("Error al cargar los datos");
     }
@@ -49,12 +49,30 @@ const TablaEstados = () => {
   const columns = [
     {
       header: "ID",
-      accessorKey: "mEstadoId",
+      accessorKey: "mlAtdId",
       hidden: true,
     },
     {
-      header: "Nombre del estado",
-      accessorKey: "mEtdEstado",
+      header: "Nombre",
+      accessorKey: "mlAtdNombre",
+    },
+    {
+      header: "Descripcion",
+      accessorKey: "mlAtdDescripcion",
+    },
+    {
+      header: "Ultima Modificacion",
+      accessorKey: "mlAtdUltModificacion",
+      hidden: true,
+    },
+    {
+      header: "ID Modulo",
+      accessorKey: "mlAtdIdModulo",
+      hidden: true,
+    },
+    {
+      header: "Modulo",
+      accessorKey: "mlAtdModulo",
       cell: ({ cell }) => (
         <div
           style={{
@@ -64,6 +82,26 @@ const TablaEstados = () => {
           }}
         >
           {cell.getValue()}
+        </div>
+      ),
+    },
+    {
+      header: "ID Estado",
+      accessorKey: "mlAtdIdEstado",
+      hidden: true,
+    },
+    {
+      header: "Estado",
+      accessorKey: "mlAtdEstado",
+      cell: ({ cell }) => (
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          <Badge status={cell.getValue()} />
         </div>
       ),
     },
@@ -112,12 +150,12 @@ const TablaEstados = () => {
     <section className="py-10">
       <div className="container">
         <h1 className="mb-10 text-5xl font-bold text-green-700">
-          Listado de estados
+          Listado de actividades
         </h1>
         <DataTable
           data={data}
           columns={visibleColumns}
-          footer={"Lista de estados"}
+          footer={"Lista de actividades"}
           headerClassName="text-center" // Añade esta línea
         />
       </div>
@@ -125,4 +163,4 @@ const TablaEstados = () => {
   );
 };
 
-export default TablaEstados;
+export default TablaActividades;

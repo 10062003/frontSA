@@ -8,7 +8,7 @@ const ProfesionInicio = () => {
   };
 
   const ButtonListarProfesion = () => {
-    navigate("/");
+    navigate("/TablaProfesiones");
   };
 
   return (

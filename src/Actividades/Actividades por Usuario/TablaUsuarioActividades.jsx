@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import DataTable from "../components/tablas/datatable";
+import DataTable from "../../components/tablas/datatable";
 import { MoreHorizontal } from "lucide-react";
 import {
   DropdownMenu,
@@ -11,7 +11,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Button } from "@/components/ui/Button";
 import { Toaster, toast } from "sonner";
-import ServiciosEstados from "./ServicioEstados";
+import ServiciosUsuariosAct from "./ServiciosUsuariosAct";
 
 const Badge = ({ status }) => {
   const isActive = status === "Activado";
@@ -20,22 +20,24 @@ const Badge = ({ status }) => {
     color: isActive ? "#54C252" : "#E82828",
     padding: "0.5rem 1rem",
     borderRadius: "1rem",
-    display: "inline-block",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
     fontWeight: "bold",
     textAlign: "center",
   };
-  return <span style={badgeStyle}>{status}</span>;
+  return <div style={badgeStyle}>{status}</div>;
 };
 
-const TablaEstados = () => {
-  const servicioEstados = new ServiciosEstados();
+const TablaUsuarioActividades = () => {
+  const servicioUsuarioAct = new ServiciosUsuariosAct();
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
 
   const ObtenerDatosTabla = async () => {
-    const respuesta = await servicioEstados.ListarEstados();
+    const respuesta = await servicioUsuarioAct.ListarUsuarioAct();
     if (respuesta.respuesta === 1) {
-      setData(respuesta.listaEstado);
+      setData(respuesta.listaUsuarioAct);
     } else {
       toast.error("Error al cargar los datos");
     }
@@ -49,12 +51,17 @@ const TablaEstados = () => {
   const columns = [
     {
       header: "ID",
-      accessorKey: "mEstadoId",
+      accessorKey: "mlUsrAcId",
       hidden: true,
     },
     {
-      header: "Nombre del estado",
-      accessorKey: "mEtdEstado",
+      header: "ID Actividad",
+      accessorKey: "mlIdActividad",
+      hidden: true,
+    },
+    {
+      header: "Actividad",
+      accessorKey: "mlActividad",
       cell: ({ cell }) => (
         <div
           style={{
@@ -66,6 +73,101 @@ const TablaEstados = () => {
           {cell.getValue()}
         </div>
       ),
+    },
+    {
+      header: "ID Usuario",
+      accessorKey: "mlIdUsuario",
+      hidden: true,
+    },
+    {
+      header: "Nombre",
+      accessorKey: "mlNombreUsuario",
+      cell: ({ cell }) => (
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          {cell.getValue()}
+        </div>
+      ),
+    },
+    {
+      header: "Apellido",
+      accessorKey: "mlApellidoUsuario",
+      cell: ({ cell }) => (
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          {cell.getValue()}
+        </div>
+      ),
+    },
+    {
+      header: "Correo",
+      accessorKey: "mlCorreoUsuario",
+      cell: ({ cell }) => (
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          {cell.getValue()}
+        </div>
+      ),
+    },
+    {
+      header: "ID UPA",
+      accessorKey: "mlIdUpa",
+      hidden: true,
+    },
+    {
+      header: "UPA",
+      accessorKey: "mlUpa",
+      cell: ({ cell }) => (
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          {cell.getValue()}
+        </div>
+      ),
+    },
+    {
+      header: "ID Estado",
+      accessorKey: "rolIdEstado",
+      hidden: true,
+    },
+    {
+      header: "Estado",
+      accessorKey: "mRolEstado",
+      cell: ({ cell }) => (
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          <Badge status={cell.getValue()} />
+        </div>
+      ),
+    },
+    {
+      header: "Ultima modificación",
+      accessorKey: "mlFechaUltimaModificacion",
+      hidden: true,
     },
     {
       id: "actions",
@@ -112,17 +214,17 @@ const TablaEstados = () => {
     <section className="py-10">
       <div className="container">
         <h1 className="mb-10 text-5xl font-bold text-green-700">
-          Listado de estados
+          Listado de roles
         </h1>
         <DataTable
           data={data}
           columns={visibleColumns}
-          footer={"Lista de estados"}
-          headerClassName="text-center" // Añade esta línea
+          footer={"Lista de roles."}
+          headerClassName="text-center"
         />
       </div>
     </section>
   );
 };
 
-export default TablaEstados;
+export default TablaUsuarioActividades;

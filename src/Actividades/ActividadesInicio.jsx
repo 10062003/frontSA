@@ -8,7 +8,7 @@ const ActividadesInicio = () => {
   };
 
   const ButtonListarActividades = () => {
-    navigate("/TablaUpa");
+    navigate("/TablaActividades");
   };
 
   const ButtonRegistroUsuarioAct = () => {
@@ -16,7 +16,7 @@ const ActividadesInicio = () => {
   };
 
   const ButtonListarUsuarioAct = () => {
-    navigate("/TablaUpa");
+    navigate("/TablaUsuarioActividades");
   };
 
   return (

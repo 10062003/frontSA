@@ -15,7 +15,8 @@ import {
   Tags,
   Trees,
   UserPlus,
-  FileStack
+  FileStack,
+  User,
 } from "lucide-react";
 
 const MostrarSideBar = () => {
@@ -27,6 +28,11 @@ const MostrarSideBar = () => {
           icon={<UserPlus size={20} />}
           text="Registro"
           to={"/RegistroUsuario"}
+        ></SidebarItem>
+        <SidebarItem
+          icon={<User size={20} />}
+          text="Usuarios"
+          to={"/TablaUsuarios"}
         ></SidebarItem>
         <SidebarItem
           icon={<Trees size={20} />}
@@ -65,7 +71,6 @@ const MostrarSideBar = () => {
           text="Historial"
           to={"/Historial"}
         />
-        
       </Sidebar>
     </div>
   );

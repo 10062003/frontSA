@@ -3,7 +3,7 @@ import ButtonBasic from "../components/ui/ButtonBasic";
 import InputRegistros from "../components/ui/InputRegistros";
 import { useState } from "react";
 import { Orbit } from "lucide-react";
-import ServiciosEstados from "./ServiciosEstados";
+import ServiciosEstados from "./ServicioEstados";
 
 const RegistroEstados = () => {
   const servicioEstados = new ServiciosEstados();

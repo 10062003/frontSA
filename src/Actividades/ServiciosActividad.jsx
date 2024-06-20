@@ -33,6 +33,32 @@ class ServiciosActividad {
 
     return respuestaActividad;
   };
+
+  ListarActividad = async () => {
+    const respuestaListaActividad = {
+      respuesta: 0,
+      mensaje: "",
+      listaActividades: [],
+    };
+
+    const Token = sessionStorage.getItem("Token");
+
+    try {
+      const res = await Axios.get("/GetListarActividad", {
+        headers: {
+          Authorization: "Bearer " + Token,
+        },
+      });
+      respuestaListaActividad.respuesta = 1;
+      respuestaListaActividad.mensaje = "Operación Exitosa";
+      respuestaListaActividad.listaActividades = res.data;
+    } catch (err) {
+      respuestaListaActividad.respuesta = 0;
+      respuestaListaActividad.mensaje = "Error al listar Actividades - " + err;
+    }
+
+    return respuestaListaActividad;
+  };
 }
 
 export default ServiciosActividad;

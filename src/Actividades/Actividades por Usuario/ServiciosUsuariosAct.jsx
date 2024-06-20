@@ -21,31 +21,41 @@ class ServiciosUsuariosAct {
 
       const mensaje = res.data;
       const RespuestaServicio = mensaje.split(" ")[1];
-      console.log(RespuestaServicio);
-
       respuestaUsuarioAct.respuesta = 1;
       respuestaUsuarioAct.mensaje = RespuestaServicio;
     } catch (error) {
-      console.log(error);
       respuestaUsuarioAct.respuesta = 0;
 
-      // Verifica si el error tiene una respuesta
       if (error.response) {
-        // Extrae los datos de la respuesta del error
         const errorData = error.response.data;
         const errorStatus = error.response.status;
         toast.error(errorData);
-
-        // Usa los datos del error para construir el mensaje
         respuestaUsuarioAct.mensaje = `Error ${errorStatus}: ${errorData}`;
       } else {
-        // Manejo de errores sin respuesta (posibles errores de red)
         respuestaUsuarioAct.mensaje = "Error al asignar actividad.";
       }
     }
 
     return respuestaUsuarioAct;
   };
+
+  // ListarUsuarioAct = async () => {
+  //   const Token = sessionStorage.getItem("Token");
+  //   try {
+  //     const res = await Axios.post(
+  //       "/PostListarUsuarioActividad",
+  //       {},
+  //       {
+  //         headers: {
+  //           Authorization: "Bearer " + Token,
+  //         },
+  //       }
+  //     );
+  //     console.log(res.data); // Imprimir datos en la consola
+  //   } catch (err) {
+  //     console.error("Error al listar los roles:", err);
+  //   }
+  // };
 }
 
 export default ServiciosUsuariosAct;

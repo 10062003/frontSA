@@ -5,7 +5,7 @@ import InputRegistros from "../components/ui/InputRegistros";
 import SeleccionConValidacion from "../components/ui/SeleccionConValidacion";
 import { TextCursorInput, Orbit } from "lucide-react";
 import ServiciosModulo from "./ServiciosModulo";
-import ServiciosEstados from "../Estados/ServiciosEstados";
+import ServiciosEstados from "../Estados/ServicioEstados";
 
 const RegistroModulo = () => {
   const servicioModulo = new ServiciosModulo();

@@ -21,12 +21,12 @@ class ServiciosEstados {
 
       const mensaje = res.data;
       const RespuestaServicio = mensaje.split(" ")[1];
-      console.log(RespuestaServicio);
+      //console.log(RespuestaServicio);
 
       respuestaEstado.respuesta = 1;
       respuestaEstado.mensaje = RespuestaServicio;
     } catch (error) {
-      console.log(error);
+      //console.log(error);
       respuestaEstado.respuesta = 0;
       respuestaEstado.mensaje = "Error al crear el estado.";
     }
@@ -38,7 +38,7 @@ class ServiciosEstados {
     const respuestaListaEstados = {
       respuesta: 0,
       mensaje: "",
-      listaEstados: [],
+      listaEstado: [],
     };
 
     const Token = sessionStorage.getItem("Token");
@@ -51,10 +51,10 @@ class ServiciosEstados {
       });
       respuestaListaEstados.respuesta = 1;
       respuestaListaEstados.mensaje = "Operación Exitosa";
-      respuestaListaEstados.listaEstados = res.data;
+      respuestaListaEstados.listaEstado = res.data;
     } catch (err) {
       respuestaListaEstados.respuesta = 0;
-      respuestaListaEstados.mensaje = "Error al listar Upas - " + err;
+      respuestaListaEstados.mensaje = "Error al listar estados - " + err;
     }
 
     return respuestaListaEstados;

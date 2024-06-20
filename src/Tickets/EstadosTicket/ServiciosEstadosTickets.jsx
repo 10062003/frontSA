@@ -33,6 +33,33 @@ class ServiciosEstados {
 
     return respuestaEstado;
   };
+
+  ListarEstadoTickets = async () => {
+    const respuestaListaEstadoTickets = {
+      respuesta: 0,
+      mensaje: "",
+      listaEstadoTikets: [],
+    };
+
+    const Token = sessionStorage.getItem("Token");
+
+    try {
+      const res = await Axios.get("/GetListarEstadoTicket", {
+        headers: {
+          Authorization: "Bearer " + Token,
+        },
+      });
+      respuestaListaEstadoTickets.respuesta = 1;
+      respuestaListaEstadoTickets.mensaje = "Operación Exitosa";
+      respuestaListaEstadoTickets.listaEstadoTikets = res.data;
+    } catch (err) {
+      respuestaListaEstadoTickets.respuesta = 0;
+      respuestaListaEstadoTickets.mensaje =
+        "Error al listar estado de los tickets - " + err;
+    }
+
+    return respuestaListaEstadoTickets;
+  };
 }
 
 export default ServiciosEstados;

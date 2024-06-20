@@ -24,7 +24,7 @@ const TicketsInicio = () => {
   };
 
   const ButtonListarEstadoTickets = () => {
-    navigate("/");
+    navigate("/TablaEstadoTickets");
   };
 
   return (

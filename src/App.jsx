@@ -12,7 +12,7 @@ import MostrarSideBar from "./components/ui/Sidebar/MostrarSideBar";
 import RegistroUpa from "./Upas/RegistroUpa";
 import TablaUpa from "./Upas/TablaUpa";
 import ToasterWrapper from "./components/ui/Toast";
-import RegistroUsuario from "./Registro/RegistroUsuario";
+import RegistroUsuario from "./Usuarios/RegistroUsuario";
 import "./index.css";
 import RolesInicio from "./Roles/RolesInicio";
 import RegistroRoles from "./Roles/RegistroRoles";
@@ -32,6 +32,13 @@ import ProfesionInicio from "./Profesion/ProfesionInicio";
 import RegistroProfesion from "./Profesion/RegistroProfesion";
 import TablaEstados from "./Estados/TablaEstados";
 import TablaModulo from "./Modulo/TablaModulo";
+import TablaActividades from "./Actividades/TablaActividades";
+import TablaDocumentos from "./Documentos/TablaDocumentos";
+import TablaProfesiones from "./Profesion/TablaProfesiones";
+import TablaRoles from "./Roles/TablaRoles";
+import TablaUsuarioActividades from "./Actividades/Actividades por Usuario/TablaUsuarioActividades";
+import TablaEstadoTickets from "./Tickets/EstadosTicket/TablaEstadosTicket";
+import TablaUsuarios from "./Usuarios/TablaUsuarios";
 
 const router = createBrowserRouter([
   {
@@ -126,12 +133,38 @@ const router = createBrowserRouter([
     ),
   },
   {
+    path: "TablaRoles",
+    element: (
+      <div className="flex h-screen">
+        <div className="flex-shrink-0">
+          <MostrarSideBar />
+        </div>
+        <div className="flex flex-1 flex-col overflow-y-auto p-4">
+          <TablaRoles />
+        </div>
+      </div>
+    ),
+  },
+  {
     path: "RegistroUsuario",
     element: (
       <div className="flex h-screen">
         <MostrarSideBar />
         <div className="flex flex-col flex-1 overflow-y-auto">
           <RegistroUsuario />
+        </div>
+      </div>
+    ),
+  },
+  {
+    path: "TablaUsuarios",
+    element: (
+      <div className="flex h-screen">
+        <div className="flex-shrink-0">
+          <MostrarSideBar />
+        </div>
+        <div className="flex flex-1 flex-col overflow-y-auto p-4">
+          <TablaUsuarios />
         </div>
       </div>
     ),
@@ -158,6 +191,19 @@ const router = createBrowserRouter([
           <div className="flex flex-col flex-1 items-center justify-center p-4">
             <RegistroDocumentos />
           </div>
+        </div>
+      </div>
+    ),
+  },
+  {
+    path: "TablaDocumentos",
+    element: (
+      <div className="flex h-screen">
+        <div className="flex-shrink-0">
+          <MostrarSideBar />
+        </div>
+        <div className="flex flex-1 flex-col overflow-y-auto p-4">
+          <TablaDocumentos />
         </div>
       </div>
     ),
@@ -202,6 +248,19 @@ const router = createBrowserRouter([
     ),
   },
   {
+    path: "TablaEstadoTickets",
+    element: (
+      <div className="flex h-screen">
+        <div className="flex-shrink-0">
+          <MostrarSideBar />
+        </div>
+        <div className="flex flex-1 flex-col overflow-y-auto p-4">
+          <TablaEstadoTickets />
+        </div>
+      </div>
+    ),
+  },
+  {
     path: "Actividades",
     element: (
       <div className="flex h-screen">
@@ -228,6 +287,19 @@ const router = createBrowserRouter([
     ),
   },
   {
+    path: "TablaActividades",
+    element: (
+      <div className="flex h-screen">
+        <div className="flex-shrink-0">
+          <MostrarSideBar />
+        </div>
+        <div className="flex flex-1 flex-col overflow-y-auto p-4">
+          <TablaActividades />
+        </div>
+      </div>
+    ),
+  },
+  {
     path: "RegistroUsuarioActividad",
     element: (
       <div className="flex h-screen">
@@ -236,6 +308,19 @@ const router = createBrowserRouter([
           <div className="flex flex-col flex-1 items-center justify-center p-4">
             <UsuarioActividades />
           </div>
+        </div>
+      </div>
+    ),
+  },
+  {
+    path: "TablaUsuarioActividades",
+    element: (
+      <div className="flex h-screen">
+        <div className="flex-shrink-0">
+          <MostrarSideBar />
+        </div>
+        <div className="flex flex-1 flex-col overflow-y-auto p-4">
+          <TablaUsuarioActividades />
         </div>
       </div>
     ),
@@ -270,11 +355,11 @@ const router = createBrowserRouter([
     path: "ListarEstados",
     element: (
       <div className="flex h-screen">
-        <MostrarSideBar />
-        <div className="flex flex-col flex-1 overflow-y-auto">
-          <div className="flex flex-col flex-1 items-center justify-center p-4">
-            <TablaEstados />
-          </div>
+        <div className="flex-shrink-0">
+          <MostrarSideBar />
+        </div>
+        <div className="flex flex-1 flex-col overflow-y-auto p-4">
+          <TablaEstados />
         </div>
       </div>
     ),
@@ -309,11 +394,11 @@ const router = createBrowserRouter([
     path: "TablaModulo",
     element: (
       <div className="flex h-screen">
-        <MostrarSideBar />
-        <div className="flex flex-col flex-1 overflow-y-auto">
-          <div className="flex flex-col flex-1 items-center justify-center p-4">
-            <TablaModulo />
-          </div>
+        <div className="flex-shrink-0">
+          <MostrarSideBar />
+        </div>
+        <div className="flex flex-1 flex-col overflow-y-auto p-4">
+          <TablaModulo />
         </div>
       </div>
     ),
@@ -340,6 +425,19 @@ const router = createBrowserRouter([
           <div className="flex flex-col flex-1 items-center justify-center p-4">
             <RegistroProfesion />
           </div>
+        </div>
+      </div>
+    ),
+  },
+  {
+    path: "TablaProfesiones",
+    element: (
+      <div className="flex h-screen">
+        <div className="flex-shrink-0">
+          <MostrarSideBar />
+        </div>
+        <div className="flex flex-1 flex-col overflow-y-auto p-4">
+          <TablaProfesiones />
         </div>
       </div>
     ),

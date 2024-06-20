@@ -9,9 +9,9 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import ServiciosUpa from "./ServiciosUpa";
 import { Button } from "@/components/ui/Button";
 import { Toaster, toast } from "sonner";
+import ServiciosUsuario from "./ServiciosRegUsuario";
 
 const Badge = ({ status }) => {
   const isActive = status === "Activado";
@@ -20,22 +20,24 @@ const Badge = ({ status }) => {
     color: isActive ? "#54C252" : "#E82828",
     padding: "0.5rem 1rem",
     borderRadius: "1rem",
-    display: "inline-block",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
     fontWeight: "bold",
     textAlign: "center",
   };
-  return <span style={badgeStyle}>{status}</span>;
+  return <div style={badgeStyle}>{status}</div>;
 };
 
-const TablaUpa = () => {
-  const servicioUpa = new ServiciosUpa();
+const TablaUsuarios = () => {
+  const servicioUsuaio = new ServiciosUsuario();
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
 
   const ObtenerDatosTabla = async () => {
-    const respuesta = await servicioUpa.ListarUpas();
+    const respuesta = await servicioUsuaio.ListarUsuarios();
     if (respuesta.respuesta === 1) {
-      setData(respuesta.listaUpas);
+      setData(respuesta.listaUsuarios);
     } else {
       toast.error("Error al cargar los datos");
     }
@@ -48,21 +50,43 @@ const TablaUpa = () => {
 
   const columns = [
     {
-      header: "ID",
-      accessorKey: "mlUpsId",
+      header: "ID Usuario",
+      accessorKey: "mUsrId",
       hidden: true,
     },
     {
       header: "Nombre",
-      accessorKey: "mlUpsNombre",
+      accessorKey: "mUsrNombre",
+      cell: ({ cell }) => (
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          {cell.getValue()}
+        </div>
+      ),
     },
     {
-      header: "Descripcion",
-      accessorKey: "mlUpsDescipcion",
+      header: "Apellido",
+      accessorKey: "mUsrApellido",
+      cell: ({ cell }) => (
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          {cell.getValue()}
+        </div>
+      ),
     },
     {
-      header: "Ubicacion",
-      accessorKey: "mlUpsUbicacion",
+      header: "Correo",
+      accessorKey: "mUsrCorreo",
       cell: ({ cell }) => (
         <div
           style={{
@@ -77,12 +101,12 @@ const TablaUpa = () => {
     },
     {
       header: "ID Estado",
-      accessorKey: "mlUpsIdEstado",
+      accessorKey: "etdTkIdEstado",
       hidden: true,
     },
     {
       header: "Estado",
-      accessorKey: "mlUpsEstado",
+      accessorKey: "mUsrEstado",
       cell: ({ cell }) => (
         <div
           style={{
@@ -96,13 +120,8 @@ const TablaUpa = () => {
       ),
     },
     {
-      header: "Ultima Modificacion",
-      accessorKey: "mlUpsUltimaModificacion",
-      hidden: true,
-    },
-    {
-      header: "Ciudad",
-      accessorKey: "mlUpsCiudad",
+      header: "Profesion",
+      accessorKey: "mUsrIdProfesion",
       cell: ({ cell }) => (
         <div
           style={{
@@ -116,8 +135,53 @@ const TablaUpa = () => {
       ),
     },
     {
-      header: "Departamento",
-      accessorKey: "mlUpsDepartamento",
+      header: "Rol",
+      accessorKey: "mUsrIdRol",
+      cell: ({ cell }) => (
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          {cell.getValue()}
+        </div>
+      ),
+    },
+    {
+      header: "Tipo Documento",
+      accessorKey: "mUsrIdTipoDocumento",
+      cell: ({ cell }) => (
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          {cell.getValue()}
+        </div>
+      ),
+    },
+    {
+      header: "Número Documento",
+      accessorKey: "mUsrNumeroDocumento",
+      cell: ({ cell }) => (
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          {cell.getValue()}
+        </div>
+      ),
+    },
+    {
+      header: "Upa",
+      accessorKey: "mUsrIdUpa",
       cell: ({ cell }) => (
         <div
           style={{
@@ -175,17 +239,17 @@ const TablaUpa = () => {
     <section className="py-10">
       <div className="container">
         <h1 className="mb-10 text-5xl font-bold text-green-700">
-          Listado de Upas
+          Listado de estado de tickets
         </h1>
         <DataTable
           data={data}
           columns={visibleColumns}
-          footer={"Lista de UPAs"}
-          headerClassName="text-center" // Añade esta línea
+          footer={"Lista de estados de tikets."}
+          headerClassName="text-center"
         />
       </div>
     </section>
   );
 };
 
-export default TablaUpa;
+export default TablaUsuarios;

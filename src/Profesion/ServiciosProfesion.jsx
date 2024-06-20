@@ -33,6 +33,33 @@ class ServiciosProfesion {
 
     return respuestaProfesion;
   };
+
+  ListarProfesiones = async () => {
+    const respuestaListaProfesiones = {
+      respuesta: 0,
+      mensaje: "",
+      listaProfesiones: [],
+    };
+
+    const Token = sessionStorage.getItem("Token");
+
+    try {
+      const res = await Axios.get("/GetListarProfesion", {
+        headers: {
+          Authorization: "Bearer " + Token,
+        },
+      });
+      respuestaListaProfesiones.respuesta = 1;
+      respuestaListaProfesiones.mensaje = "Operación Exitosa";
+      respuestaListaProfesiones.listaProfesiones = res.data;
+    } catch (err) {
+      respuestaListaProfesiones.respuesta = 0;
+      respuestaListaProfesiones.mensaje =
+        "Error al listar las profesiones - " + err;
+    }
+
+    return respuestaListaProfesiones;
+  };
 }
 
 export default ServiciosProfesion;

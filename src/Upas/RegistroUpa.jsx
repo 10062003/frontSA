@@ -201,7 +201,7 @@ const RegistroUpa = () => {
           errorMsm="Este campo es requerido"
           estado={estado}
           cambiarEstado={cambiarEstado}
-          opciones={opciones}
+          //opciones={}
           icon={
             <Orbit
               className={`${municipio.valido === "true" ? "opacity-100 text-exito" : municipio.valido === "false" ? "opacity-100 text-error" : municipio.valido === null ? "opacity-100 text-green-800 dark:text-green-600" : ""}`}
