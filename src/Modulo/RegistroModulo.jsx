@@ -21,23 +21,21 @@ const RegistroModulo = () => {
     valido: null,
   });
   const [estado, cambiarEstado] = useState({ campo: "", valido: null });
+  const [dataEstados, setDataEstados] = useState([]); // Inicializar como array vacío
+  const [loading, setLoading] = useState(true);
 
   const validarCampo = (campo, expresion) => expresion.test(campo);
-  const [dataEstados, setDataEstados] = useState([]);
-  const [loading, setLoading] = useState(true);
 
   const ObtenerDatosEstados = async () => {
     try {
       const respuesta = await servicioEstados.ListarEstados();
-      //console.log(respuesta.listaEstados);
       if (respuesta.respuesta === 1) {
-        setDataEstados(respuesta.listaEstados);
+        setDataEstados(respuesta.listaEstado);
       } else {
         toast.error("Error al cargar los datos");
       }
       setLoading(false);
     } catch (error) {
-      //console.error("Error al obtener los datos:", error);
       toast.error("Error al cargar los datos");
       setLoading(false);
     }
@@ -46,11 +44,6 @@ const RegistroModulo = () => {
   useEffect(() => {
     ObtenerDatosEstados();
   }, []);
-
-  //Verificar que los datos se estén actualizando
-  // useEffect(() => {
-  //   console.log("Data Estados actualizado:", dataEstados);
-  // }, [dataEstados]);
 
   // Dar formato a los datos de los estados para el select
   const DatosEstados = dataEstados.map((estado) => ({
@@ -76,7 +69,6 @@ const RegistroModulo = () => {
     ) {
       try {
         const respuesta = await servicioModulo.RegistrarModulo(modulo);
-        console.log("Respuesta del servidor:", respuesta);
 
         if (respuesta && respuesta.respuesta === 1) {
           cambiarNombre({ campo: "", valido: null });
@@ -94,7 +86,6 @@ const RegistroModulo = () => {
       }
     } else {
       toast.error("Error al enviar el módulo, revise los campos");
-      console.log("Error de validación de campos");
     }
   };
 
@@ -107,7 +98,6 @@ const RegistroModulo = () => {
         onSubmit={handleSubmit}
         className="grid grid-cols-1 gap-5 sm:grid-cols-2"
       >
-        {/* Input Nombre */}
         <InputRegistros
           estado={nombre}
           cambiarEstado={cambiarNombre}
@@ -118,23 +108,10 @@ const RegistroModulo = () => {
           name="nombre"
           errorMsm="El nombre no debe contener números y máximo 20 caracteres"
           expRegular={expresiones.nombre}
-          icon={
-            <TextCursorInput
-              className={`${
-                nombre.valido === "true"
-                  ? "opacity-100 text-exito"
-                  : nombre.valido === "false"
-                    ? "opacity-100 text-error"
-                    : nombre.valido === null
-                      ? "opacity-100 text-green-800 dark:text-green-600"
-                      : ""
-              }`}
-            />
-          }
+          icon={<TextCursorInput />}
           className="col-span-1 sm:col-span-2"
         />
 
-        {/* Input Descripción */}
         <InputRegistros
           estado={descripcion}
           cambiarEstado={cambiarDescripcion}
@@ -145,23 +122,10 @@ const RegistroModulo = () => {
           name="descripcion"
           errorMsm="La descripción debe contener mínimo 10 caracteres"
           expRegular={expresiones.descripcion}
-          icon={
-            <TextCursorInput
-              className={`${
-                descripcion.valido === "true"
-                  ? "opacity-100 text-exito"
-                  : descripcion.valido === "false"
-                    ? "opacity-100 text-error"
-                    : descripcion.valido === null
-                      ? "opacity-100 text-green-800 dark:text-green-600"
-                      : ""
-              }`}
-            />
-          }
+          icon={<TextCursorInput />}
           className="col-span-1 sm:col-span-2"
         />
 
-        {/* Select Estado */}
         <SeleccionConValidacion
           label="Estado"
           name="estado"
@@ -169,23 +133,10 @@ const RegistroModulo = () => {
           estado={estado}
           cambiarEstado={cambiarEstado}
           opciones={DatosEstados}
-          icon={
-            <Orbit
-              className={`${
-                estado.valido === "true"
-                  ? "opacity-100 text-exito"
-                  : estado.valido === "false"
-                    ? "opacity-100 text-error"
-                    : estado.valido === null
-                      ? "opacity-100 text-green-800 dark:text-green-600"
-                      : ""
-              }`}
-            />
-          }
+          icon={<Orbit />}
           className="col-span-1 sm:col-span-2"
         />
 
-        {/* Boton Registrar */}
         <div className="flex flex-col col-span-1 sm:col-span-2 items-center">
           <ButtonBasic
             children={"Registrar"}

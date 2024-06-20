@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import InputRegistros from "../components/ui/InputRegistros";
 import {
   AtSign,
@@ -18,9 +18,22 @@ import ButtonBasic from "../components/ui/ButtonBasic";
 import { Toaster, toast } from "sonner";
 import SeleccionConValidacion from "../components/ui/SeleccionConValidacion";
 import ServiciosUsuario from "./ServiciosRegUsuario";
+import ServiciosEstados from "../Estados/ServicioEstados";
+import ServiciosDocumentos from "../Documentos/ServiciosDocumentos";
+import ServiciosModulo from "../Modulo/ServiciosModulo";
+import ServiciosProfesion from "../Profesion/ServiciosProfesion";
+import ServiciosRoles from "../Roles/ServiciosRoles";
+import ServiciosUpa from "../Upas/ServiciosUpa";
 
 const RegistroUsuario = () => {
   const servicioUsuario = new ServiciosUsuario();
+  const servicioTipoDocumento = new ServiciosDocumentos();
+  const servicioModulos = new ServiciosModulo();
+  const servicioEstados = new ServiciosEstados();
+  const servicioProfesion = new ServiciosProfesion();
+  const ServicioRoles = new ServiciosRoles();
+  const ServicioUpa = new ServiciosUpa();
+
   const expresiones = {
     nombre: /^[a-zA-ZÀ-ÿ\s]{3,20}$/, // Letras y espacios, pueden llevar acentos, de 3 a 20.
     apellido: /^[a-zA-ZÀ-ÿ\s]{3,20}$/, // Letras y espacios, pueden llevar acentos, de 3 a 20.
@@ -51,8 +64,138 @@ const RegistroUsuario = () => {
   const [rol, cambiarRol] = useState({ campo: "", valido: null });
   const [estado, cambiarEstado] = useState({ campo: "", valido: null });
   const [upa, cambiarUpa] = useState({ campo: "", valido: null });
+  const [dataEstados, setDataEstados] = useState([]);
+  const [dataTipoDocumento, setDataTipoDocumento] = useState([]);
+  const [dataModulo, setDataModulo] = useState([]);
+  const [dataProfesion, setDataProfesion] = useState([]);
+  const [dataRoles, setDataRoles] = useState([]);
+  const [dataUpa, setDataUpa] = useState([]);
 
   const validarCampo = (campo, expresion) => expresion.test(campo);
+
+  const ObtenerDatosTipoDoc = async () => {
+    try {
+      const respuesta = await servicioTipoDocumento.ListarDocumentos();
+      if (respuesta.respuesta === 1) {
+        setDataTipoDocumento(respuesta.listaDocumentos);
+      } else {
+        toast.error("Error al cargar los datos");
+      }
+    } catch (error) {
+      toast.error("Error al cargar los datos");
+    }
+  };
+
+  const ObtenerDatosModulo = async () => {
+    try {
+      const respuesta = await servicioModulos.ListarModulos();
+      if (respuesta.respuesta === 1) {
+        setDataModulo(respuesta.listaModulos);
+      } else {
+        toast.error("Error al cargar los datos");
+      }
+    } catch (error) {
+      toast.error("Error al cargar los datos");
+    }
+  };
+
+  const ObtenerDatosProfesion = async () => {
+    try {
+      const respuesta = await servicioProfesion.ListarProfesiones();
+      if (respuesta.respuesta === 1) {
+        setDataProfesion(respuesta.listaProfesiones);
+      } else {
+        toast.error("Error al cargar los datos");
+      }
+    } catch (error) {
+      toast.error("Error al cargar los datos");
+    }
+  };
+
+  const ObtenerDatosRoles = async () => {
+    try {
+      const respuesta = await ServicioRoles.ListarRoles();
+      if (respuesta.respuesta === 1) {
+        setDataRoles(respuesta.listaRoles);
+      } else {
+        toast.error("Error al cargar los datos");
+      }
+    } catch (error) {
+      toast.error("Error al cargar los datos");
+    }
+  };
+
+  const ObtenerDatosEstados = async () => {
+    try {
+      const respuesta = await servicioEstados.ListarEstados();
+      if (respuesta.respuesta === 1) {
+        setDataEstados(respuesta.listaEstado);
+      } else {
+        toast.error("Error al cargar los datos");
+      }
+    } catch (error) {
+      toast.error("Error al cargar los datos");
+    }
+  };
+
+  const ObtenerDatosUpa = async () => {
+    try {
+      const respuesta = await ServicioUpa.ListarUpas();
+      if (respuesta.respuesta === 1) {
+        setDataUpa(respuesta.listaUpas);
+      } else {
+        toast.error("Error al cargar los datos");
+      }
+    } catch (error) {
+      toast.error("Error al cargar los datos");
+    }
+  };
+
+  useEffect(() => {
+    ObtenerDatosTipoDoc();
+    ObtenerDatosModulo();
+    ObtenerDatosProfesion();
+    ObtenerDatosRoles();
+    ObtenerDatosEstados();
+    ObtenerDatosUpa();
+  }, []);
+
+  // Dar formato a los datos de los estados para el select
+  const DatosTipoDoc = dataTipoDocumento.map((estado) => ({
+    campo: estado.mTdocId,
+    label: estado.mTdocTipoDocumento,
+    valido: null,
+  }));
+
+  const DatosModulo = dataModulo.map((estado) => ({
+    campo: estado.mdsId,
+    label: estado.mdsNombre,
+    valido: null,
+  }));
+
+  const DatosProfesion = dataProfesion.map((estado) => ({
+    campo: estado.mPfsId,
+    label: estado.mPfsProfesion,
+    valido: null,
+  }));
+
+  const DatosRoles = dataRoles.map((estado) => ({
+    campo: estado.mRolId,
+    label: estado.mRolNombre,
+    valido: null,
+  }));
+
+  const DatosEstados = dataEstados.map((estado) => ({
+    campo: estado.mEstadoId,
+    label: estado.mEtdEstado,
+    valido: null,
+  }));
+
+  const DatosUpa = dataUpa.map((estado) => ({
+    campo: estado.mlUpsId,
+    label: estado.mlUpsNombre,
+    valido: null,
+  }));
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -222,20 +365,7 @@ const RegistroUsuario = () => {
               className={`${tipoDocumento.valido === "true" ? "opacity-100 text-exito" : tipoDocumento.valido === "false" ? "opacity-100 text-error" : tipoDocumento.valido === null ? "opacity-100 text-green-800 dark:text-green-600" : ""}`}
             />
           }
-          opciones={[
-            {
-              campo: "3fa85f64-5717-4562-b3fc-2c963f66afa6",
-              label: "C.C",
-            },
-            {
-              campo: "809cdfb4-1953-4c8e-bf72-42c49478618b",
-              label: "C.E",
-            },
-            {
-              campo: "948ffc9f-3fd7-48be-9ca7-3ac4ba892209",
-              label: "T.I",
-            },
-          ]}
+          opciones={DatosTipoDoc}
           className="col-span-1 sm:col-span-2"
         ></SeleccionConValidacion>
 
@@ -284,20 +414,7 @@ const RegistroUsuario = () => {
           errorMsm="Este campo es requerido"
           estado={modulo}
           cambiarEstado={cambiarModulo}
-          opciones={[
-            {
-              campo: "3fa85f64-5717-4562-b3fc-2c963f66afa6",
-              label: "Web Super Administrador",
-            },
-            {
-              campo: "ee29a3a6-844f-4be1-8a22-8f81c03a902a",
-              label: "Movil",
-            },
-            {
-              campo: "f1ece582-920a-4dff-82d5-9ce12791fcc2",
-              label: "Local",
-            },
-          ]}
+          opciones={DatosModulo}
           icon={
             <Component
               className={`${modulo.valido === "true" ? "opacity-100 text-exito" : modulo.valido === "false" ? "opacity-100 text-error" : modulo.valido === null ? "opacity-100 text-green-800 dark:text-green-600" : ""}`}
@@ -313,16 +430,7 @@ const RegistroUsuario = () => {
           errorMsm="Este campo es requerido"
           estado={profesion}
           cambiarEstado={cambiarProfesion}
-          opciones={[
-            {
-              campo: "3fa85f64-5717-4562-b3fc-2c963f66afa6",
-              label: "Ingeniero de sistemas",
-            },
-            {
-              campo: "5a7dd53b-2aca-4032-b875-8b237591dbf4",
-              label: "Ingeniero Electronico",
-            },
-          ]}
+          opciones={DatosProfesion}
           icon={
             <GraduationCap
               className={`${profesion.valido === "true" ? "opacity-100 text-exito" : profesion.valido === "false" ? "opacity-100 text-error" : profesion.valido === null ? "opacity-100 text-green-800 dark:text-green-600" : ""}`}
@@ -338,16 +446,7 @@ const RegistroUsuario = () => {
           errorMsm="Este campo es requerido"
           estado={rol}
           cambiarEstado={cambiarRol}
-          opciones={[
-            {
-              campo: "3fa85f64-5717-4562-b3fc-2c963f66afa6",
-              label: "Super Administrador",
-            },
-            {
-              campo: "ee29a3a6-844f-4be1-8a22-8f81c03a902a",
-              label: "Operario",
-            },
-          ]}
+          opciones={DatosRoles}
           icon={
             <Dock
               className={`${rol.valido === "true" ? "opacity-100 text-exito" : rol.valido === "false" ? "opacity-100 text-error" : rol.valido === null ? "opacity-100 text-green-800 dark:text-green-600" : ""}`}
@@ -363,16 +462,7 @@ const RegistroUsuario = () => {
           errorMsm="Este campo es requerido"
           estado={estado}
           cambiarEstado={cambiarEstado}
-          opciones={[
-            {
-              campo: "1a9d5660-0fb2-4b3e-857f-a45e3d1a5dbd",
-              label: "Desactivo",
-            },
-            {
-              campo: "3fa85f64-5717-4562-b3fc-2c963f66afa6",
-              label: "Activo",
-            },
-          ]}
+          opciones={DatosEstados}
           icon={
             <Orbit
               className={`${estado.valido === "true" ? "opacity-100 text-exito" : estado.valido === "false" ? "opacity-100 text-error" : estado.valido === null ? "opacity-100 text-green-800 dark:text-green-600" : ""}`}
@@ -388,24 +478,7 @@ const RegistroUsuario = () => {
           errorMsm="Este campo es requerido"
           estado={upa}
           cambiarEstado={cambiarUpa}
-          opciones={[
-            {
-              campo: "3fa85f64-5717-4562-b3fc-2c963f66afa6",
-              label: "Lestoma",
-            },
-            {
-              campo: "5f44a781-8f04-4026-83b1-d2b5348696e1",
-              label: "HydroDomusLab",
-            },
-            {
-              campo: "6c93fe8c-6ac3-4ae2-906b-b05e7658d8dc",
-              label: "EcoAquaInnovación",
-            },
-            {
-              campo: "d135acc8-fb65-48bd-86df-af53fe0afcd9",
-              label: "AquaTechLab",
-            },
-          ]}
+          opciones={DatosUpa}
           icon={
             <NotepadText
               className={`${upa.valido === "true" ? "opacity-100 text-exito" : upa.valido === "false" ? "opacity-100 text-error" : upa.valido === null ? "opacity-100 text-green-800 dark:text-green-600" : ""}`}
