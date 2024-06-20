@@ -14,9 +14,12 @@ import {
 import { useState, useEffect } from "react";
 import SeleccionConValidacion from "../components/ui/SeleccionConValidacion";
 import ServiciosUpa from "./ServiciosUpa";
+import ServiciosEstados from "../Estados/ServicioEstados";
 
 const RegistroUpa = () => {
   const servicioUpa = new ServiciosUpa();
+  const servicioEstados = new ServiciosEstados();
+
   const expresiones = {
     nombre: /^[a-zA-ZÀ-ÿ\s]{3,20}$/, // Letras y espacios, pueden llevar acentos, de 3 a 20.
     descripcion: /^[a-zA-ZÀ-ÿ0-9\s]{10,100}$/, // Letras y espacios, pueden llevar acentos, de 10 a 100.
@@ -37,6 +40,7 @@ const RegistroUpa = () => {
     campo: "",
     valido: null,
   });
+  const [dataEstados, setDataEstados] = useState([]);
 
   const validarCampo = (campo, expresion) => {
     if (expresion.test(campo)) {
@@ -45,6 +49,29 @@ const RegistroUpa = () => {
       return "false";
     }
   };
+
+  const ObtenerDatosEstados = async () => {
+    try {
+      const respuesta = await servicioEstados.ListarEstados();
+      if (respuesta.respuesta === 1) {
+        setDataEstados(respuesta.listaEstado);
+      } else {
+        toast.error("Error al cargar los datos");
+      }
+    } catch (error) {
+      toast.error("Error al cargar los datos");
+    }
+  };
+
+  useEffect(() => {
+    ObtenerDatosEstados();
+  }, []);
+
+  const DatosEstados = dataEstados.map((estado) => ({
+    campo: estado.mEstadoId,
+    label: estado.mEtdEstado,
+    valido: null,
+  }));
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -156,7 +183,7 @@ const RegistroUpa = () => {
           className="col-span-1 sm:col-span-2"
         ></InputRegistros>
 
-        {/* Input Departamaento */}
+        {/* Input Departamento */}
         <InputRegistros
           estado={departamento}
           cambiarEstado={cambiarDepartamento}
@@ -194,21 +221,21 @@ const RegistroUpa = () => {
           className="col-span-1 sm:col-span-2"
         ></InputRegistros>
 
-        {/* Select Estado */}
+        {/* Input Estado */}
         <SeleccionConValidacion
           label="Estado"
           name="estado"
           errorMsm="Este campo es requerido"
           estado={estado}
           cambiarEstado={cambiarEstado}
-          //opciones={}
+          opciones={DatosEstados}
           icon={
             <Orbit
-              className={`${municipio.valido === "true" ? "opacity-100 text-exito" : municipio.valido === "false" ? "opacity-100 text-error" : municipio.valido === null ? "opacity-100 text-green-800 dark:text-green-600" : ""}`}
+              className={`${estado.valido === "true" ? "opacity-100 text-exito" : estado.valido === "false" ? "opacity-100 text-error" : estado.valido === null ? "opacity-100 text-green-800 dark:text-green-600" : ""}`}
             />
           }
           className="col-span-1 sm:col-span-2"
-        />
+        ></SeleccionConValidacion>
 
         {/* Boton Registrar */}
         <div className="flex flex-col col-span-1 sm:col-span-2 items-center">

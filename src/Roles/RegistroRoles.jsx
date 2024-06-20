@@ -3,47 +3,63 @@ import ButtonBasic from "../components/ui/ButtonBasic";
 import InputRegistros from "../components/ui/InputRegistros";
 import SeleccionConValidacion from "../components/ui/SeleccionConValidacion";
 import ServiciosRoles from "./ServiciosRoles";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { BookUser, BarChart3, TextCursorInput, Orbit } from "lucide-react";
+import ServiciosEstados from "../Estados/ServicioEstados";
 
 const RegistroRol = () => {
   const servicioRol = new ServiciosRoles();
+  const servicioEstados = new ServiciosEstados();
+
   const expresiones = {
     nombre: /^[a-zA-ZÀ-ÿ\s]{3,20}$/, // Letras y espacios, pueden llevar acentos, de 3 a 20.
   };
 
-  const opciones = [
-    {
-      campo: "3fa85f64-5717-4562-b3fc-2c963f66afa6",
-      label: "Activado",
-    },
-    {
-      campo: "1a9d5660-0fb2-4b3e-857f-a45e3d1a5dbd",
-      label: "Desactivado",
-    },
-  ];
-
   const [nombre, cambiarNombre] = useState({ campo: "", valido: null });
   const [estado, cambiarEstado] = useState({ campo: "", valido: null });
+  const [dataEstados, setDataEstados] = useState([]);
 
   const validarCampo = (campo, expresion) => expresion.test(campo);
 
+  const ObtenerDatosEstados = async () => {
+    try {
+      const respuesta = await servicioEstados.ListarEstados();
+      if (respuesta.respuesta === 1) {
+        setDataEstados(respuesta.listaEstado);
+      } else {
+        toast.error("Error al cargar los datos");
+      }
+    } catch (error) {
+      toast.error("Error al cargar los datos");
+    }
+  };
+
+  useEffect(() => {
+    ObtenerDatosEstados();
+  }, []);
+
+  const DatosEstados = dataEstados.map((estado) => ({
+    campo: estado.mEstadoId,
+    label: estado.mEtdEstado,
+    valido: null,
+  }));
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-  
+
     const rol = {
       rolNombre: nombre.campo,
-      rolIdEstado: estado.campo
+      rolIdEstado: estado.campo,
     };
-  
+
     console.log("Nombre:", nombre.campo);
     console.log("Estado:", estado.campo);
-  
+
     if (validarCampo(nombre.campo, expresiones.nombre) && estado.campo) {
       try {
         const respuesta = await servicioRol.RegistrarRol(rol);
         console.log("Respuesta del servidor:", respuesta);
-  
+
         if (respuesta && respuesta.respuesta === 1) {
           cambiarNombre({ campo: "", valido: null });
           cambiarEstado({ campo: "", valido: null });
@@ -85,7 +101,7 @@ const RegistroRol = () => {
           expRegular={expresiones.nombre}
           icon={
             <TextCursorInput
-            className={`${nombre.valido === "true" ? "opacity-100 text-exito" : nombre.valido === "false" ? "opacity-100 text-error" : nombre.valido === null ? "opacity-100 text-green-800 dark:text-green-600" : ""}`}
+              className={`${nombre.valido === "true" ? "opacity-100 text-exito" : nombre.valido === "false" ? "opacity-100 text-error" : nombre.valido === null ? "opacity-100 text-green-800 dark:text-green-600" : ""}`}
             />
           }
           className="col-span-1 sm:col-span-2"
@@ -98,10 +114,10 @@ const RegistroRol = () => {
           errorMsm="Este campo es requerido"
           estado={estado}
           cambiarEstado={cambiarEstado}
-          opciones={opciones}
+          opciones={DatosEstados}
           icon={
             <Orbit
-            className={`${estado.valido === "true" ? "opacity-100 text-exito" : estado.valido === "false" ? "opacity-100 text-error" : estado.valido === null ? "opacity-100 text-green-800 dark:text-green-600" : ""}`}
+              className={`${estado.valido === "true" ? "opacity-100 text-exito" : estado.valido === "false" ? "opacity-100 text-error" : estado.valido === null ? "opacity-100 text-green-800 dark:text-green-600" : ""}`}
             />
           }
           className="col-span-1 sm:col-span-2"

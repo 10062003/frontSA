@@ -10,6 +10,7 @@ import ServiciosEstados from "../Estados/ServicioEstados";
 const RegistroModulo = () => {
   const servicioModulo = new ServiciosModulo();
   const servicioEstados = new ServiciosEstados();
+
   const expresiones = {
     nombre: /^[a-zA-ZÀ-ÿ\s]{3,20}$/,
     descripcion: /^[a-zA-ZÀ-ÿ0-9\s]{10,100}$/,
@@ -21,8 +22,7 @@ const RegistroModulo = () => {
     valido: null,
   });
   const [estado, cambiarEstado] = useState({ campo: "", valido: null });
-  const [dataEstados, setDataEstados] = useState([]); // Inicializar como array vacío
-  const [loading, setLoading] = useState(true);
+  const [dataEstados, setDataEstados] = useState([]);
 
   const validarCampo = (campo, expresion) => expresion.test(campo);
 
@@ -34,10 +34,8 @@ const RegistroModulo = () => {
       } else {
         toast.error("Error al cargar los datos");
       }
-      setLoading(false);
     } catch (error) {
       toast.error("Error al cargar los datos");
-      setLoading(false);
     }
   };
 
@@ -45,7 +43,6 @@ const RegistroModulo = () => {
     ObtenerDatosEstados();
   }, []);
 
-  // Dar formato a los datos de los estados para el select
   const DatosEstados = dataEstados.map((estado) => ({
     campo: estado.mEstadoId,
     label: estado.mEtdEstado,
@@ -108,7 +105,11 @@ const RegistroModulo = () => {
           name="nombre"
           errorMsm="El nombre no debe contener números y máximo 20 caracteres"
           expRegular={expresiones.nombre}
-          icon={<TextCursorInput />}
+          icon={
+            <TextCursorInput
+              className={`${nombre.valido === "true" ? "opacity-100 text-exito" : nombre.valido === "false" ? "opacity-100 text-error" : nombre.valido === null ? "opacity-100 text-green-800 dark:text-green-600" : ""}`}
+            />
+          }
           className="col-span-1 sm:col-span-2"
         />
 
@@ -122,7 +123,11 @@ const RegistroModulo = () => {
           name="descripcion"
           errorMsm="La descripción debe contener mínimo 10 caracteres"
           expRegular={expresiones.descripcion}
-          icon={<TextCursorInput />}
+          icon={
+            <TextCursorInput
+              className={`${descripcion.valido === "true" ? "opacity-100 text-exito" : descripcion.valido === "false" ? "opacity-100 text-error" : descripcion.valido === null ? "opacity-100 text-green-800 dark:text-green-600" : ""}`}
+            />
+          }
           className="col-span-1 sm:col-span-2"
         />
 
@@ -133,7 +138,11 @@ const RegistroModulo = () => {
           estado={estado}
           cambiarEstado={cambiarEstado}
           opciones={DatosEstados}
-          icon={<Orbit />}
+          icon={
+            <Orbit
+              className={`${estado.valido === "true" ? "opacity-100 text-exito" : estado.valido === "false" ? "opacity-100 text-error" : estado.valido === null ? "opacity-100 text-green-800 dark:text-green-600" : ""}`}
+            />
+          }
           className="col-span-1 sm:col-span-2"
         />
 

@@ -1,10 +1,10 @@
 import Axios from "axios";
 
-class ServiciosEstados {
+class ServiciosEstadosTicket {
   constructor() {}
 
-  RegistrarEstado = async (estado) => {
-    const respuestaEstado = {
+  RegistrarEstadoTiket = async (estado) => {
+    const respuestaEstadoTiket = {
       respuesta: 0,
       mensaje: "",
     };
@@ -13,7 +13,7 @@ class ServiciosEstados {
     console.log(Token);
 
     try {
-      const res = await Axios.post("/PostCrearEstado", estado, {
+      const res = await Axios.post("/PostCrearEstadoTickets", estado, {
         headers: {
           Authorization: "Bearer " + Token,
         },
@@ -23,15 +23,15 @@ class ServiciosEstados {
       const RespuestaServicio = mensaje.split(" ")[1];
       console.log(RespuestaServicio);
 
-      respuestaEstado.respuesta = 1;
-      respuestaEstado.mensaje = RespuestaServicio;
+      respuestaEstadoTiket.respuesta = 1;
+      respuestaEstadoTiket.mensaje = RespuestaServicio;
     } catch (error) {
       console.log(error);
-      respuestaEstado.respuesta = 0;
-      respuestaEstado.mensaje = "Error al crear el estado.";
+      respuestaEstadoTiket.respuesta = 0;
+      respuestaEstadoTiket.mensaje = "Error al crear el estado.";
     }
 
-    return respuestaEstado;
+    return respuestaEstadoTiket;
   };
 
   ListarEstadoTickets = async () => {
@@ -62,4 +62,4 @@ class ServiciosEstados {
   };
 }
 
-export default ServiciosEstados;
+export default ServiciosEstadosTicket;

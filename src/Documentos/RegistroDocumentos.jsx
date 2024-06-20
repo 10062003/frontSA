@@ -3,62 +3,91 @@ import ButtonBasic from "../components/ui/ButtonBasic";
 import InputRegistros from "../components/ui/InputRegistros";
 import SeleccionConValidacion from "../components/ui/SeleccionConValidacion";
 import ServiciosDocumentos from "./ServiciosDocumentos"; // Cambiado de ServiciosRoles a ServiciosDocumentos
-import { useState } from "react";
-import { BookUser, BarChart3, TextCursorInput, Orbit, Files } from "lucide-react";
+import { useState, useEffect } from "react";
+import {
+  BookUser,
+  BarChart3,
+  TextCursorInput,
+  Orbit,
+  Files,
+} from "lucide-react";
+import ServiciosEstados from "../Estados/ServicioEstados";
 
 const RegistroDocumentos = () => {
-  const servicioDocumento = new ServiciosDocumentos(); // Cambiado de ServiciosRoles a ServiciosDocumentos
+  const servicioDocumento = new ServiciosDocumentos();
+  const servicioEstados = new ServiciosEstados();
+
   const expresiones = {
     nombre: /^[a-zA-ZÀ-ÿ\s]{2,20}$/, // Letras y espacios, pueden llevar acentos, de 3 a 20.
   };
 
-  const opciones = [
-    {
-      campo: "3fa85f64-5717-4562-b3fc-2c963f66afa6",
-      label: "Activado",
-    },
-    {
-      campo: "1a9d5660-0fb2-4b3e-857f-a45e3d1a5dbd",
-      label: "Desactivado",
-    },
-  ];
-
   const [nombre, cambiarNombre] = useState({ campo: "", valido: null });
   const [estado, cambiarEstado] = useState({ campo: "", valido: null });
+  const [dataEstados, setDataEstados] = useState([]);
 
   const validarCampo = (campo, expresion) => expresion.test(campo);
 
+  const ObtenerDatosEstados = async () => {
+    try {
+      const respuesta = await servicioEstados.ListarEstados();
+      if (respuesta.respuesta === 1) {
+        setDataEstados(respuesta.listaEstado);
+      } else {
+        toast.error("Error al cargar los datos");
+      }
+    } catch (error) {
+      toast.error("Error al cargar los datos");
+    }
+  };
+
+  useEffect(() => {
+    ObtenerDatosEstados();
+  }, []);
+
+  const DatosEstados = dataEstados.map((estado) => ({
+    campo: estado.mEstadoId,
+    label: estado.mEtdEstado,
+    valido: null,
+  }));
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-  
+
     const documento = {
       tdocTipoDocumento: nombre.campo,
-      tdocIdEstado: estado.campo
+      tdocIdEstado: estado.campo,
     };
-  
+
     console.log("Nombre:", nombre.campo);
     console.log("Estado:", estado.campo);
-  
+
     if (validarCampo(nombre.campo, expresiones.nombre) && estado.campo) {
       try {
-        const respuesta = await servicioDocumento.RegistrarDocumento(documento); // Cambiado de servicioRol.RegistrarRol a servicioDocumento.RegistrarDocumento
+        const respuesta = await servicioDocumento.RegistrarDocumento(documento);
         console.log("Respuesta del servidor:", respuesta);
-  
+
         if (respuesta && respuesta.respuesta === 1) {
           cambiarNombre({ campo: "", valido: null });
           cambiarEstado({ campo: "", valido: null });
-          toast.success("Tipo de documento " + nombre.campo + " registrado correctamente", { // Cambiado de Rol a Tipo de documento
-            duration: 4000,
-          });
+          toast.success(
+            "Tipo de documento " + nombre.campo + " registrado correctamente",
+            {
+              duration: 4000,
+            }
+          );
         } else {
-          toast.error("Error al enviar el tipo de documento, revise los campos"); // Cambiado de Rol a Tipo de documento
+          toast.error(
+            "Error al enviar el tipo de documento, revise los campos"
+          );
         }
       } catch (error) {
-        toast.error("Error de servidor: no se pudo registrar el tipo de documento"); // Cambiado de Rol a Tipo de documento
+        toast.error(
+          "Error de servidor: no se pudo registrar el tipo de documento"
+        );
         console.error("Error en el servidor:", error);
       }
     } else {
-      toast.error("Error al enviar el tipo de documento, revise los campos"); // Cambiado de Rol a Tipo de documento
+      toast.error("Error al enviar el tipo de documento, revise los campos");
       console.log("Error de validación de campos");
     }
   };
@@ -77,7 +106,7 @@ const RegistroDocumentos = () => {
           estado={nombre}
           cambiarEstado={cambiarNombre}
           label="Tipo de documento"
-          placeholder="CC"
+          placeholder="C.C"
           id="nombre"
           type="text"
           name="nombre"
@@ -85,7 +114,7 @@ const RegistroDocumentos = () => {
           expRegular={expresiones.nombre}
           icon={
             <Files
-            className={`${nombre.valido === "true" ? "opacity-100 text-exito" : nombre.valido === "false" ? "opacity-100 text-error" : nombre.valido === null ? "opacity-100 text-green-800 dark:text-green-600" : ""}`}
+              className={`${nombre.valido === "true" ? "opacity-100 text-exito" : nombre.valido === "false" ? "opacity-100 text-error" : nombre.valido === null ? "opacity-100 text-green-800 dark:text-green-600" : ""}`}
             />
           }
           className="col-span-1 sm:col-span-2"
@@ -98,10 +127,10 @@ const RegistroDocumentos = () => {
           errorMsm="Este campo es requerido"
           estado={estado}
           cambiarEstado={cambiarEstado}
-          opciones={opciones}
+          opciones={DatosEstados}
           icon={
             <Orbit
-            className={`${estado.valido === "true" ? "opacity-100 text-exito" : estado.valido === "false" ? "opacity-100 text-error" : estado.valido === null ? "opacity-100 text-green-800 dark:text-green-600" : ""}`}
+              className={`${estado.valido === "true" ? "opacity-100 text-exito" : estado.valido === "false" ? "opacity-100 text-error" : estado.valido === null ? "opacity-100 text-green-800 dark:text-green-600" : ""}`}
             />
           }
           className="col-span-1 sm:col-span-2"

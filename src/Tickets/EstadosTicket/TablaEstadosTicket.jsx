@@ -11,7 +11,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Button } from "@/components/ui/Button";
 import { Toaster, toast } from "sonner";
-import ServiciosEstados from "./ServiciosEstadosTickets";
+import ServiciosEstadosTicket from "./ServiciosEstadosTickets";
 
 const Badge = ({ status }) => {
   const isActive = status === "Activado";
@@ -30,7 +30,7 @@ const Badge = ({ status }) => {
 };
 
 const TablaEstadoTickets = () => {
-  const servicioEstadosTickets = new ServiciosEstados();
+  const servicioEstadosTickets = new ServiciosEstadosTicket();
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
 

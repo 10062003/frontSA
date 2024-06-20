@@ -2,30 +2,47 @@ import { Toaster, toast } from "sonner";
 import ButtonBasic from "../../components/ui/ButtonBasic";
 import InputRegistros from "../../components/ui/InputRegistros";
 import SeleccionConValidacion from "../../components/ui/SeleccionConValidacion";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { TextCursorInput, Orbit } from "lucide-react";
-import ServiciosEstados from "./ServiciosEstadosTickets"; // Asegúrate de que este import sea correcto
+import ServiciosEstadosTicket from "./ServiciosEstadosTickets"; // Importa la clase
+import ServiciosEstados from "../../Estados/ServicioEstados";
 
 const RegistroEstadosTickets = () => {
+  const servicioEstadosTicket = new ServiciosEstadosTicket(); // Instancia la clase correctamente
+  const servcioEstados = new ServiciosEstados();
+
   const expresiones = {
     nombre: /^[a-zA-ZÀ-ÿ\s]{3,20}$/,
   };
 
-  const opciones = [
-    {
-      campo: "3fa85f64-5717-4562-b3fc-2c963f66afa6",
-      label: "Activo",
-    },
-    {
-      campo: "1a9d5660-0fb2-4b3e-857f-a45e3d1a5dbd",
-      label: "Inactivo",
-    },
-  ];
-
   const [nombre, cambiarNombre] = useState({ campo: "", valido: null });
   const [estado, cambiarEstado] = useState({ campo: "", valido: null });
+  const [dataEstados, setDataEstados] = useState([]);
 
   const validarCampo = (campo, expresion) => expresion.test(campo);
+
+  const ObtenerDatosEstados = async () => {
+    try {
+      const respuesta = await servcioEstados.ListarEstados();
+      if (respuesta.respuesta === 1) {
+        setDataEstados(respuesta.listaEstado);
+      } else {
+        toast.error("Error al cargar los datos");
+      }
+    } catch (error) {
+      toast.error("Error al cargar los datos");
+    }
+  };
+
+  useEffect(() => {
+    ObtenerDatosEstados();
+  }, []);
+
+  const DatosEstados = dataEstados.map((estado) => ({
+    campo: estado.mEstadoId,
+    label: estado.mEtdEstado,
+    valido: null,
+  }));
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -35,13 +52,10 @@ const RegistroEstadosTickets = () => {
       etdTkIdEstado: estado.campo,
     };
 
-    console.log("Nombre:", nombre.campo);
-    console.log("Estado:", estado.campo);
-
     if (validarCampo(nombre.campo, expresiones.nombre) && estado.campo) {
       try {
         const respuesta =
-          await ServiciosEstados.RegistrarEstadoTickets(estadoObj);
+          await servicioEstadosTicket.RegistrarEstadoTiket(estadoObj); // Llama al método correctamente
         console.log("Respuesta del servidor:", respuesta);
 
         if (respuesta && respuesta.respuesta === 1) {
@@ -101,7 +115,7 @@ const RegistroEstadosTickets = () => {
           errorMsm="Este campo es requerido"
           estado={estado}
           cambiarEstado={cambiarEstado}
-          opciones={opciones}
+          opciones={DatosEstados}
           icon={
             <Orbit
               className={`${estado.valido === "true" ? "opacity-100 text-exito" : estado.valido === "false" ? "opacity-100 text-error" : estado.valido === null ? "opacity-100 text-green-800 dark:text-green-600" : ""}`}

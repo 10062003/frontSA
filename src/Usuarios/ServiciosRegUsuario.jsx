@@ -51,7 +51,7 @@ class ServiciosUsuario {
       respuestaListaUsuarios.respuesta = 1;
       respuestaListaUsuarios.mensaje = "Operación Exitosa";
       respuestaListaUsuarios.listaUsuarios = res.data;
-      console.log(res.data);
+      //console.log(res.data);
     } catch (err) {
       respuestaListaUsuarios.respuesta = 0;
       respuestaListaUsuarios.mensaje = "Error al listar los usuarios - " + err;
