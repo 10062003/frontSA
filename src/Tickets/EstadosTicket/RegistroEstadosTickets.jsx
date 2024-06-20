@@ -4,11 +4,11 @@ import InputRegistros from "../../components/ui/InputRegistros";
 import SeleccionConValidacion from "../../components/ui/SeleccionConValidacion";
 import { useState, useEffect } from "react";
 import { TextCursorInput, Orbit } from "lucide-react";
-import ServiciosEstadosTicket from "./ServiciosEstadosTickets"; // Importa la clase
+import ServiciosEstadosTicket from "./ServiciosEstadosTickets";
 import ServiciosEstados from "../../Estados/ServicioEstados";
 
 const RegistroEstadosTickets = () => {
-  const servicioEstadosTicket = new ServiciosEstadosTicket(); // Instancia la clase correctamente
+  const servicioEstadosTicket = new ServiciosEstadosTicket();
   const servcioEstados = new ServiciosEstados();
 
   const expresiones = {
