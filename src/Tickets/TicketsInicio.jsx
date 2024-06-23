@@ -10,7 +10,7 @@ const TicketsInicio = () => {
   };
 
   const ButtonListarTickets = () => {
-    navigate("/");
+    navigate("/TablaTipoTicket");
   };
 
   const ButtonCrearTicket = () => {

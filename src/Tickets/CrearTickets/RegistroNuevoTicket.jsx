@@ -7,7 +7,10 @@ import ServiciosNuevoTicket from "./ServiciosNuevoTicket";
 import ServiciosModulo from "../../Modulo/ServiciosModulo";
 import ServiciosProfesion from "../../Profesion/ServiciosProfesion";
 import ServiciosDocumentos from "../../Documentos/ServiciosDocumentos";
-
+import ServiciosRoles from "../../Roles/ServiciosRoles";
+import ServiciosUpa from "../../Upas/ServiciosUpa";
+import ServiciosTickets from "../ServiciosTickets";
+import ServiciosEstadosTicket from "../EstadosTicket/ServiciosEstadosTickets";
 
 import {
   User,
@@ -21,6 +24,7 @@ import {
   List,
   ScanEye,
   FileText,
+  ShieldAlertIcon,
 } from "lucide-react";
 
 const RegistroNuevoTicket = () => {
@@ -28,19 +32,19 @@ const RegistroNuevoTicket = () => {
   const servicioModulos = new ServiciosModulo();
   const servicioTicket = new ServiciosNuevoTicket();
   const servicioTipoDocumento = new ServiciosDocumentos();
+  const ServicioRoles = new ServiciosRoles();
+  const ServicioUpa = new ServiciosUpa();
+  const ServicioTipoTicket = new ServiciosTickets();
+  const ServicioEstadoTicket = new ServiciosEstadosTicket();
+
   const expresiones = {
     nombre: /^[a-zA-ZÀ-ÿ\s]{3,30}$/,
     correo: /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/,
     numeroDocumento: /^\d{8,15}$/,
     descripcion: /^.{1,250}$/,
+    fecha: /^\d{4}-\d{2}-\d{2}$/,
   };
 
-  const opcionesTipoTicket = [
-    { campo: "tipo1", label: "Tipo 1" },
-    { campo: "tipo2", label: "Tipo 2" },
-    { campo: "tipo3", label: "Tipo 3" },
-  ];
-  
   const opcionesEstado = [
     { campo: "3fa85f64-5717-4562-b3fc-2c963f66afa6", label: "Activado" },
     { campo: "1a9d5660-0fb2-4b3e-857f-a45e3d1a5dbd", label: "Desactivado" },
@@ -63,6 +67,10 @@ const RegistroNuevoTicket = () => {
   const [dataModulo, setDataModulo] = useState([]);
   const [dataProfesion, setDataProfesion] = useState([]);
   const [dataTipoDocumento, setDataTipoDocumento] = useState([]);
+  const [dataRoles, setDataRoles] = useState([]);
+  const [dataUpa, setDataUpa] = useState([]);
+  const [dataTipoTicket, setDataTipoTicket] = useState([]);
+  const [dataEstadoTicket, setDataEstadoTicket] = useState([]);
 
   const validarCampo = (campo, expresion) => expresion.test(campo);
 
@@ -78,11 +86,59 @@ const RegistroNuevoTicket = () => {
       toast.error("Error al cargar los datos");
     }
   };
+  const ObtenerDatosEstadoTicket = async () => {
+    try {
+      const respuesta = await ServicioEstadoTicket.ListarEstadoTickets();
+      if (respuesta.respuesta === 1) {
+        setDataEstadoTicket(respuesta.listaEstadoTikets);
+      } else {
+        toast.error("Error al cargar los datos");
+      }
+    } catch (error) {
+      toast.error("Error al cargar los datos");
+    }
+  };
+  const ObtenerDatosTipoTicket = async () => {
+    try {
+      const respuesta = await ServicioTipoTicket.ListarTipoTicket();
+      if (respuesta.respuesta === 1) {
+        setDataTipoTicket(respuesta.listaTipoTicket);
+      } else {
+        toast.error("Error al cargar los datos");
+      }
+    } catch (error) {
+      toast.error("Error al cargar los datos");
+    }
+  };
   const ObtenerDatosTipoDoc = async () => {
     try {
       const respuesta = await servicioTipoDocumento.ListarDocumentos();
       if (respuesta.respuesta === 1) {
         setDataTipoDocumento(respuesta.listaDocumentos);
+      } else {
+        toast.error("Error al cargar los datos");
+      }
+    } catch (error) {
+      toast.error("Error al cargar los datos");
+    }
+  };
+  const ObtenerDatosUpa = async () => {
+    try {
+      const respuesta = await ServicioUpa.ListarUpas();
+      if (respuesta.respuesta === 1) {
+        setDataUpa(respuesta.listaUpas);
+      } else {
+        toast.error("Error al cargar los datos");
+      }
+    } catch (error) {
+      toast.error("Error al cargar los datos");
+    }
+  };
+  const ObtenerDatosRoles = async () => {
+    try {
+      const respuesta = await ServicioRoles.ListarRoles();
+      if (respuesta.respuesta === 1) {
+        setDataRoles(respuesta.listaRoles);
       } else {
         toast.error("Error al cargar los datos");
       }
@@ -107,11 +163,39 @@ const RegistroNuevoTicket = () => {
     ObtenerDatosModulo();
     ObtenerDatosProfesion();
     ObtenerDatosTipoDoc();
+    ObtenerDatosRoles();
+    ObtenerDatosUpa();
+    ObtenerDatosTipoTicket();
+    ObtenerDatosEstadoTicket();
   }, []);
 
   const DatosTipoDoc = dataTipoDocumento.map((estado) => ({
     campo: estado.mTdocId,
     label: estado.mTdocTipoDocumento,
+    valido: null,
+  }));
+
+  const DatosEstadoTicket = dataEstadoTicket.map((estado) => ({
+    campo: estado.etdTkId,
+    label: estado.etdTkEstadoTicket,
+    valido: null,
+  }));
+
+  const DatosTipoTicket = dataTipoTicket.map((estado) => ({
+    campo: estado.mtIdTipoTicKets,
+    label: estado.mtTipoTicKets,
+    valido: null,
+  }));
+
+  const DatosUpa = dataUpa.map((estado) => ({
+    campo: estado.mlUpsId,
+    label: estado.mlUpsNombre,
+    valido: null,
+  }));
+
+  const DatosRoles = dataRoles.map((estado) => ({
+    campo: estado.mRolId,
+    label: estado.mRolNombre,
     valido: null,
   }));
 
@@ -141,7 +225,6 @@ const RegistroNuevoTicket = () => {
       TIdProfesion: profesion.campo,
       TIdRol: rol.campo,
       TIdUpa: upa.campo,
-      TUsuarioSolicitante: usuarioSolicitante.campo,
       TIdTipoTickets: tipoTicket.campo,
       TIdEstadoTicket: estadoTicket.campo,
       TSoporteTicket: soporteTicket.campo,
@@ -191,7 +274,7 @@ const RegistroNuevoTicket = () => {
   return (
     <main className="max-w-4xl w-11/12 m-auto p-10">
       <p className="flex justify-center text-bold text-center font-bold mb-11 text-green-700 text-7xl dark:text-green-500">
-        Registro de Nuevo Ticket
+        Nuevo Ticket
       </p>
       <form
         onSubmit={handleSubmit}
@@ -268,7 +351,7 @@ const RegistroNuevoTicket = () => {
           type="date"
           name="fechaNacimiento"
           errorMsm="Este campo es requerido"
-          expRegular={() => true}
+          expRegular={expresiones.fecha}
           icon={<Calendar className={`${fechaNacimiento.valido === "true" ? "opacity-100 text-exito" : fechaNacimiento.valido === "false" ? "opacity-100 text-error" : fechaNacimiento.valido === null ? "opacity-100 text-green-800 dark:text-green-600" : ""}`}/>}
           className="col-span-1 sm:col-span-2"
         />
@@ -296,30 +379,24 @@ const RegistroNuevoTicket = () => {
           icon={<List className={`${profesion.valido === "true" ? "opacity-100 text-exito" : profesion.valido === "false" ? "opacity-100 text-error" : profesion.valido === null ? "opacity-100 text-green-800 dark:text-green-600" : ""}`}/>}
           className="col-span-1"
         />
-        <InputRegistros
+        <SeleccionConValidacion
+          label="Rol"
+          name="roles"
+          errorMsm="Este campo es requerido"
           estado={rol}
           cambiarEstado={cambiarRol}
-          label="Rol"
-          placeholder="Administrador"
-          id="rol"
-          type="text"
-          name="rol"
-          errorMsm="Este campo es requerido"
-          expRegular={() => true}
-          icon={<Shield className={`${rol.valido === "true" ? "opacity-100 text-exito" : rol.valido === "false" ? "opacity-100 text-error" : rol.valido === null ? "opacity-100 text-green-800 dark:text-green-600" : ""}`}/>}
+          opciones={DatosRoles}
+          icon={<ShieldAlertIcon className={`${tipoTicket.valido === "true" ? "opacity-100 text-exito" : tipoTicket.valido === "false" ? "opacity-100 text-error" : tipoTicket.valido === null ? "opacity-100 text-green-800 dark:text-green-600" : ""}`}/>}
           className="col-span-1"
         />
-        <InputRegistros
-          estado={upa}
-          cambiarEstado={cambiarUpa}
+        <SeleccionConValidacion
           label="UPA"
-          placeholder="UPA 1"
-          id="upa"
-          type="text"
           name="upa"
           errorMsm="Este campo es requerido"
-          expRegular={() => true}
-          icon={<Building className={`${upa.valido === "true" ? "opacity-100 text-exito" : upa.valido === "false" ? "opacity-100 text-error" : upa.valido === null ? "opacity-100 text-green-800 dark:text-green-600" : ""}`}/>}
+          estado={upa}
+          cambiarEstado={cambiarUpa}
+          opciones={DatosUpa}
+          icon={<Building className={`${tipoTicket.valido === "true" ? "opacity-100 text-exito" : tipoTicket.valido === "false" ? "opacity-100 text-error" : tipoTicket.valido === null ? "opacity-100 text-green-800 dark:text-green-600" : ""}`}/>}
           className="col-span-1"
         />
         <SeleccionConValidacion
@@ -328,7 +405,7 @@ const RegistroNuevoTicket = () => {
           errorMsm="Este campo es requerido"
           estado={tipoTicket}
           cambiarEstado={cambiarTipoTicket}
-          opciones={opcionesTipoTicket}
+          opciones={DatosTipoTicket}
           icon={<List className={`${tipoTicket.valido === "true" ? "opacity-100 text-exito" : tipoTicket.valido === "false" ? "opacity-100 text-error" : tipoTicket.valido === null ? "opacity-100 text-green-800 dark:text-green-600" : ""}`}/>}
           className="col-span-1"
         />
@@ -338,20 +415,20 @@ const RegistroNuevoTicket = () => {
           errorMsm="Este campo es requerido"
           estado={estadoTicket}
           cambiarEstado={cambiarEstadoTicket}
-          opciones={opcionesEstado}
+          opciones={DatosEstadoTicket}
           icon={<List className={`${estadoTicket.valido === "true" ? "opacity-100 text-exito" : estadoTicket.valido === "false" ? "opacity-100 text-error" : estadoTicket.valido === null ? "opacity-100 text-green-800 dark:text-green-600" : ""}`}/>}
           className="col-span-1"
         />
         <InputRegistros
           estado={soporteTicket}
           cambiarEstado={cambiarSoporteTicket}
-          label="Soporte del Ticket"
-          placeholder="Detalles del soporte"
+          label="Detalles Relevantes"
+          placeholder="Problema en X sección del aplicativo."
           id="soporteTicket"
           type="text"
           name="soporteTicket"
           errorMsm="Este campo es requerido"
-          expRegular={() => true}
+          expRegular={expresiones.descripcion}
           icon={<FileText className={`${soporteTicket.valido === "true" ? "opacity-100 text-exito" : soporteTicket.valido === "false" ? "opacity-100 text-error" : soporteTicket.valido === null ? "opacity-100 text-green-800 dark:text-green-600" : ""}`}/>}
           className="col-span-1 sm:col-span-2"
         />
@@ -359,7 +436,7 @@ const RegistroNuevoTicket = () => {
           estado={descripcion}
           cambiarEstado={cambiarDescripcion}
           label="Descripción"
-          placeholder="Descripción del ticket"
+          placeholder="Describa su solicitud aquí."
           id="descripcion"
           type="text"
           name="descripcion"
