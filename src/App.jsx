@@ -447,10 +447,7 @@ const router = createBrowserRouter([
 const App = () => {
   return (
     <div className="bg-gray-100 dark:bg-neutral-900 font-sans">
-      {/* Mantén el Toaster fuera de las rutas para que esté presente en todas las páginas */}
       <ToasterWrapper richColors closeButton />
-
-      {/* Envuelve las rutas en RouterProvider */}
       <RouterProvider router={router}>
         {/* Define tus rutas aquí... */}
       </RouterProvider>

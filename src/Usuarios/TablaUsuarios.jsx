@@ -10,7 +10,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Button } from "@/components/ui/Button";
-import { Toaster, toast } from "sonner";
+import { toast } from "sonner";
 import ServiciosUsuario from "./ServiciosRegUsuario";
 
 const Badge = ({ status }) => {
@@ -30,12 +30,12 @@ const Badge = ({ status }) => {
 };
 
 const TablaUsuarios = () => {
-  const servicioUsuaio = new ServiciosUsuario();
+  const servicioUsuario = new ServiciosUsuario();
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
 
   const ObtenerDatosTabla = async () => {
-    const respuesta = await servicioUsuaio.ListarUsuarios();
+    const respuesta = await servicioUsuario.ListarUsuarios();
     if (respuesta.respuesta === 1) {
       setData(respuesta.listaUsuarios);
     } else {

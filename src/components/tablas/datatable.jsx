@@ -95,26 +95,26 @@ const DataTable = ({ data, columns, footer }) => {
           value={globalFilter}
           onChange={(e) => setGlobalFilter(e.target.value)}
           placeholder="Buscar..."
-          className="mb-4 w-1/3 mr-4"
+          className="mb-4 w-1/3 mr-4 dark:bg-neutral-800 dark:text-neutral-300"
         />
         <div className="relative" ref={menuRef}>
           <button
             onClick={() => setExportType(exportType ? null : "options")}
-            className="px-4 py-2 bg-green-700 text-white rounded hover:bg-green-800"
+            className="px-4 py-2 bg-green-700 text-white rounded hover:bg-green-800 dark:bg-neutral-700 dark:hover:bg-neutral-800"
           >
             <FileDown />
           </button>
           {exportType === "options" && (
-            <div className="absolute top-full right-0 bg-white border border-gray-200 shadow-lg rounded-md p-2 space-y-2 z-10">
+            <div className="absolute top-full right-0 bg-white dark:bg-neutral-800 border border-gray-200 dark:border-neutral-700 shadow-lg rounded-md p-2 space-y-2 z-10">
               <button
                 onClick={() => handleExport("excel")}
-                className="flex items-center space-x-2 text-gray-800 hover:bg-gray-100 rounded-md pr-2 py-1"
+                className="flex items-center space-x-2 text-gray-800 dark:text-neutral-300 hover:bg-gray-100 dark:hover:bg-neutral-700 rounded-md pr-2 py-1"
               >
                 <Sheet className="m-2" /> Excel
               </button>
               <button
                 onClick={() => handleExport("pdf")}
-                className="flex items-center space-x-2 text-gray-800 hover:bg-gray-100 rounded-md pr-2 py-1"
+                className="flex items-center space-x-2 text-gray-800 dark:text-neutral-300 hover:bg-gray-100 dark:hover:bg-neutral-700 rounded-md pr-2 py-1"
               >
                 <FileText className="m-2" /> PDF
               </button>
@@ -122,14 +122,19 @@ const DataTable = ({ data, columns, footer }) => {
           )}
         </div>
       </div>
-      <div className="bg-white border-[1px] rounded-md border-neutral-300">
+      <div className="bg-white dark:bg-neutral-800 border-[1px] rounded-md border-neutral-300 dark:border-neutral-700">
         <Table>
-          <TableCaption>{footer}</TableCaption>
+          <TableCaption className="dark:text-neutral-400">
+            {footer}
+          </TableCaption>
           <TableHeader>
             {table.getHeaderGroups().map((headerGroup) => (
-              <TableRow key={headerGroup.id}>
+              <TableRow key={headerGroup.id} className="dark:bg-neutral-700">
                 {headerGroup.headers.map((header) => (
-                  <TableHead key={header.id} className="text-center">
+                  <TableHead
+                    key={header.id}
+                    className="text-center dark:text-neutral-300"
+                  >
                     {flexRender(
                       header.column.columnDef.header,
                       header.getContext()
@@ -142,9 +147,9 @@ const DataTable = ({ data, columns, footer }) => {
           <TableBody>
             {table.getRowModel().rows.length ? (
               table.getRowModel().rows.map((row) => (
-                <TableRow key={row.id}>
+                <TableRow key={row.id} className="dark:bg-neutral-700">
                   {row.getVisibleCells().map((cell) => (
-                    <TableCell key={cell.id}>
+                    <TableCell key={cell.id} className="dark:text-neutral-300">
                       {flexRender(
                         cell.column.columnDef.cell,
                         cell.getContext()
@@ -154,8 +159,11 @@ const DataTable = ({ data, columns, footer }) => {
                 </TableRow>
               ))
             ) : (
-              <TableRow>
-                <TableCell colSpan={columns.length} className="text-center">
+              <TableRow className="dark:bg-neutral-700">
+                <TableCell
+                  colSpan={columns.length}
+                  className="text-center dark:text-neutral-300"
+                >
                   No se encuentra información.
                 </TableCell>
               </TableRow>
