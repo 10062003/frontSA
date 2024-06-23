@@ -39,6 +39,7 @@ import TablaRoles from "./Roles/TablaRoles";
 import TablaUsuarioActividades from "./Actividades/Actividades por Usuario/TablaUsuarioActividades";
 import TablaEstadoTickets from "./Tickets/EstadosTicket/TablaEstadosTicket";
 import TablaUsuarios from "./Usuarios/TablaUsuarios";
+import RegistroNuevoTicket from "./Tickets/CrearTickets/RegistroNuevoTicket";
 
 const router = createBrowserRouter([
   {
@@ -216,6 +217,19 @@ const router = createBrowserRouter([
         <div className="flex flex-col flex-1 overflow-y-auto">
           <div className="flex flex-col flex-1 items-center justify-center p-4">
             <TicketsInicio />
+          </div>
+        </div>
+      </div>
+    ),
+  },
+  {
+    path: "RegistroNuevoTicket",
+    element: (
+      <div className="flex h-screen">
+        <MostrarSideBar />
+        <div className="flex flex-col flex-1 overflow-y-auto">
+          <div className="flex flex-col flex-1 items-center justify-center p-4">
+            <RegistroNuevoTicket />
           </div>
         </div>
       </div>

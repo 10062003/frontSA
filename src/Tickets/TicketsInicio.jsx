@@ -1,8 +1,10 @@
+import React from "react";
 import { useNavigate } from "react-router-dom";
 import CardGeneral from "../components/ui/CardGeneral";
 
 const TicketsInicio = () => {
   const navigate = useNavigate();
+
   const ButtonRegistroTickets = () => {
     navigate("/RegistroTickets");
   };
@@ -12,7 +14,7 @@ const TicketsInicio = () => {
   };
 
   const ButtonCrearTicket = () => {
-    navigate("/RegistroTickets");
+    navigate("/RegistroNuevoTicket");
   };
 
   const ButtonConsultarTickets = () => {
@@ -44,7 +46,7 @@ const TicketsInicio = () => {
         <CardGeneral
           title="Estados de tickets"
           description={
-            "Aquí podrás registrar un nuevo tipo de ticket y listar los ya existentes."
+            "Aquí podrás registrar un nuevo estado de ticket y listar los ya existentes."
           }
           toFrist={"/Inicio"}
           onClickOne={ButtonRegistroEstadoTickets}
@@ -55,7 +57,7 @@ const TicketsInicio = () => {
         <CardGeneral
           title="Tickets"
           description={
-            "Aquí podrás generar un nuevo ticket y dar seguimiento a tu solicitud   ."
+            "Aquí podrás generar un nuevo ticket y dar seguimiento a tu solicitud."
           }
           toFrist={"/Inicio"}
           onClickOne={ButtonCrearTicket}
@@ -65,4 +67,5 @@ const TicketsInicio = () => {
     </div>
   );
 };
+
 export default TicketsInicio;
