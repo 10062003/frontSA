@@ -239,7 +239,7 @@ const TablaUsuarios = () => {
     <section className="py-10">
       <div className="container">
         <h1 className="mb-10 text-5xl font-bold text-green-700">
-          Listado de estado de tickets
+          Listado de usuarios
         </h1>
         <DataTable
           data={data}
