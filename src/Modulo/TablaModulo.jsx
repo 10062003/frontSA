@@ -10,7 +10,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Button } from "@/components/ui/Button";
-import { Toaster, toast } from "sonner";
+import { toast } from "sonner";
 import ServiciosModulo from "./ServiciosModulo";
 
 const Badge = ({ status }) => {

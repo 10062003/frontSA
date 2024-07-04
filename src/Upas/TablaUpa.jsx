@@ -11,7 +11,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import ServiciosUpa from "./ServiciosUpa";
 import { Button } from "@/components/ui/Button";
-import { Toaster, toast } from "sonner";
+import { toast } from "sonner";
 
 const Badge = ({ status }) => {
   const isActive = status === "Activado";

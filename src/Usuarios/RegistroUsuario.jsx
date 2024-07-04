@@ -15,7 +15,7 @@ import {
   User,
 } from "lucide-react";
 import ButtonBasic from "../components/ui/ButtonBasic";
-import { Toaster, toast } from "sonner";
+import { toast } from "sonner";
 import SeleccionConValidacion from "../components/ui/SeleccionConValidacion";
 import ServiciosUsuario from "./ServiciosRegUsuario";
 import ServiciosEstados from "../Estados/ServicioEstados";
@@ -496,7 +496,6 @@ const RegistroUsuario = () => {
           </ButtonBasic>
         </div>
       </form>
-      <Toaster richColors closeButton />
     </main>
   );
 };

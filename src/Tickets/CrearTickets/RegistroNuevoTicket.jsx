@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Toaster, toast } from "sonner";
+import { toast } from "sonner";
 import ButtonBasic from "../../components/ui/ButtonBasic";
 import InputRegistros from "../../components/ui/InputRegistros";
 import SeleccionConValidacion from "../../components/ui/SeleccionConValidacion";
@@ -53,17 +53,35 @@ const RegistroNuevoTicket = () => {
   const [nombre, cambiarNombre] = useState({ campo: "", valido: null });
   const [apellido, cambiarApellido] = useState({ campo: "", valido: null });
   const [correo, cambiarCorreo] = useState({ campo: "", valido: null });
-  const [tipoDocumento, cambiarTipoDocumento] = useState({ campo: "", valido: null });
-  const [numeroDocumento, cambiarNumeroDocumento] = useState({ campo: "", valido: null });
-  const [fechaNacimiento, cambiarFechaNacimiento] = useState({ campo: "", valido: null });
+  const [tipoDocumento, cambiarTipoDocumento] = useState({
+    campo: "",
+    valido: null,
+  });
+  const [numeroDocumento, cambiarNumeroDocumento] = useState({
+    campo: "",
+    valido: null,
+  });
+  const [fechaNacimiento, cambiarFechaNacimiento] = useState({
+    campo: "",
+    valido: null,
+  });
   const [modulo, cambiarModulo] = useState({ campo: "", valido: null });
   const [profesion, cambiarProfesion] = useState({ campo: "", valido: null });
   const [rol, cambiarRol] = useState({ campo: "", valido: null });
   const [upa, cambiarUpa] = useState({ campo: "", valido: null });
   const [tipoTicket, cambiarTipoTicket] = useState({ campo: "", valido: null });
-  const [estadoTicket, cambiarEstadoTicket] = useState({ campo: "", valido: null });
-  const [soporteTicket, cambiarSoporteTicket] = useState({ campo: "", valido: null });
-  const [descripcion, cambiarDescripcion] = useState({ campo: "", valido: null });
+  const [estadoTicket, cambiarEstadoTicket] = useState({
+    campo: "",
+    valido: null,
+  });
+  const [soporteTicket, cambiarSoporteTicket] = useState({
+    campo: "",
+    valido: null,
+  });
+  const [descripcion, cambiarDescripcion] = useState({
+    campo: "",
+    valido: null,
+  });
   const [dataModulo, setDataModulo] = useState([]);
   const [dataProfesion, setDataProfesion] = useState([]);
   const [dataTipoDocumento, setDataTipoDocumento] = useState([]);
@@ -290,7 +308,11 @@ const RegistroNuevoTicket = () => {
           name="nombre"
           errorMsm="El nombre no debe contener números y máximo 30 caracteres"
           expRegular={expresiones.nombre}
-          icon={<User className={`${nombre.valido === "true" ? "opacity-100 text-exito" : nombre.valido === "false" ? "opacity-100 text-error" : nombre.valido === null ? "opacity-100 text-green-800 dark:text-green-600" : ""}`}/>}
+          icon={
+            <User
+              className={`${nombre.valido === "true" ? "opacity-100 text-exito" : nombre.valido === "false" ? "opacity-100 text-error" : nombre.valido === null ? "opacity-100 text-green-800 dark:text-green-600" : ""}`}
+            />
+          }
           className="col-span-1"
         />
         <InputRegistros
@@ -303,7 +325,11 @@ const RegistroNuevoTicket = () => {
           name="apellido"
           errorMsm="El apellido no debe contener números y máximo 30 caracteres"
           expRegular={expresiones.nombre}
-          icon={<User className={`${apellido.valido === "true" ? "opacity-100 text-exito" : apellido.valido === "false" ? "opacity-100 text-error" : apellido.valido === null ? "opacity-100 text-green-800 dark:text-green-600" : ""}`} />}
+          icon={
+            <User
+              className={`${apellido.valido === "true" ? "opacity-100 text-exito" : apellido.valido === "false" ? "opacity-100 text-error" : apellido.valido === null ? "opacity-100 text-green-800 dark:text-green-600" : ""}`}
+            />
+          }
           className="col-span-1"
         />
         <InputRegistros
@@ -316,7 +342,11 @@ const RegistroNuevoTicket = () => {
           name="correo"
           errorMsm="Debe ser un correo válido"
           expRegular={expresiones.correo}
-          icon={<Mail className={`${correo.valido === "true" ? "opacity-100 text-exito" : correo.valido === "false" ? "opacity-100 text-error" : correo.valido === null ? "opacity-100 text-green-800 dark:text-green-600" : ""}`}/>}
+          icon={
+            <Mail
+              className={`${correo.valido === "true" ? "opacity-100 text-exito" : correo.valido === "false" ? "opacity-100 text-error" : correo.valido === null ? "opacity-100 text-green-800 dark:text-green-600" : ""}`}
+            />
+          }
           className="col-span-1 sm:col-span-2"
         />
         <SeleccionConValidacion
@@ -326,7 +356,11 @@ const RegistroNuevoTicket = () => {
           estado={tipoDocumento}
           cambiarEstado={cambiarTipoDocumento}
           opciones={DatosTipoDoc}
-          icon={<ScanEye className={`${tipoDocumento.valido === "true" ? "opacity-100 text-exito" : tipoDocumento.valido === "false" ? "opacity-100 text-error" : tipoDocumento.valido === null ? "opacity-100 text-green-800 dark:text-green-600" : ""}`}/>}
+          icon={
+            <ScanEye
+              className={`${tipoDocumento.valido === "true" ? "opacity-100 text-exito" : tipoDocumento.valido === "false" ? "opacity-100 text-error" : tipoDocumento.valido === null ? "opacity-100 text-green-800 dark:text-green-600" : ""}`}
+            />
+          }
           className="col-span-1"
         />
         <InputRegistros
@@ -339,7 +373,11 @@ const RegistroNuevoTicket = () => {
           name="numeroDocumento"
           errorMsm="El número de documento debe tener entre 8 y 15 dígitos"
           expRegular={expresiones.numeroDocumento}
-          icon={<Fingerprint className={`${numeroDocumento.valido === "true" ? "opacity-100 text-exito" : numeroDocumento.valido === "false" ? "opacity-100 text-error" : numeroDocumento.valido === null ? "opacity-100 text-green-800 dark:text-green-600" : ""}`}/>}
+          icon={
+            <Fingerprint
+              className={`${numeroDocumento.valido === "true" ? "opacity-100 text-exito" : numeroDocumento.valido === "false" ? "opacity-100 text-error" : numeroDocumento.valido === null ? "opacity-100 text-green-800 dark:text-green-600" : ""}`}
+            />
+          }
           className="col-span-1"
         />
         <InputRegistros
@@ -352,7 +390,11 @@ const RegistroNuevoTicket = () => {
           name="fechaNacimiento"
           errorMsm="Este campo es requerido"
           expRegular={expresiones.fecha}
-          icon={<Calendar className={`${fechaNacimiento.valido === "true" ? "opacity-100 text-exito" : fechaNacimiento.valido === "false" ? "opacity-100 text-error" : fechaNacimiento.valido === null ? "opacity-100 text-green-800 dark:text-green-600" : ""}`}/>}
+          icon={
+            <Calendar
+              className={`${fechaNacimiento.valido === "true" ? "opacity-100 text-exito" : fechaNacimiento.valido === "false" ? "opacity-100 text-error" : fechaNacimiento.valido === null ? "opacity-100 text-green-800 dark:text-green-600" : ""}`}
+            />
+          }
           className="col-span-1 sm:col-span-2"
         />
         <SeleccionConValidacion
@@ -364,7 +406,11 @@ const RegistroNuevoTicket = () => {
           errorMsm="Este campo es requerido"
           cambiarEstado={cambiarModulo}
           opciones={DatosModulo}
-          icon={<List className={`${modulo.valido === "true" ? "opacity-100 text-exito" : modulo.valido === "false" ? "opacity-100 text-error" : modulo.valido === null ? "opacity-100 text-green-800 dark:text-green-600" : ""}`}/>}
+          icon={
+            <List
+              className={`${modulo.valido === "true" ? "opacity-100 text-exito" : modulo.valido === "false" ? "opacity-100 text-error" : modulo.valido === null ? "opacity-100 text-green-800 dark:text-green-600" : ""}`}
+            />
+          }
           className="col-span-1"
         />
         <SeleccionConValidacion
@@ -376,7 +422,11 @@ const RegistroNuevoTicket = () => {
           errorMsm="Este campo es requerido"
           cambiarEstado={cambiarProfesion}
           opciones={DatosProfesion}
-          icon={<List className={`${profesion.valido === "true" ? "opacity-100 text-exito" : profesion.valido === "false" ? "opacity-100 text-error" : profesion.valido === null ? "opacity-100 text-green-800 dark:text-green-600" : ""}`}/>}
+          icon={
+            <List
+              className={`${profesion.valido === "true" ? "opacity-100 text-exito" : profesion.valido === "false" ? "opacity-100 text-error" : profesion.valido === null ? "opacity-100 text-green-800 dark:text-green-600" : ""}`}
+            />
+          }
           className="col-span-1"
         />
         <SeleccionConValidacion
@@ -386,7 +436,11 @@ const RegistroNuevoTicket = () => {
           estado={rol}
           cambiarEstado={cambiarRol}
           opciones={DatosRoles}
-          icon={<ShieldAlertIcon className={`${tipoTicket.valido === "true" ? "opacity-100 text-exito" : tipoTicket.valido === "false" ? "opacity-100 text-error" : tipoTicket.valido === null ? "opacity-100 text-green-800 dark:text-green-600" : ""}`}/>}
+          icon={
+            <ShieldAlertIcon
+              className={`${tipoTicket.valido === "true" ? "opacity-100 text-exito" : tipoTicket.valido === "false" ? "opacity-100 text-error" : tipoTicket.valido === null ? "opacity-100 text-green-800 dark:text-green-600" : ""}`}
+            />
+          }
           className="col-span-1"
         />
         <SeleccionConValidacion
@@ -396,7 +450,11 @@ const RegistroNuevoTicket = () => {
           estado={upa}
           cambiarEstado={cambiarUpa}
           opciones={DatosUpa}
-          icon={<Building className={`${tipoTicket.valido === "true" ? "opacity-100 text-exito" : tipoTicket.valido === "false" ? "opacity-100 text-error" : tipoTicket.valido === null ? "opacity-100 text-green-800 dark:text-green-600" : ""}`}/>}
+          icon={
+            <Building
+              className={`${tipoTicket.valido === "true" ? "opacity-100 text-exito" : tipoTicket.valido === "false" ? "opacity-100 text-error" : tipoTicket.valido === null ? "opacity-100 text-green-800 dark:text-green-600" : ""}`}
+            />
+          }
           className="col-span-1"
         />
         <SeleccionConValidacion
@@ -406,7 +464,11 @@ const RegistroNuevoTicket = () => {
           estado={tipoTicket}
           cambiarEstado={cambiarTipoTicket}
           opciones={DatosTipoTicket}
-          icon={<List className={`${tipoTicket.valido === "true" ? "opacity-100 text-exito" : tipoTicket.valido === "false" ? "opacity-100 text-error" : tipoTicket.valido === null ? "opacity-100 text-green-800 dark:text-green-600" : ""}`}/>}
+          icon={
+            <List
+              className={`${tipoTicket.valido === "true" ? "opacity-100 text-exito" : tipoTicket.valido === "false" ? "opacity-100 text-error" : tipoTicket.valido === null ? "opacity-100 text-green-800 dark:text-green-600" : ""}`}
+            />
+          }
           className="col-span-1"
         />
         <SeleccionConValidacion
@@ -416,7 +478,11 @@ const RegistroNuevoTicket = () => {
           estado={estadoTicket}
           cambiarEstado={cambiarEstadoTicket}
           opciones={DatosEstadoTicket}
-          icon={<List className={`${estadoTicket.valido === "true" ? "opacity-100 text-exito" : estadoTicket.valido === "false" ? "opacity-100 text-error" : estadoTicket.valido === null ? "opacity-100 text-green-800 dark:text-green-600" : ""}`}/>}
+          icon={
+            <List
+              className={`${estadoTicket.valido === "true" ? "opacity-100 text-exito" : estadoTicket.valido === "false" ? "opacity-100 text-error" : estadoTicket.valido === null ? "opacity-100 text-green-800 dark:text-green-600" : ""}`}
+            />
+          }
           className="col-span-1"
         />
         <InputRegistros
@@ -429,7 +495,11 @@ const RegistroNuevoTicket = () => {
           name="soporteTicket"
           errorMsm="Este campo es requerido"
           expRegular={expresiones.descripcion}
-          icon={<FileText className={`${soporteTicket.valido === "true" ? "opacity-100 text-exito" : soporteTicket.valido === "false" ? "opacity-100 text-error" : soporteTicket.valido === null ? "opacity-100 text-green-800 dark:text-green-600" : ""}`}/>}
+          icon={
+            <FileText
+              className={`${soporteTicket.valido === "true" ? "opacity-100 text-exito" : soporteTicket.valido === "false" ? "opacity-100 text-error" : soporteTicket.valido === null ? "opacity-100 text-green-800 dark:text-green-600" : ""}`}
+            />
+          }
           className="col-span-1 sm:col-span-2"
         />
         <InputRegistros
@@ -442,7 +512,11 @@ const RegistroNuevoTicket = () => {
           name="descripcion"
           errorMsm="Máximo 250 caracteres"
           expRegular={expresiones.descripcion}
-          icon={<FileText className={`${descripcion.valido === "true" ? "opacity-100 text-exito" : descripcion.valido === "false" ? "opacity-100 text-error" : descripcion.valido === null ? "opacity-100 text-green-800 dark:text-green-600" : ""}`}/>}
+          icon={
+            <FileText
+              className={`${descripcion.valido === "true" ? "opacity-100 text-exito" : descripcion.valido === "false" ? "opacity-100 text-error" : descripcion.valido === null ? "opacity-100 text-green-800 dark:text-green-600" : ""}`}
+            />
+          }
           className="col-span-1 sm:col-span-2"
         />
 
@@ -453,7 +527,6 @@ const RegistroNuevoTicket = () => {
           />
         </div>
       </form>
-      <Toaster richColors closeButton />
     </main>
   );
 };

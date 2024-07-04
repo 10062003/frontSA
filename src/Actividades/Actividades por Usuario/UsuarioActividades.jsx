@@ -1,4 +1,4 @@
-import { Toaster, toast } from "sonner";
+import { toast } from "sonner";
 import ButtonBasic from "../../components/ui/ButtonBasic";
 import SeleccionConValidacion from "../../components/ui/SeleccionConValidacion";
 import { act, useState } from "react";
@@ -166,7 +166,6 @@ const UsuarioActividades = () => {
           />
         </div>
       </form>
-      <Toaster richColors closeButton />
     </main>
   );
 };

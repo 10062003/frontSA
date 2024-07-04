@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState } from "react";
 import DataTable from "../components/tablas/datatable";
 import { MoreHorizontal } from "lucide-react";
@@ -11,7 +10,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Button } from "@/components/ui/Button";
-import { Toaster, toast } from "sonner";
+import { toast } from "sonner";
 import ServiciosTickets from "./ServiciosTickets";
 
 const Badge = ({ status }) => {

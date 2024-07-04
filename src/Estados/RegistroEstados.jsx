@@ -1,4 +1,4 @@
-import { Toaster, toast } from "sonner";
+import { toast } from "sonner";
 import ButtonBasic from "../components/ui/ButtonBasic";
 import InputRegistros from "../components/ui/InputRegistros";
 import { useState } from "react";
@@ -81,7 +81,6 @@ const RegistroEstados = () => {
           />
         </div>
       </form>
-      <Toaster richColors closeButton />
     </main>
   );
 };

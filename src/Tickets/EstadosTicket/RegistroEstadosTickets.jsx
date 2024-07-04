@@ -1,4 +1,4 @@
-import { Toaster, toast } from "sonner";
+import { toast } from "sonner";
 import ButtonBasic from "../../components/ui/ButtonBasic";
 import InputRegistros from "../../components/ui/InputRegistros";
 import SeleccionConValidacion from "../../components/ui/SeleccionConValidacion";
@@ -132,7 +132,6 @@ const RegistroEstadosTickets = () => {
           />
         </div>
       </form>
-      <Toaster richColors closeButton />
     </main>
   );
 };

@@ -1,10 +1,16 @@
-import { Toaster, toast } from "sonner";
+import { toast } from "sonner";
 import ButtonBasic from "../components/ui/ButtonBasic";
 import InputRegistros from "../components/ui/InputRegistros";
 import SeleccionConValidacion from "../components/ui/SeleccionConValidacion";
 import ServiciosTickets from "./ServiciosTickets"; // Importar el servicio correcto
 import { useState } from "react";
-import { BookUser, BarChart3, TextCursorInput, Orbit, MessageSquareDiff } from "lucide-react";
+import {
+  BookUser,
+  BarChart3,
+  TextCursorInput,
+  Orbit,
+  MessageSquareDiff,
+} from "lucide-react";
 
 const RegistroTiposTickets = () => {
   const servicioTicket = new ServiciosTickets(); // Crear una instancia del servicio correcto
@@ -33,7 +39,7 @@ const RegistroTiposTickets = () => {
 
     const ticket = {
       mtTipoTicKets: nombre.campo,
-      mtTipoIdEstado: estado.campo
+      mtTipoIdEstado: estado.campo,
     };
 
     if (validarCampo(nombre.campo, expresiones.nombre) && estado.campo) {
@@ -44,14 +50,19 @@ const RegistroTiposTickets = () => {
         if (respuesta && respuesta.respuesta === 1) {
           cambiarNombre({ campo: "", valido: null });
           cambiarEstado({ campo: "", valido: null });
-          toast.success("Tipo de ticket " + nombre.campo + " registrado correctamente", {
-            duration: 4000,
-          });
+          toast.success(
+            "Tipo de ticket " + nombre.campo + " registrado correctamente",
+            {
+              duration: 4000,
+            }
+          );
         } else {
           toast.error("Error al enviar el tipo de ticket, revise los campos");
         }
       } catch (error) {
-        toast.error("Error de servidor: no se pudo registrar el tipo de ticket");
+        toast.error(
+          "Error de servidor: no se pudo registrar el tipo de ticket"
+        );
         console.error("Error en el servidor:", error);
       }
     } else {
@@ -112,7 +123,6 @@ const RegistroTiposTickets = () => {
           />
         </div>
       </form>
-      <Toaster richColors closeButton />
     </main>
   );
 };
