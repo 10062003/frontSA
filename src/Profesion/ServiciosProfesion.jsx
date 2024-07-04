@@ -40,9 +40,9 @@ class ServiciosProfesion {
       mensaje: "",
       listaProfesiones: [],
     };
-
+  
     const Token = sessionStorage.getItem("Token");
-
+  
     try {
       const res = await Axios.get("/GetListarProfesion", {
         headers: {
@@ -53,13 +53,14 @@ class ServiciosProfesion {
       respuestaListaProfesiones.mensaje = "Operación Exitosa";
       respuestaListaProfesiones.listaProfesiones = res.data;
     } catch (err) {
+      console.error("Error al obtener las profesiones:", err); // Registra el error para depuración
       respuestaListaProfesiones.respuesta = 0;
-      respuestaListaProfesiones.mensaje =
-        "Error al listar las profesiones - " + err;
+      respuestaListaProfesiones.mensaje = "Error al listar las profesiones.";
     }
-
+  
     return respuestaListaProfesiones;
   };
+  
 }
 
 export default ServiciosProfesion;
