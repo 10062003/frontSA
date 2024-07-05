@@ -39,6 +39,7 @@ const Login = () => {
     if (captcha.current && captcha.current.getValue()) {
       const contrasena = sha512(tContrasenna).toString();
       const user = { tCorreoUsuario, tContrasenna: contrasena };
+      console.log(user);
 
       try {
         const respuesta = await servicioLogin.IniciarSesion(user);

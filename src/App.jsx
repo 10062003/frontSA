@@ -195,313 +195,409 @@ const router = createBrowserRouter([
   {
     path: "TablaUsuarios",
     element: (
-      <div className="flex h-screen">
-        <div className="flex-shrink-0">
-          <MostrarSideBar />
-        </div>
-        <div className="flex flex-1 flex-col overflow-y-auto p-4">
-          <TablaUsuarios />
-        </div>
-      </div>
+      <PrivateRoute
+        element={
+          <div className="flex h-screen">
+            <div className="flex-shrink-0">
+              <MostrarSideBar />
+            </div>
+            <div className="flex flex-1 flex-col overflow-y-auto p-4">
+              <TablaUsuarios />
+            </div>
+          </div>
+        }
+      />
     ),
   },
   {
     path: "Documentos",
     element: (
-      <div className="flex h-screen">
-        <MostrarSideBar />
-        <div className="flex flex-col flex-1 overflow-y-auto">
-          <div className="flex flex-col flex-1 items-center justify-center p-4">
-            <DocumentosInicio />
+      <PrivateRoute
+        element={
+          <div className="flex h-screen">
+            <MostrarSideBar />
+            <div className="flex flex-col flex-1 overflow-y-auto">
+              <div className="flex flex-col flex-1 items-center justify-center p-4">
+                <DocumentosInicio />
+              </div>
+            </div>
           </div>
-        </div>
-      </div>
+        }
+      />
     ),
   },
   {
     path: "RegistroDocumentos",
     element: (
-      <div className="flex h-screen">
-        <MostrarSideBar />
-        <div className="flex flex-col flex-1 overflow-y-auto">
-          <div className="flex flex-col flex-1 items-center justify-center p-4">
-            <RegistroDocumentos />
+      <PrivateRoute
+        element={
+          <div className="flex h-screen">
+            <MostrarSideBar />
+            <div className="flex flex-col flex-1 overflow-y-auto">
+              <div className="flex flex-col flex-1 items-center justify-center p-4">
+                <RegistroDocumentos />
+              </div>
+            </div>
           </div>
-        </div>
-      </div>
+        }
+      />
     ),
   },
   {
     path: "TablaDocumentos",
     element: (
-      <div className="flex h-screen">
-        <div className="flex-shrink-0">
-          <MostrarSideBar />
-        </div>
-        <div className="flex flex-1 flex-col overflow-y-auto p-4">
-          <TablaDocumentos />
-        </div>
-      </div>
+      <PrivateRoute
+        element={
+          <div className="flex h-screen">
+            <div className="flex-shrink-0">
+              <MostrarSideBar />
+            </div>
+            <div className="flex flex-1 flex-col overflow-y-auto p-4">
+              <TablaDocumentos />
+            </div>
+          </div>
+        }
+      />
     ),
   },
   {
     path: "Tickets",
     element: (
-      <div className="flex h-screen">
-        <MostrarSideBar />
-        <div className="flex flex-col flex-1 overflow-y-auto">
-          <div className="flex flex-col flex-1 items-center justify-center p-4">
-            <TicketsInicio />
+      <PrivateRoute
+        element={
+          <div className="flex h-screen">
+            <MostrarSideBar />
+            <div className="flex flex-col flex-1 overflow-y-auto">
+              <div className="flex flex-col flex-1 items-center justify-center p-4">
+                <TicketsInicio />
+              </div>
+            </div>
           </div>
-        </div>
-      </div>
+        }
+      />
     ),
   },
   {
     path: "RegistroNuevoTicket",
     element: (
-      <div className="flex h-screen">
-        <MostrarSideBar />
-        <div className="flex flex-col flex-1 overflow-y-auto">
-          <div className="flex flex-col flex-1 items-center justify-center p-4">
-            <RegistroNuevoTicket />
+      <PrivateRoute
+        element={
+          <div className="flex h-screen">
+            <MostrarSideBar />
+            <div className="flex flex-col flex-1 overflow-y-auto">
+              <div className="flex flex-col flex-1 items-center justify-center p-4">
+                <RegistroNuevoTicket />
+              </div>
+            </div>
           </div>
-        </div>
-      </div>
+        }
+      />
     ),
   },
   {
     path: "RegistroTickets",
     element: (
-      <div className="flex h-screen">
-        <MostrarSideBar />
-        <div className="flex flex-col flex-1 overflow-y-auto">
-          <div className="flex flex-col flex-1 items-center justify-center p-4">
-            <RegistroTiposTickets />
+      <PrivateRoute
+        element={
+          <div className="flex h-screen">
+            <MostrarSideBar />
+            <div className="flex flex-col flex-1 overflow-y-auto">
+              <div className="flex flex-col flex-1 items-center justify-center p-4">
+                <RegistroTiposTickets />
+              </div>
+            </div>
           </div>
-        </div>
-      </div>
+        }
+      />
     ),
   },
   {
     path: "TablaTipoTicket",
     element: (
-      <div className="flex h-screen">
-        <div className="flex-shrink-0">
-          <MostrarSideBar />
-        </div>
-        <div className="flex flex-1 flex-col overflow-y-auto p-4">
-          <TablaTipoTicket />
-        </div>
-      </div>
+      <PrivateRoute
+        element={
+          <div className="flex h-screen">
+            <div className="flex-shrink-0">
+              <MostrarSideBar />
+            </div>
+            <div className="flex flex-1 flex-col overflow-y-auto p-4">
+              <TablaTipoTicket />
+            </div>
+          </div>
+        }
+      />
     ),
   },
   {
     path: "RegistroEstadosTickets",
     element: (
-      <div className="flex h-screen">
-        <MostrarSideBar />
-        <div className="flex flex-col flex-1 overflow-y-auto">
-          <div className="flex flex-col flex-1 items-center justify-center p-4">
-            <RegistroEstadosTickets />
+      <PrivateRoute
+        element={
+          <div className="flex h-screen">
+            <MostrarSideBar />
+            <div className="flex flex-col flex-1 overflow-y-auto">
+              <div className="flex flex-col flex-1 items-center justify-center p-4">
+                <RegistroEstadosTickets />
+              </div>
+            </div>
           </div>
-        </div>
-      </div>
+        }
+      />
     ),
   },
   {
     path: "TablaEstadoTickets",
     element: (
-      <div className="flex h-screen">
-        <div className="flex-shrink-0">
-          <MostrarSideBar />
-        </div>
-        <div className="flex flex-1 flex-col overflow-y-auto p-4">
-          <TablaEstadoTickets />
-        </div>
-      </div>
+      <PrivateRoute
+        element={
+          <div className="flex h-screen">
+            <div className="flex-shrink-0">
+              <MostrarSideBar />
+            </div>
+            <div className="flex flex-1 flex-col overflow-y-auto p-4">
+              <TablaEstadoTickets />
+            </div>
+          </div>
+        }
+      />
     ),
   },
   {
     path: "Actividades",
     element: (
-      <div className="flex h-screen">
-        <MostrarSideBar />
-        <div className="flex flex-col flex-1 overflow-y-auto">
-          <div className="flex flex-col flex-1 items-center justify-center p-4">
-            <ActividadesInicio />
+      <PrivateRoute
+        element={
+          <div className="flex h-screen">
+            <MostrarSideBar />
+            <div className="flex flex-col flex-1 overflow-y-auto">
+              <div className="flex flex-col flex-1 items-center justify-center p-4">
+                <ActividadesInicio />
+              </div>
+            </div>
           </div>
-        </div>
-      </div>
+        }
+      />
     ),
   },
   {
     path: "RegistroActividades",
     element: (
-      <div className="flex h-screen">
-        <MostrarSideBar />
-        <div className="flex flex-col flex-1 overflow-y-auto">
-          <div className="flex flex-col flex-1 items-center justify-center p-4">
-            <RegistroActividad />
+      <PrivateRoute
+        element={
+          <div className="flex h-screen">
+            <MostrarSideBar />
+            <div className="flex flex-col flex-1 overflow-y-auto">
+              <div className="flex flex-col flex-1 items-center justify-center p-4">
+                <RegistroActividad />
+              </div>
+            </div>
           </div>
-        </div>
-      </div>
+        }
+      />
     ),
   },
   {
     path: "TablaActividades",
     element: (
-      <div className="flex h-screen">
-        <div className="flex-shrink-0">
-          <MostrarSideBar />
-        </div>
-        <div className="flex flex-1 flex-col overflow-y-auto p-4">
-          <TablaActividades />
-        </div>
-      </div>
+      <PrivateRoute
+        element={
+          <div className="flex h-screen">
+            <div className="flex-shrink-0">
+              <MostrarSideBar />
+            </div>
+            <div className="flex flex-1 flex-col overflow-y-auto p-4">
+              <TablaActividades />
+            </div>
+          </div>
+        }
+      />
     ),
   },
   {
     path: "RegistroUsuarioActividad",
     element: (
-      <div className="flex h-screen">
-        <MostrarSideBar />
-        <div className="flex flex-col flex-1 overflow-y-auto">
-          <div className="flex flex-col flex-1 items-center justify-center p-4">
-            <UsuarioActividades />
+      <PrivateRoute
+        element={
+          <div className="flex h-screen">
+            <MostrarSideBar />
+            <div className="flex flex-col flex-1 overflow-y-auto">
+              <div className="flex flex-col flex-1 items-center justify-center p-4">
+                <UsuarioActividades />
+              </div>
+            </div>
           </div>
-        </div>
-      </div>
+        }
+      />
     ),
   },
   {
     path: "TablaUsuarioActividades",
     element: (
-      <div className="flex h-screen">
-        <div className="flex-shrink-0">
-          <MostrarSideBar />
-        </div>
-        <div className="flex flex-1 flex-col overflow-y-auto p-4">
-          <TablaUsuarioActividades />
-        </div>
-      </div>
+      <PrivateRoute
+        element={
+          <div className="flex h-screen">
+            <div className="flex-shrink-0">
+              <MostrarSideBar />
+            </div>
+            <div className="flex flex-1 flex-col overflow-y-auto p-4">
+              <TablaUsuarioActividades />
+            </div>
+          </div>
+        }
+      />
     ),
   },
   {
     path: "Estados",
     element: (
-      <div className="flex h-screen">
-        <MostrarSideBar />
-        <div className="flex flex-col flex-1 overflow-y-auto">
-          <div className="flex flex-col flex-1 items-center justify-center p-4">
-            <EstadoInicio />
+      <PrivateRoute
+        element={
+          <div className="flex h-screen">
+            <MostrarSideBar />
+            <div className="flex flex-col flex-1 overflow-y-auto">
+              <div className="flex flex-col flex-1 items-center justify-center p-4">
+                <EstadoInicio />
+              </div>
+            </div>
           </div>
-        </div>
-      </div>
+        }
+      />
     ),
   },
   {
     path: "RegistroEstado",
     element: (
-      <div className="flex h-screen">
-        <MostrarSideBar />
-        <div className="flex flex-col flex-1 overflow-y-auto">
-          <div className="flex flex-col flex-1 items-center justify-center p-4">
-            <RegistroEstados />
+      <PrivateRoute
+        element={
+          <div className="flex h-screen">
+            <MostrarSideBar />
+            <div className="flex flex-col flex-1 overflow-y-auto">
+              <div className="flex flex-col flex-1 items-center justify-center p-4">
+                <RegistroEstados />
+              </div>
+            </div>
           </div>
-        </div>
-      </div>
+        }
+      />
     ),
   },
   {
     path: "ListarEstados",
     element: (
-      <div className="flex h-screen">
-        <div className="flex-shrink-0">
-          <MostrarSideBar />
-        </div>
-        <div className="flex flex-1 flex-col overflow-y-auto p-4">
-          <TablaEstados />
-        </div>
-      </div>
+      <PrivateRoute
+        element={
+          <div className="flex h-screen">
+            <div className="flex-shrink-0">
+              <MostrarSideBar />
+            </div>
+            <div className="flex flex-1 flex-col overflow-y-auto p-4">
+              <TablaEstados />
+            </div>
+          </div>
+        }
+      />
     ),
   },
   {
     path: "Modulos",
     element: (
-      <div className="flex h-screen">
-        <MostrarSideBar />
-        <div className="flex flex-col flex-1 overflow-y-auto">
-          <div className="flex flex-col flex-1 items-center justify-center p-4">
-            <ModuloInicio />
+      <PrivateRoute
+        element={
+          <div className="flex h-screen">
+            <MostrarSideBar />
+            <div className="flex flex-col flex-1 overflow-y-auto">
+              <div className="flex flex-col flex-1 items-center justify-center p-4">
+                <ModuloInicio />
+              </div>
+            </div>
           </div>
-        </div>
-      </div>
+        }
+      />
     ),
   },
   {
     path: "RegistroModulo",
     element: (
-      <div className="flex h-screen">
-        <MostrarSideBar />
-        <div className="flex flex-col flex-1 overflow-y-auto">
-          <div className="flex flex-col flex-1 items-center justify-center p-4">
-            <RegistroModulo />
+      <PrivateRoute
+        element={
+          <div className="flex h-screen">
+            <MostrarSideBar />
+            <div className="flex flex-col flex-1 overflow-y-auto">
+              <div className="flex flex-col flex-1 items-center justify-center p-4">
+                <RegistroModulo />
+              </div>
+            </div>
           </div>
-        </div>
-      </div>
+        }
+      />
     ),
   },
   {
     path: "TablaModulo",
     element: (
-      <div className="flex h-screen">
-        <div className="flex-shrink-0">
-          <MostrarSideBar />
-        </div>
-        <div className="flex flex-1 flex-col overflow-y-auto p-4">
-          <TablaModulo />
-        </div>
-      </div>
+      <PrivateRoute
+        element={
+          <div className="flex h-screen">
+            <div className="flex-shrink-0">
+              <MostrarSideBar />
+            </div>
+            <div className="flex flex-1 flex-col overflow-y-auto p-4">
+              <TablaModulo />
+            </div>
+          </div>
+        }
+      />
     ),
   },
   {
     path: "Profesiones",
     element: (
-      <div className="flex h-screen">
-        <MostrarSideBar />
-        <div className="flex flex-col flex-1 overflow-y-auto">
-          <div className="flex flex-col flex-1 items-center justify-center p-4">
-            <ProfesionInicio />
+      <PrivateRoute
+        element={
+          <div className="flex h-screen">
+            <MostrarSideBar />
+            <div className="flex flex-col flex-1 overflow-y-auto">
+              <div className="flex flex-col flex-1 items-center justify-center p-4">
+                <ProfesionInicio />
+              </div>
+            </div>
           </div>
-        </div>
-      </div>
+        }
+      />
     ),
   },
   {
     path: "RegistroProfesion",
     element: (
-      <div className="flex h-screen">
-        <MostrarSideBar />
-        <div className="flex flex-col flex-1 overflow-y-auto">
-          <div className="flex flex-col flex-1 items-center justify-center p-4">
-            <RegistroProfesion />
+      <PrivateRoute
+        element={
+          <div className="flex h-screen">
+            <MostrarSideBar />
+            <div className="flex flex-col flex-1 overflow-y-auto">
+              <div className="flex flex-col flex-1 items-center justify-center p-4">
+                <RegistroProfesion />
+              </div>
+            </div>
           </div>
-        </div>
-      </div>
+        }
+      />
     ),
   },
   {
     path: "TablaProfesiones",
     element: (
-      <div className="flex h-screen">
-        <div className="flex-shrink-0">
-          <MostrarSideBar />
-        </div>
-        <div className="flex flex-1 flex-col overflow-y-auto p-4">
-          <TablaProfesiones />
-        </div>
-      </div>
+      <PrivateRoute
+        element={
+          <div className="flex h-screen">
+            <div className="flex-shrink-0">
+              <MostrarSideBar />
+            </div>
+            <div className="flex flex-1 flex-col overflow-y-auto p-4">
+              <TablaProfesiones />
+            </div>
+          </div>
+        }
+      />
     ),
   },
 ]);

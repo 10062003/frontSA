@@ -1,67 +1,39 @@
-import { MoreVertical, ChevronLast, ChevronFirst, Cctv } from "lucide-react";
+import { MoreVertical, LogOut } from "lucide-react";
 import { useContext, createContext, useState } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import "./SideBar.css";
 
 const SidebarContext = createContext();
 
 export default function Sidebar({ children }) {
   const [expanded, setExpanded] = useState(false);
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    localStorage.removeItem("authToken");
+    localStorage.setItem(
+      "logoutMessage",
+      "Has cerrado sesión. Por favor, inicia sesión nuevamente."
+    );
+    navigate("/Login");
+  };
 
   return (
     <aside className="h-screen">
       <nav className="h-screen flex flex-col bg-slate-50 border-r-2 border-gray-300 shadow-sm dark:bg-neutral-950 dark:border-neutral-800">
         <div className="p-4 pb-2 flex items-center justify-center">
-          <div
-            className={`transition-all flex-grow ${expanded ? "mr-2 flex" : "w-0 overflow-hidden"}`}
+          <button
+            type="button"
+            onClick={handleLogout}
+            className="p-1.5 rounded-lg text-white bg-green-800 hover:bg-green-600 dark:hover:bg-gray-400 dark:text-black dark:bg-green-600"
           >
-            {expanded && (
-              <img
-                src="./public/imgs/logoa.png"
-                alt="description"
-                className="flex mr-3 w-28 h-auto items-center"
-              />
-            )}
-          </div>
-          <div className="flex justify-center">
-            <button
-              onClick={() => setExpanded((curr) => !curr)}
-              className="p-1.5 rounded-lg text-white bg-green-800 hover:bg-green-600 dark:hover:bg-gray-400 dark:text-black dark:bg-green-600"
-            >
-              {expanded ? (
-                <ChevronFirst className="dark:text-white" />
-              ) : (
-                <ChevronLast />
-              )}
-            </button>
-          </div>
+            <LogOut size={22} />
+          </button>
         </div>
 
         <SidebarContext.Provider value={{ expanded }}>
           <ul className="flex-1 px-3">{children}</ul>
         </SidebarContext.Provider>
-
-        <div className=" flex p-3 border-t-2 border-neutral-300 dark:border-neutral-800">
-          <img
-            src="./public/imgs/yo.png"
-            alt=""
-            className="w-10 h-14 rounded-md"
-          />
-          <div
-            className={`
-              flex justify-between items-center
-              overflow-hidden transition-all ${expanded ? "w-40 ml-3" : "w-0"}
-          `}
-          >
-            <div className="leading-4">
-              <h4 className="font-semibold dark:text-white">Kevin</h4>
-              <span className="text-xs text-gray-600 dark:text-white">
-                kholguin@udec.edu.com
-              </span>
-            </div>
-            <MoreVertical size={20} />
-          </div>
-        </div>
       </nav>
     </aside>
   );

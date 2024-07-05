@@ -4,16 +4,15 @@ import { LogOut } from "lucide-react";
 
 const NavBar = (props) => {
   const { title } = props;
-  const navigate = useNavigate();
 
-  const handleLogout = () => {
-    localStorage.removeItem("authToken");
-    localStorage.setItem(
-      "logoutMessage",
-      "Has cerrado sesión. Por favor, inicia sesión nuevamente."
-    );
-    navigate("/login");
-  };
+  // const handleLogout = () => {
+  //   localStorage.removeItem("authToken");
+  //   localStorage.setItem(
+  //     "logoutMessage",
+  //     "Has cerrado sesión. Por favor, inicia sesión nuevamente."
+  //   );
+  //   navigate("/Login");
+  // };
 
   return (
     <nav className="bg-slate-50 border-b-2 border-gray-300 dark:bg-neutral-950 w-full z-20">
@@ -30,7 +29,7 @@ const NavBar = (props) => {
             </li>
           </ul>
         </div>
-        <div className="flex items-center ml-auto">
+        {/* <div className="flex items-center ml-auto">
           <button
             type="button"
             onClick={handleLogout}
@@ -40,7 +39,7 @@ const NavBar = (props) => {
               <LogOut />
             </span>
           </button>
-        </div>
+        </div> */}
       </div>
     </nav>
   );

@@ -46,7 +46,7 @@ const RegistroUsuario = () => {
   const [nombre, cambiarNombre] = useState({ campo: "", valido: null });
   const [apellido, cambiarApellido] = useState({ campo: "", valido: null });
   const [correo, cambiarCorreo] = useState({ campo: "", valido: null });
-  const [contraseña, cambiarContraseña] = useState({ campo: "", valido: null });
+  // const [contraseña, cambiarContraseña] = useState({ campo: "", valido: null });
   const [tipoDocumento, cambiarTipoDocumento] = useState({
     campo: "",
     valido: null,
@@ -204,7 +204,7 @@ const RegistroUsuario = () => {
       usrNombre: nombre.campo,
       usrApellido: apellido.campo,
       usrCorreo: correo.campo,
-      usrContrasenna: contraseña.campo,
+      // usrContrasenna: contraseña.campo,
       usrIdTipoDocumento: tipoDocumento.campo,
       usrNumeroDocumento: numeroDocumento.campo,
       usrFechaNacimiento: fechaNacimiento.campo,
@@ -222,7 +222,7 @@ const RegistroUsuario = () => {
       validarCampo(nombre.campo, expresiones.nombre) &&
       validarCampo(apellido.campo, expresiones.apellido) &&
       validarCampo(correo.campo, expresiones.correo) &&
-      validarCampo(contraseña.campo, expresiones.contraseña) &&
+      // validarCampo(contraseña.campo, expresiones.contraseña) &&
       tipoDocumento.campo &&
       validarCampo(numeroDocumento.campo, expresiones.documento) &&
       validarCampo(fechaNacimiento.campo, expresiones.fecha) &&
@@ -240,7 +240,7 @@ const RegistroUsuario = () => {
           cambiarNombre({ campo: "", valido: null });
           cambiarApellido({ campo: "", valido: null });
           cambiarCorreo({ campo: "", valido: null });
-          cambiarContraseña({ campo: "", valido: null });
+          // cambiarContraseña({ campo: "", valido: null });
           cambiarTipoDocumento({ campo: "", valido: null });
           cambiarNumeroDocumento({ campo: "", valido: null });
           cambiarFechaNacimiento({ campo: "", valido: null });
@@ -250,7 +250,9 @@ const RegistroUsuario = () => {
           cambiarEstado({ campo: "", valido: null });
           cambiarUpa({ campo: "", valido: null });
           toast.success(
-            "Usuario " + nombre.campo + " registrado correctamente",
+            "Usuario " +
+              nombre.campo +
+              " Registrado correctamente, por favor revisar el correo para ver la contraseña temporal",
             {
               duration: 4000,
             }
@@ -335,7 +337,7 @@ const RegistroUsuario = () => {
         ></InputRegistros>
 
         {/* Input Contraseña */}
-        <InputRegistros
+        {/* <InputRegistros
           estado={contraseña}
           cambiarEstado={cambiarContraseña}
           label="Contraseña"
@@ -351,7 +353,7 @@ const RegistroUsuario = () => {
             />
           }
           className="col-span-1 sm:col-span-2"
-        ></InputRegistros>
+        ></InputRegistros> */}
 
         {/* Input Tipo de documento */}
         <SeleccionConValidacion
