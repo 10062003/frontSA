@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useState, useRef } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import sha512 from "crypto-js/sha512";
 import { toast } from "sonner";
@@ -10,22 +10,15 @@ import PassIcon from "./icons/PassIcon";
 import ReCAPTCHA from "react-google-recaptcha";
 import ServiciosLogin from "./ServiciosLogin";
 import { Cctv } from "lucide-react";
+import { Progress } from "../components/ui/progress"; // Asegúrate de importar tu componente de progreso
 
 const Login = () => {
   const servicioLogin = new ServiciosLogin();
   const [tCorreoUsuario, setCorreo] = useState("");
   const [tContrasenna, setContrasenna] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
   const captcha = useRef(null);
   const navigate = useNavigate();
-
-  useEffect(() => {
-    const token = localStorage.getItem("authToken");
-
-    // Si hay un token, redirigir automáticamente a la página de inicio
-    if (token) {
-      navigate("/Inicio");
-    }
-  }, [navigate]);
 
   const onChange = () => {
     if (captcha.current && captcha.current.getValue()) {
@@ -35,11 +28,12 @@ const Login = () => {
 
   const submit = async (e) => {
     e.preventDefault();
+    setIsLoading(true);
 
     if (captcha.current && captcha.current.getValue()) {
       const contrasena = sha512(tContrasenna).toString();
       const user = { tCorreoUsuario, tContrasenna: contrasena };
-      console.log(user);
+      //console.log(user);
 
       try {
         const respuesta = await servicioLogin.IniciarSesion(user);
@@ -55,14 +49,22 @@ const Login = () => {
       } catch (error) {
         console.error(error);
         toast.error("Ocurrió un error al iniciar sesión.");
+      } finally {
+        setIsLoading(false);
       }
     } else {
       toast.error("Por favor completa el captcha!");
+      setIsLoading(false);
     }
   };
 
   return (
     <div className="flex min-h-full h-screen flex-1 flex-col justify-center items-center px-6 py-12 lg:px-8 dark:bg-neutral-900">
+      {isLoading && (
+        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
+          <Progress className="w-2/3" value={100} />
+        </div>
+      )}
       <div className="sm:mx-auto sm:w-full sm:max-w-sm">
         <Cctv className="mx-auto h-12 w-auto dark:text-green-600 text-green-600" />
         <h2 className="mt-5 text-center text-4xl font-extrabold leading-9 tracking-tight text-green-600">

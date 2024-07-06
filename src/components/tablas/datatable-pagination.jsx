@@ -50,7 +50,7 @@ const DataTablePagination = ({ table }) => {
       <div className="flex items-center space-x-2">
         <Button
           variant="outline"
-          className="h-8 w-8 p-0"
+          className="h-8 w-8 p-0 dark:bg-neutral-600 dark:text-gray-100"
           onClick={() => table.previousPage()}
           disabled={!table.getCanPreviousPage()}
         >
@@ -61,7 +61,7 @@ const DataTablePagination = ({ table }) => {
           <Button
             key={page}
             variant="outline"
-            className="h-8 w-8 p-0"
+            className="h-8 w-8 p-0 dark:bg-neutral-600 dark:text-gray-100"
             onClick={() => table.setPageIndex(page)}
             disabled={pageIndex === page}
           >
@@ -70,7 +70,7 @@ const DataTablePagination = ({ table }) => {
         ))}
         <Button
           variant="outline"
-          className="h-8 w-8 p-0"
+          className="h-8 w-8 p-0 dark:bg-neutral-600 dark:text-gray-100"
           onClick={() => table.nextPage()}
           disabled={!table.getCanNextPage()}
         >

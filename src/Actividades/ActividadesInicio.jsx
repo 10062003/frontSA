@@ -20,7 +20,7 @@ const ActividadesInicio = () => {
   };
 
   return (
-    <div>
+    <div className="flex flex-wrap h-screen p-4 flex-col gap-4">
       <CardGeneral
         title="Actividades"
         description={

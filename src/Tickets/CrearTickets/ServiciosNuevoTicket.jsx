@@ -16,7 +16,7 @@ class ServiciosNuevoTicket {
       const res = await Axios.post("/PostCrearTicket", ticket, {
         headers: {
           Authorization: "Bearer " + Token,
-          'Content-Type': 'application/json'  // Ensure the content type is set to application/json
+          "Content-Type": "application/json", // Ensure the content type is set to application/json
         },
       });
 
@@ -35,7 +35,38 @@ class ServiciosNuevoTicket {
     return respuestaNuevoTicket;
   };
 
+  ListarTickets = async (tipoTicketId) => {
+    const respuestaTickets = {
+      respuesta: 0,
+      listaTipoTicket: [],
+      mensaje: "",
+    };
 
+    const Token = sessionStorage.getItem("Token");
+
+    try {
+      const res = await Axios.post(
+        "/GetListarTicket",
+        { MTIdTipoTickets: tipoTicketId },
+        {
+          headers: {
+            Authorization: "Bearer " + Token,
+            "Content-Type": "application/json",
+          },
+        }
+      );
+
+      respuestaTickets.respuesta = 1;
+      respuestaTickets.listaTipoTicket = res.data;
+      //console.log(respuestaTickets.listaTipoTicket);
+    } catch (error) {
+      console.log(error);
+      respuestaTickets.respuesta = 0;
+      respuestaTickets.mensaje = "Error al listar los Tickets.";
+    }
+
+    return respuestaTickets;
+  };
 }
 
 export default ServiciosNuevoTicket;

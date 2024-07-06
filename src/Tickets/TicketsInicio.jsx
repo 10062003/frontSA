@@ -6,7 +6,7 @@ const TicketsInicio = () => {
   const navigate = useNavigate();
 
   const ButtonRegistroTickets = () => {
-    navigate("/RegistroTickets");
+    navigate("/RegistroTipoTickets");
   };
 
   const ButtonListarTickets = () => {
@@ -18,7 +18,7 @@ const TicketsInicio = () => {
   };
 
   const ButtonConsultarTickets = () => {
-    navigate("/");
+    navigate("/TablaTickets");
   };
 
   const ButtonRegistroEstadoTickets = () => {
@@ -30,8 +30,19 @@ const TicketsInicio = () => {
   };
 
   return (
-    <div>
-      <div>
+    <div className="flex flex-wrap h-screen p-4 flex-col gap-4">
+      <div className="flex flex-col">
+        <CardGeneral
+          title="Tickets"
+          description={
+            "Aquí podrás generar un nuevo ticket y dar seguimiento a tu solicitud."
+          }
+          toFrist={"/Inicio"}
+          onClickOne={ButtonCrearTicket}
+          onClickTwo={ButtonConsultarTickets}
+        />
+      </div>
+      <div className="flex flex-col">
         <CardGeneral
           title="Tipos de tickets"
           description={
@@ -42,7 +53,7 @@ const TicketsInicio = () => {
           onClickTwo={ButtonListarTickets}
         />
       </div>
-      <div>
+      <div className="flex flex-col">
         <CardGeneral
           title="Estados de tickets"
           description={
@@ -51,17 +62,6 @@ const TicketsInicio = () => {
           toFrist={"/Inicio"}
           onClickOne={ButtonRegistroEstadoTickets}
           onClickTwo={ButtonListarEstadoTickets}
-        />
-      </div>
-      <div>
-        <CardGeneral
-          title="Tickets"
-          description={
-            "Aquí podrás generar un nuevo ticket y dar seguimiento a tu solicitud."
-          }
-          toFrist={"/Inicio"}
-          onClickOne={ButtonCrearTicket}
-          onClickTwo={ButtonConsultarTickets}
         />
       </div>
     </div>

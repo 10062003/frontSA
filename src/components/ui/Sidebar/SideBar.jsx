@@ -1,13 +1,27 @@
-import { MoreVertical, LogOut } from "lucide-react";
-import { useContext, createContext, useState } from "react";
+import { MoreVertical, LogOut, Moon, Sun } from "lucide-react"; // Importa Moon y Sun
+import { useContext, createContext, useState, useEffect } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
-import "./SideBar.css";
 
 const SidebarContext = createContext();
 
 export default function Sidebar({ children }) {
   const [expanded, setExpanded] = useState(false);
+  const [darkMode, setDarkMode] = useState(
+    () => localStorage.getItem("theme") === "dark"
+  );
   const navigate = useNavigate();
+
+  useEffect(() => {
+    if (darkMode) {
+      document.documentElement.classList.add("dark");
+      localStorage.setItem("theme", "dark");
+    } else {
+      document.documentElement.classList.remove("dark");
+      localStorage.setItem("theme", "light");
+    }
+  }, [darkMode]);
+
+  const toggleDarkMode = () => setDarkMode(!darkMode);
 
   const handleLogout = () => {
     localStorage.removeItem("authToken");
@@ -34,6 +48,16 @@ export default function Sidebar({ children }) {
         <SidebarContext.Provider value={{ expanded }}>
           <ul className="flex-1 px-3">{children}</ul>
         </SidebarContext.Provider>
+
+        <div className="p-4 flex items-center justify-center">
+          <button
+            type="button"
+            onClick={toggleDarkMode}
+            className="p-1.5 rounded-lg text-white bg-green-600 hover:bg-green-700 dark:hover:bg-green-500 dark:text-black dark:bg-green-600"
+          >
+            {darkMode ? <Moon size={22} /> : <Sun size={22} />}{" "}
+          </button>
+        </div>
       </nav>
     </aside>
   );

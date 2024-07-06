@@ -8,21 +8,21 @@ class ServiciosTickets {
       respuesta: 0,
       mensaje: "",
     };
-  
+
     const Token = sessionStorage.getItem("Token");
     console.log(Token);
-  
+
     try {
       const res = await Axios.post("/PostCrearTipoTicket", ticket, {
         headers: {
           Authorization: "Bearer " + Token,
         },
       });
-      
+
       const mensaje = res.data;
       const RespuestaServicio = mensaje.split(" ")[1];
       console.log(RespuestaServicio);
-      
+
       respuestaTipoTicket.respuesta = 1;
       respuestaTipoTicket.mensaje = RespuestaServicio;
     } catch (error) {
@@ -30,7 +30,7 @@ class ServiciosTickets {
       respuestaTipoTicket.respuesta = 0;
       respuestaTipoTicket.mensaje = "Error al crear el tipo de ticket.";
     }
-  
+
     return respuestaTipoTicket;
   };
   ListarTipoTicket = async () => {
@@ -53,7 +53,8 @@ class ServiciosTickets {
       respuestaListaTipoTicket.listaTipoTicket = res.data;
     } catch (err) {
       respuestaListaTipoTicket.respuesta = 0;
-      respuestaListaTipoTicket.mensaje = "Error al listar los tipos de ticket. - " + err;
+      respuestaListaTipoTicket.mensaje =
+        "Error al listar los tipos de ticket. - " + err;
     }
 
     return respuestaListaTipoTicket;

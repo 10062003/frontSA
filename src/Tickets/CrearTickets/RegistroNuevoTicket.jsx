@@ -104,6 +104,7 @@ const RegistroNuevoTicket = () => {
       toast.error("Error al cargar los datos");
     }
   };
+
   const ObtenerDatosEstadoTicket = async () => {
     try {
       const respuesta = await ServicioEstadoTicket.ListarEstadoTickets();
@@ -116,6 +117,7 @@ const RegistroNuevoTicket = () => {
       toast.error("Error al cargar los datos");
     }
   };
+
   const ObtenerDatosTipoTicket = async () => {
     try {
       const respuesta = await ServicioTipoTicket.ListarTipoTicket();
@@ -128,6 +130,7 @@ const RegistroNuevoTicket = () => {
       toast.error("Error al cargar los datos");
     }
   };
+
   const ObtenerDatosTipoDoc = async () => {
     try {
       const respuesta = await servicioTipoDocumento.ListarDocumentos();
@@ -140,6 +143,7 @@ const RegistroNuevoTicket = () => {
       toast.error("Error al cargar los datos");
     }
   };
+
   const ObtenerDatosUpa = async () => {
     try {
       const respuesta = await ServicioUpa.ListarUpas();
@@ -152,6 +156,7 @@ const RegistroNuevoTicket = () => {
       toast.error("Error al cargar los datos");
     }
   };
+
   const ObtenerDatosRoles = async () => {
     try {
       const respuesta = await ServicioRoles.ListarRoles();
@@ -164,6 +169,7 @@ const RegistroNuevoTicket = () => {
       toast.error("Error al cargar los datos");
     }
   };
+
   const ObtenerDatosProfesion = async () => {
     try {
       const respuesta = await servicioProfesion.ListarProfesiones();

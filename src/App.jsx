@@ -1,4 +1,5 @@
 import React from "react";
+import { useState, useEffect } from "react";
 import Login from "./Login/Login";
 import HomePage from "./HomePage/Home";
 import {
@@ -40,9 +41,10 @@ import TablaUsuarioActividades from "./Actividades/Actividades por Usuario/Tabla
 import TablaEstadoTickets from "./Tickets/EstadosTicket/TablaEstadosTicket";
 import TablaUsuarios from "./Usuarios/TablaUsuarios";
 import RegistroNuevoTicket from "./Tickets/CrearTickets/RegistroNuevoTicket";
-import TablaTipoTicket from "./Tickets/TablaTickets";
+import TablaTipoTicket from "./Tickets/TablaTipoTickets";
 import PrivateRoute from "./RutaProtegida";
 import ForgotPassword from "./Login/OlvidasteTuContraseña";
+import TablaTickets from "./Tickets/CrearTickets/TablaNuevosTickets";
 
 const router = createBrowserRouter([
   {
@@ -252,7 +254,7 @@ const router = createBrowserRouter([
             <div className="flex-shrink-0">
               <MostrarSideBar />
             </div>
-            <div className="flex flex-1 flex-col overflow-y-auto p-4">
+            <div className="flex flex-1 flex-col overflow-y-auto">
               <TablaDocumentos />
             </div>
           </div>
@@ -268,7 +270,7 @@ const router = createBrowserRouter([
           <div className="flex h-screen">
             <MostrarSideBar />
             <div className="flex flex-col flex-1 overflow-y-auto">
-              <div className="flex flex-col flex-1 items-center justify-center p-4">
+              <div className="flex flex-col flex-1 items-center justify-center">
                 <TicketsInicio />
               </div>
             </div>
@@ -295,7 +297,24 @@ const router = createBrowserRouter([
     ),
   },
   {
-    path: "RegistroTickets",
+    path: "TablaTickets",
+    element: (
+      <PrivateRoute
+        element={
+          <div className="flex h-screen">
+            <div className="flex-shrink-0">
+              <MostrarSideBar />
+            </div>
+            <div className="flex flex-1 flex-col overflow-y-auto p-4">
+              <TablaTickets />
+            </div>
+          </div>
+        }
+      />
+    ),
+  },
+  {
+    path: "RegistroTipoTickets",
     element: (
       <PrivateRoute
         element={
@@ -370,7 +389,7 @@ const router = createBrowserRouter([
           <div className="flex h-screen">
             <MostrarSideBar />
             <div className="flex flex-col flex-1 overflow-y-auto">
-              <div className="flex flex-col flex-1 items-center justify-center p-4">
+              <div className="flex flex-col flex-1 items-center justify-center">
                 <ActividadesInicio />
               </div>
             </div>
@@ -603,6 +622,25 @@ const router = createBrowserRouter([
 ]);
 
 const App = () => {
+  const [theme, setTheme] = useState(
+    window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light"
+  );
+
+  useEffect(() => {
+    const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
+    const handleChange = () => setTheme(mediaQuery.matches ? "dark" : "light");
+    mediaQuery.addEventListener("change", handleChange);
+    return () => mediaQuery.removeEventListener("change", handleChange);
+  }, []);
+
+  useEffect(() => {
+    if (theme === "dark") {
+      document.documentElement.classList.add("dark");
+    } else {
+      document.documentElement.classList.remove("dark");
+    }
+  }, [theme]);
+
   return (
     <div className="bg-gray-100 dark:bg-neutral-900 font-sans">
       <ToasterWrapper richColors closeButton />
