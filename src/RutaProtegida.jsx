@@ -9,9 +9,7 @@ const PrivateRoute = ({ element }) => {
     return element;
   } else {
     // Mostrar toast de sesión cerrada al redirigir al Login
-    toast.error(
-      "Tu sesión ha sido cerrada. Por favor inicia sesión nuevamente."
-    );
+    toast.error("Tu sesión ha expirado. Por favor inicia sesión nuevamente.");
 
     return <Navigate to="/Login" replace />;
   }

@@ -10,7 +10,7 @@ import PassIcon from "./icons/PassIcon";
 import ReCAPTCHA from "react-google-recaptcha";
 import ServiciosLogin from "./ServiciosLogin";
 import { Cctv } from "lucide-react";
-import { Progress } from "../components/ui/progress"; // Asegúrate de importar tu componente de progreso
+import { Progress } from "../components/ui/progress";
 
 const Login = () => {
   const servicioLogin = new ServiciosLogin();
@@ -33,7 +33,6 @@ const Login = () => {
     if (captcha.current && captcha.current.getValue()) {
       const contrasena = sha512(tContrasenna).toString();
       const user = { tCorreoUsuario, tContrasenna: contrasena };
-      //console.log(user);
 
       try {
         const respuesta = await servicioLogin.IniciarSesion(user);
@@ -61,7 +60,7 @@ const Login = () => {
   return (
     <div className="flex min-h-full h-screen flex-1 flex-col justify-center items-center px-6 py-12 lg:px-8 dark:bg-neutral-900">
       {isLoading && (
-        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
+        <div className="fixed inset-0 flex items-center justify-center bg-white dark:bg-black z-50">
           <Progress className="w-2/3" value={100} />
         </div>
       )}

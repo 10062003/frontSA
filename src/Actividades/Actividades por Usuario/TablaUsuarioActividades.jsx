@@ -1,6 +1,11 @@
 import React, { useEffect, useState } from "react";
 import DataTable from "../../components/tablas/datatable";
-import { MoreHorizontal } from "lucide-react";
+import { toast } from "sonner";
+import ServiciosUsuariosAct from "./ServiciosUsuariosAct";
+import SeleccionConValidacion from "../../components/ui/SeleccionConValidacion";
+import ButtonBasic from "../../components/ui/ButtonBasic";
+import { List, Orbit } from "lucide-react";
+import ServiciosEstados from "../../Estados/ServicioEstados";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -10,47 +15,97 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Button } from "@/components/ui/Button";
-import { toast } from "sonner";
-import ServiciosUsuariosAct from "./ServiciosUsuariosAct";
+import { MoreHorizontal } from "lucide-react";
 
-const Badge = ({ status }) => {
-  const isActive = status === "Activado";
-  const badgeStyle = {
-    backgroundColor: isActive ? "#E2EFE2" : "#F3E2E2",
-    color: isActive ? "#54C252" : "#E82828",
-    padding: "0.5rem 1rem",
-    borderRadius: "1rem",
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-    fontWeight: "bold",
-    textAlign: "center",
-  };
-  return <div style={badgeStyle}>{status}</div>;
-};
+const TablaUsuariosAct = () => {
+  const servicioUsuariosAct = new ServiciosUsuariosAct();
+  const servicioEstados = new ServiciosEstados();
 
-const TablaUsuarioActividades = () => {
-  const servicioUsuarioAct = new ServiciosUsuariosAct();
   const [data, setData] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
+  const [estado, cambiarEstado] = useState({
+    campo: "",
+    valido: null,
+  });
+  const [dataEstados, setDataEstados] = useState([]);
 
-  const ObtenerDatosTabla = async () => {
-    const respuesta = await servicioUsuarioAct.ListarUsuarioAct();
+  const ObtenerDatosEstado = async () => {
+    try {
+      const respuesta = await servicioEstados.ListarEstados();
+      if (respuesta.respuesta === 1) {
+        setDataEstados(respuesta.listaEstado);
+      } else {
+        toast.error("Error al cargar los datos");
+      }
+    } catch (error) {
+      toast.error("Error al cargar los datos");
+    }
+  };
+
+  useEffect(() => {
+    ObtenerDatosEstado();
+  }, []);
+
+  const DatosEstados = dataEstados.map((estado) => ({
+    campo: estado.mEstadoId,
+    label: estado.mEtdEstado,
+    valido: null,
+  }));
+
+  const ObtenerDatosTabla = async (estado) => {
+    setLoading(true);
+    const respuesta = await servicioUsuariosAct.ListarUsuariosAct(estado);
+
     if (respuesta.respuesta === 1) {
-      setData(respuesta.listaUsuarioAct);
+      setData(respuesta.listaUsuariosAct);
     } else {
       toast.error("Error al cargar los datos");
     }
     setLoading(false);
   };
 
-  useEffect(() => {
-    ObtenerDatosTabla();
-  }, []);
+  const handleBuscarClick = (e) => {
+    e.preventDefault();
+    if (estado.valido === "true") {
+      ObtenerDatosTabla(estado.campo);
+    } else {
+      toast.error("Seleccione un estado válido");
+    }
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    const filtroEstado = {
+      MEstadoId: estado.campo,
+    };
+
+    try {
+      const respuesta =
+        await servicioUsuariosAct.ListarUsuariosAct(filtroEstado);
+
+      if (respuesta && respuesta.respuesta === 1) {
+        cambiarEstado({ campo: "", valido: null });
+        setData(respuesta.listaUsuariosAct);
+        toast.success("Actividades de usuarios listadas correctamente", {
+          duration: 4000,
+        });
+      } else {
+        toast.error(
+          "Error al listar actividades de usuarios, revise los campos"
+        );
+      }
+    } catch (error) {
+      toast.error(
+        "Error de servidor: no se pudo listar las actividades de usuarios"
+      );
+      console.error("Error en el servidor:", error);
+    }
+  };
 
   const columns = [
     {
-      header: "ID",
+      header: "Actividad Usuario ID",
       accessorKey: "mlUsrAcId",
       hidden: true,
     },
@@ -75,12 +130,12 @@ const TablaUsuarioActividades = () => {
       ),
     },
     {
-      header: "ID Usuario",
+      header: "Usuario ID",
       accessorKey: "mlIdUsuario",
       hidden: true,
     },
     {
-      header: "Nombre",
+      header: "Nombre Usuario",
       accessorKey: "mlNombreUsuario",
       cell: ({ cell }) => (
         <div
@@ -95,7 +150,7 @@ const TablaUsuarioActividades = () => {
       ),
     },
     {
-      header: "Apellido",
+      header: "Apellido Usuario",
       accessorKey: "mlApellidoUsuario",
       cell: ({ cell }) => (
         <div
@@ -125,7 +180,7 @@ const TablaUsuarioActividades = () => {
       ),
     },
     {
-      header: "ID UPA",
+      header: "UPA ID",
       accessorKey: "mlIdUpa",
       hidden: true,
     },
@@ -145,13 +200,13 @@ const TablaUsuarioActividades = () => {
       ),
     },
     {
-      header: "ID Estado",
-      accessorKey: "rolIdEstado",
+      header: "Estado ID",
+      accessorKey: "mlIdEstado",
       hidden: true,
     },
     {
       header: "Estado",
-      accessorKey: "mRolEstado",
+      accessorKey: "mlEstado",
       cell: ({ cell }) => (
         <div
           style={{
@@ -160,12 +215,12 @@ const TablaUsuarioActividades = () => {
             alignItems: "center",
           }}
         >
-          <Badge status={cell.getValue()} />
+          {cell.getValue()}
         </div>
       ),
     },
     {
-      header: "Ultima modificación",
+      header: "Fecha modificación",
       accessorKey: "mlFechaUltimaModificacion",
       hidden: true,
     },
@@ -207,19 +262,50 @@ const TablaUsuarioActividades = () => {
   const visibleColumns = columns.filter((column) => !column.hidden);
 
   if (loading) {
-    return <div>Loading...</div>;
+    return <div className="justify-center items-center">Loading...</div>;
   }
 
   return (
-    <section className="py-10">
+    <section className="">
       <div className="container">
-        <h1 className="mb-10 text-5xl font-bold text-green-700">
-          Listado de roles
+        <h1 className="text-5xl font-bold text-green-700 mt-2 mb-5">
+          Listado de actividades de usuarios
         </h1>
+        <form onSubmit={handleSubmit}>
+          <SeleccionConValidacion
+            label="Estado"
+            name="estado"
+            errorMsm="Este campo es requerido"
+            estado={estado}
+            cambiarEstado={cambiarEstado}
+            opciones={DatosEstados}
+            icon={
+              <List
+                className={`${
+                  estado.valido === "true"
+                    ? "opacity-100 text-exito"
+                    : estado.valido === "false"
+                      ? "opacity-100 text-error"
+                      : estado.valido === null
+                        ? "opacity-100 text-green-800 dark:text-green-600"
+                        : ""
+                }`}
+              />
+            }
+            className="col-span-1"
+          />
+          <div className="flex flex-col col-span-1 sm:col-span-2 mb-4">
+            <ButtonBasic
+              children={"Filtrar"}
+              className="cursor-pointer text-white hover:shadow-[3px_0px_30px_rgba(163,163,163,0.4)] bg-green-700 border-green-700 text-base"
+              onClick={handleBuscarClick}
+            />
+          </div>
+        </form>
         <DataTable
           data={data}
           columns={visibleColumns}
-          footer={"Lista de roles."}
+          footer={"Lista de actividades de usuarios"}
           headerClassName="text-center"
         />
       </div>
@@ -227,4 +313,4 @@ const TablaUsuarioActividades = () => {
   );
 };
 
-export default TablaUsuarioActividades;
+export default TablaUsuariosAct;

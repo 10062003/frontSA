@@ -39,23 +39,39 @@ class ServiciosUsuariosAct {
     return respuestaUsuarioAct;
   };
 
-  // ListarUsuarioAct = async () => {
-  //   const Token = sessionStorage.getItem("Token");
-  //   try {
-  //     const res = await Axios.post(
-  //       "/PostListarUsuarioActividad",
-  //       {},
-  //       {
-  //         headers: {
-  //           Authorization: "Bearer " + Token,
-  //         },
-  //       }
-  //     );
-  //     console.log(res.data); // Imprimir datos en la consola
-  //   } catch (err) {
-  //     console.error("Error al listar los roles:", err);
-  //   }
-  // };
+  ListarUsuariosAct = async (estado) => {
+    const respuestaUsuarioAct = {
+      respuesta: 0,
+      listaUsuariosAct: [],
+      mensaje: "",
+    };
+
+    const Token = sessionStorage.getItem("Token");
+
+    try {
+      const res = await Axios.post(
+        "/PostListarUsuarioActividad",
+        { MEstadoId: estado },
+        {
+          headers: {
+            Authorization: "Bearer " + Token,
+            "Content-Type": "application/json",
+          },
+        }
+      );
+
+      respuestaUsuarioAct.respuesta = 1;
+      respuestaUsuarioAct.listaUsuariosAct = res.data;
+      console.log("Respuesta del servidor:", res.data); // Imprime el JSON en la consola
+    } catch (error) {
+      console.log(error);
+      respuestaUsuarioAct.respuesta = 0;
+      respuestaUsuarioAct.mensaje =
+        "Error al listar las actividades por usuario.";
+    }
+
+    return respuestaUsuarioAct;
+  };
 }
 
 export default ServiciosUsuariosAct;
