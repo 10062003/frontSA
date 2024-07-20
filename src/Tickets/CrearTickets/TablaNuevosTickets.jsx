@@ -18,17 +18,47 @@ import ServiciosTickets from "../ServiciosTickets";
 import ButtonBasic from "../../components/ui/ButtonBasic";
 
 const Badge = ({ status }) => {
-  const isActive = status === "Activado";
-  const badgeStyle = {
-    backgroundColor: isActive ? "#E2EFE2" : "#F3E2E2",
-    color: isActive ? "#54C252" : "#E82828",
-    padding: "0.5rem 1rem",
-    borderRadius: "1rem",
-    display: "inline-block",
-    fontWeight: "bold",
-    textAlign: "center",
+  // Define los estilos de los badges para cada estado con colores más oscuros
+  const badgeStyles = {
+    Recibido: {
+      backgroundColor: "#FDF8B5", // Color pastel amarillo
+      color: "#D4B800", // Amarillo oscuro
+    },
+    Enviado: {
+      backgroundColor: "#9FCFFD", // Color pastel azul
+      color: "#005BB5", // Azul oscuro
+    },
+    Rechazado: {
+      backgroundColor: "#FFB5B5", // Color pastel rojo
+      color: "#D62A2A", // Rojo oscuro
+    },
+    Solucionado: {
+      backgroundColor: "#E2EFE2", // Color pastel verde
+      color: "#2D6A4F", // Verde oscuro
+    },
+    default: {
+      backgroundColor: "#E2EFE2", // Color pastel verde
+      color: "#2D6A4F", // Verde oscuro
+    },
   };
-  return <span style={badgeStyle}>{status}</span>;
+
+  // Usa el estilo del badge basado en el estado o el estilo por defecto
+  const badgeStyle = badgeStyles[status] || badgeStyles.default;
+
+  return (
+    <span
+      style={{
+        ...badgeStyle,
+        padding: "0.5rem 1rem",
+        borderRadius: "1rem",
+        display: "inline-block",
+        fontWeight: "bold",
+        textAlign: "center",
+      }}
+    >
+      {status}
+    </span>
+  );
 };
 
 const TablaTickets = () => {
