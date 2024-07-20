@@ -12,6 +12,7 @@ import {
 import { Button } from "@/components/ui/Button";
 import { toast } from "sonner";
 import ServiciosUsuario from "./ServiciosRegUsuario";
+import { DialogDemo } from "./EditarUsuario";
 
 const Badge = ({ status }) => {
   const isActive = status === "Activado";
@@ -33,20 +34,44 @@ const TablaUsuarios = () => {
   const servicioUsuario = new ServiciosUsuario();
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
+  const [selectedUser, setSelectedUser] = useState(null);
 
   const ObtenerDatosTabla = async () => {
-    const respuesta = await servicioUsuario.ListarUsuarios();
-    if (respuesta.respuesta === 1) {
-      setData(respuesta.listaUsuarios);
-    } else {
+    try {
+      const respuesta = await servicioUsuario.ListarUsuarios();
+      if (respuesta.respuesta === 1) {
+        setData(respuesta.listaUsuarios);
+      } else {
+        toast.error("Error al cargar los datos");
+      }
+    } catch (error) {
+      console.error("Error fetching data:", error);
       toast.error("Error al cargar los datos");
+    } finally {
+      setLoading(false);
     }
-    setLoading(false);
   };
 
   useEffect(() => {
     ObtenerDatosTabla();
   }, []);
+
+  const handleEditClick = async (user) => {
+    try {
+      const respuesta = await servicioUsuario.ObtenerUsuarioPorId(user.mUsrId);
+      if (respuesta.respuesta === 1) {
+        console.log("Response from backend:", respuesta.usuario);
+        setSelectedUser(respuesta.usuario);
+        setIsDialogOpen(true);
+      } else {
+        toast.error("Error al obtener el usuario");
+      }
+    } catch (error) {
+      console.error("Error fetching user:", error);
+      toast.error("Error al obtener el usuario");
+    }
+  };
 
   const columns = [
     {
@@ -203,7 +228,9 @@ const TablaUsuarios = () => {
             justifyContent: "flex-end",
             alignItems: "center",
             width: "100%",
+            backgroundColor: "",
           }}
+          className="dark:hover:bg-neutral-700"
         >
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
@@ -215,12 +242,16 @@ const TablaUsuarios = () => {
             <DropdownMenuContent align="end">
               <DropdownMenuLabel>Actions</DropdownMenuLabel>
               <DropdownMenuItem
-                onClick={() => navigator.clipboard.writeText(row.original.id)}
+                onClick={() =>
+                  navigator.clipboard.writeText(row.original.mUsrNombre)
+                }
               >
                 Copiar nombre
               </DropdownMenuItem>
               <DropdownMenuSeparator />
-              <DropdownMenuItem>Editar</DropdownMenuItem>
+              <DropdownMenuItem onClick={() => handleEditClick(row.original)}>
+                Editar
+              </DropdownMenuItem>
               <DropdownMenuItem>Borrar</DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
@@ -244,9 +275,15 @@ const TablaUsuarios = () => {
         <DataTable
           data={data}
           columns={visibleColumns}
-          footer={"Lista de estados de tikets."}
+          footer={"Lista de usuarios."}
           headerClassName="text-center"
         />
+        {isDialogOpen && selectedUser && (
+          <DialogDemo
+            userData={selectedUser}
+            onClose={() => setIsDialogOpen(false)}
+          />
+        )}
       </div>
     </section>
   );

@@ -199,7 +199,7 @@ const router = createBrowserRouter([
     element: (
       <PrivateRoute
         element={
-          <div className="flex h-screen">
+          <div className="flex h-screen overflow-hidden">
             <div className="flex-shrink-0">
               <MostrarSideBar />
             </div>
@@ -622,24 +622,39 @@ const router = createBrowserRouter([
 ]);
 
 const App = () => {
-  const [theme, setTheme] = useState(
-    window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light"
-  );
+  const [theme, setTheme] = useState(() => {
+    // Verifica localStorage primero
+    const savedTheme = localStorage.getItem("theme");
+    if (savedTheme) {
+      return savedTheme;
+    }
+    // Si no hay valor guardado, usa la preferencia del sistema
+    return window.matchMedia("(prefers-color-scheme: dark)").matches
+      ? "dark"
+      : "light";
+  });
 
   useEffect(() => {
-    const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
-    const handleChange = () => setTheme(mediaQuery.matches ? "dark" : "light");
-    mediaQuery.addEventListener("change", handleChange);
-    return () => mediaQuery.removeEventListener("change", handleChange);
-  }, []);
-
-  useEffect(() => {
+    // Aplica el tema basado en el estado
     if (theme === "dark") {
       document.documentElement.classList.add("dark");
     } else {
       document.documentElement.classList.remove("dark");
     }
+    // Guarda el tema en localStorage
+    localStorage.setItem("theme", theme);
   }, [theme]);
+
+  useEffect(() => {
+    const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
+    const handleChange = () => {
+      if (localStorage.getItem("theme") === null) {
+        setTheme(mediaQuery.matches ? "dark" : "light");
+      }
+    };
+    mediaQuery.addEventListener("change", handleChange);
+    return () => mediaQuery.removeEventListener("change", handleChange);
+  }, []);
 
   return (
     <div className="bg-gray-100 dark:bg-neutral-900 font-sans">

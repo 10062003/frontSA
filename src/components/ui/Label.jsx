@@ -1,19 +1,18 @@
-import PropTypes from "prop-types";
+"use client"
 
-const Label = ({ children, className, props }) => {
-  return (
-    <label
-      className={`block text-sm font-semibold leading-6 text-gray-900 dark:text-white ${className}`}
-      {...props}
-    >
-      {children}
-    </label>
-  );
-};
+import * as React from "react"
+import * as LabelPrimitive from "@radix-ui/react-label"
+import { cva } from "class-variance-authority";
 
-Label.propTypes = {
-  children: PropTypes.node,
-  props: PropTypes.object, // Puedes especificar otros tipos según las propiedades que esperes
-};
+import { cn } from "@/lib/utils"
 
-export default Label;
+const labelVariants = cva(
+  "text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+)
+
+const Label = React.forwardRef(({ className, ...props }, ref) => (
+  <LabelPrimitive.Root ref={ref} className={cn(labelVariants(), className)} {...props} />
+))
+Label.displayName = LabelPrimitive.Root.displayName
+
+export { Label }

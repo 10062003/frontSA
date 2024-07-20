@@ -122,18 +122,21 @@ const DataTable = ({ data, columns, footer }) => {
           )}
         </div>
       </div>
-      <div className="bg-white dark:bg-neutral-800 border-[1px] rounded-md border-neutral-300 dark:border-neutral-700">
+      <div className="bg-white dark:bg-neutral-800 border dark:border-neutral-800 rounded-md">
         <Table>
           <TableCaption className="dark:text-neutral-400">
             {footer}
           </TableCaption>
           <TableHeader>
             {table.getHeaderGroups().map((headerGroup) => (
-              <TableRow key={headerGroup.id} className="dark:bg-neutral-700">
+              <TableRow
+                key={headerGroup.id}
+                className="dark:bg-neutral-800 border-b"
+              >
                 {headerGroup.headers.map((header) => (
                   <TableHead
                     key={header.id}
-                    className="text-center dark:text-neutral-300"
+                    className="text-center dark:text-neutral-300 border-b dark:border-white"
                   >
                     {flexRender(
                       header.column.columnDef.header,
@@ -147,9 +150,15 @@ const DataTable = ({ data, columns, footer }) => {
           <TableBody>
             {table.getRowModel().rows.length ? (
               table.getRowModel().rows.map((row) => (
-                <TableRow key={row.id} className="dark:bg-neutral-700">
+                <TableRow
+                  key={row.id}
+                  className="dark:bg-neutral-800 border-b dark:border-neutral-500"
+                >
                   {row.getVisibleCells().map((cell) => (
-                    <TableCell key={cell.id} className="dark:text-neutral-300">
+                    <TableCell
+                      key={cell.id}
+                      className="dark:text-neutral-300 border-b dark:border-neutral-500"
+                    >
                       {flexRender(
                         cell.column.columnDef.cell,
                         cell.getContext()
@@ -159,10 +168,10 @@ const DataTable = ({ data, columns, footer }) => {
                 </TableRow>
               ))
             ) : (
-              <TableRow className="dark:bg-neutral-700">
+              <TableRow className="dark:bg-neutral-700 border-b">
                 <TableCell
                   colSpan={columns.length}
-                  className="text-center dark:text-neutral-300"
+                  className="text-center dark:text-neutral-300 border-b"
                 >
                   No se encuentra información.
                 </TableCell>

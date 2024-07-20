@@ -1,5 +1,5 @@
-import { MoreVertical, LogOut, Moon, Sun } from "lucide-react"; // Importa Moon y Sun
-import { useContext, createContext, useState, useEffect } from "react";
+import { MoreVertical, LogOut, Moon, Sun } from "lucide-react";
+import { useContext, createContext, useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 
 const SidebarContext = createContext();
@@ -11,17 +11,16 @@ export default function Sidebar({ children }) {
   );
   const navigate = useNavigate();
 
-  useEffect(() => {
-    if (darkMode) {
-      document.documentElement.classList.add("dark");
-      localStorage.setItem("theme", "dark");
-    } else {
-      document.documentElement.classList.remove("dark");
-      localStorage.setItem("theme", "light");
-    }
-  }, [darkMode]);
-
-  const toggleDarkMode = () => setDarkMode(!darkMode);
+  const toggleDarkMode = () => {
+    setDarkMode((prevMode) => {
+      const newMode = !prevMode;
+      // Guarda el nuevo tema en localStorage
+      localStorage.setItem("theme", newMode ? "dark" : "light");
+      // Aplica el nuevo tema
+      document.documentElement.classList.toggle("dark", newMode);
+      return newMode;
+    });
+  };
 
   const handleLogout = () => {
     localStorage.removeItem("authToken");

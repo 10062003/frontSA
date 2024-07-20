@@ -4,7 +4,7 @@ import sha512 from "crypto-js/sha512";
 import { toast } from "sonner";
 import ButtonBasic from "../components/ui/ButtonBasic";
 import InputBasic from "../components/ui/InputBasic";
-import Label from "../components/ui/Label";
+import LabelInput from "../components/ui/LabelInput";
 import { MailIcon } from "./icons/MailIcon";
 import PassIcon from "./icons/PassIcon";
 import ReCAPTCHA from "react-google-recaptcha";
@@ -74,7 +74,7 @@ const Login = () => {
       <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
         <form className="space-y-6" onSubmit={submit}>
           <div>
-            <Label htmlFor="email">Correo Institucional</Label>
+            <LabelInput htmlFor="email">Correo Institucional</LabelInput>
             <div className="mt-2">
               <div className="relative flex items-center">
                 <InputBasic
@@ -94,7 +94,7 @@ const Login = () => {
 
           <div>
             <div className="flex items-center justify-between">
-              <Label htmlFor="password">Contraseña</Label>
+              <LabelInput htmlFor="password">Contraseña</LabelInput>
             </div>
             <div className="mt-2">
               <div className="relative flex items-center justify-center">
